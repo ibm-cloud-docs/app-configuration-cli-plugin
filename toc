@@ -1,0 +1,9 @@
+{:navgroup: .navgroup}
+{:topicgroup: .topicgroup}
+
+{: .toc subcollection="app-configuration-cli-plugin" audience="cli" href="/docs/app-configuration-cli-plugin/app-configuration-cli.html" path="app-configuration-cli-plugin"}
+App Configuration CLI reference
+
+    {: .navgroup id="reference"}
+    app-configuration-cli.md
+    {: .navgroup-end}
