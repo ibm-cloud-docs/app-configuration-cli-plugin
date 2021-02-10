@@ -2,7 +2,7 @@
  
 copyright:
   years: 2021
-lastupdated: "2021-02-09"
+lastupdated: "2021-02-10"
 
 keywords: app configuration CLI, app configuration command line, app configuration terminal, app configuration shell
 
@@ -24,6 +24,9 @@ subcollection: app-configuration-cli-plugin
 The {{site.data.keyword.cloud_notm}} command-line interface (CLI) provides extra capabilities for service offerings. {{site.data.keyword.cloud_notm}} CLI supports a plug-in framework to extend its capability. You can install the {{site.data.keyword.appconfig_short}} CLI plug-in from the {{site.data.keyword.cloud_notm}} plug-in repository. With the {{site.data.keyword.appconfig_short}} service CLI plugin, you can easily manage {{site.data.keyword.appconfig_short}} service instances by using the CLI commands available.
 {:shortdesc}
 
+To run {{site.data.keyword.cloud_notm}} {{site.data.keyword.appconfig_short}} commands, use `ibmcloud app-configuration` or `ibmcloud ac`.
+{: tip}
+
 ## Prerequisites
 {: #ac-prereqs}
 
@@ -40,6 +43,9 @@ Install the {{site.data.keyword.appconfig_short}} CLI plug-in by running the fol
 ibmcloud plugin install app-configuration
 ```
 {: pre}
+
+To run IBM Cloud App Configuration commands, use ibmcloud app-configuration or ibmcloud ac.
+{: note}
 
 You're notified on the command line when updates to the {{site.data.keyword.cloud_notm}} CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use the latest commands. You can view the current version of all installed plug-ins by running `ibmcloud plugin list`.
 {: tip}
@@ -95,7 +101,7 @@ Select a App Configuration instance:
 2. App Configuration Instance 2
 Enter a number> 1
 OK
-App Configuration 'App Configuration Instance 1' was selected.
+App Configuration instance selected is - 'App Configuration Instance 1'
 ```
 {: screen}
 
@@ -127,7 +133,7 @@ The command returns the following output:
 
 ```
 OK
-App Configuration instance 'App Configuration Instance 1' is being used.
+App Configuration instance being used is - 'App Configuration Instance 1'
 ```
 {: screen}
 
@@ -847,9 +853,7 @@ OK
 ## Creating or Updating item from file
 {: #ac-fileinput}
 
-The plug-in provides you the functionality of creating or updating items from JSON format request body store in a file.
-
-There are two ways to create items via CLI. First method is through flags and second method is using file. We have already seen the flag method above.
+The plug-in provides you the functionality of creating or updating items in JSON format stored in a file.
 
 Following is how you can create collection from a file.
 
