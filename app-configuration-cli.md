@@ -44,8 +44,6 @@ ibmcloud plugin install app-configuration
 ```
 {: pre}
 
-To run IBM Cloud App Configuration commands, use ibmcloud app-configuration or ibmcloud ac.
-{: note}
 
 You're notified on the command line when updates to the {{site.data.keyword.cloud_notm}} CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use the latest commands. You can view the current version of all installed plug-ins by running `ibmcloud plugin list`.
 {: tip}
@@ -911,7 +909,7 @@ updated_time    2021-02-02T19:17:07Z
 ```
 {: screen}
 
-The behaviour for create and update of collection or feature or segment is similar as above. Visit API Docs to for JSON format strucutre - https://cloud.ibm.com/apidocs/app-configuration
+The behaviour for create and update of collection or feature or segment is similar as above. Visit API Docs for accepted JSON format structure - https://cloud.ibm.com/apidocs/app-configuration
 
 ## ibmcloud plug-in uninstall
 {: #ac-ibmcloud-plugin-uninstall}
