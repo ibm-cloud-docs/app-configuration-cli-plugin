@@ -2,7 +2,7 @@
  
 copyright:
   years: 2021
-lastupdated: "2021-02-10"
+lastupdated: "2021-02-11"
 
 keywords: app configuration CLI, app configuration command line, app configuration terminal, app configuration shell
 
@@ -39,10 +39,10 @@ To run {{site.data.keyword.cloud_notm}} {{site.data.keyword.appconfig_short}} co
 
 Install the {{site.data.keyword.appconfig_short}} CLI plug-in by running the following command from the IBM plug-in repo `{{site.data.keyword.cloud_notm}}`:
 
-```sh
+```
 ibmcloud plugin install app-configuration
 ```
-{: pre}
+{: codeblock}
 
 To run IBM Cloud App Configuration commands, use ibmcloud app-configuration or ibmcloud ac.
 {: note}
@@ -75,19 +75,21 @@ Before proceeding with initializing the CLI plug-in make sure that you have sele
 
 Initialize the cli plug-in by using the following command:
 
-```sh
+```
 ibmcloud ac init
 ```
-{: pre}
+{: codeblock}
 
 ### Example
 {: #ac-ibmcloud-ac-init-example}
 
 Log in to {{site.data.keyword.cloud_notm}} CLI and initialize the CLI to {{site.data.keyword.appconfig_short}} service instance `App Configuration Instance 1`.
 
-```sh
+```
 ibmcloud ac init
 ```
+{: codeblock}
+
 ### Output
 {: #ac-ibmcloud-ac-init-output}
 
@@ -100,7 +102,6 @@ Select a App Configuration instance:
 1. App Configuration Instance 1
 2. App Configuration Instance 2
 Enter a number> 1
-OK
 App Configuration instance selected is - 'App Configuration Instance 1'
 ```
 {: screen}
@@ -110,10 +111,10 @@ App Configuration instance selected is - 'App Configuration Instance 1'
 
 To see the name of the instance that is currently being used, use this command.
 
-```sh
+```
 ibmcloud ac show
 ```
-{: pre}
+{: codeblock}
 
 ### Example
 {: #ac-ibmcloud-ac-show-example}
@@ -121,10 +122,10 @@ ibmcloud ac show
 Prerequisite - Use the `ibmcloud ac init` command to select an instance first.
 {: note}
 
-```sh
+```
 ibmcloud ac show
 ```
-{: pre}
+{: codeblock}
 
 ### Output
 {: #ac-ibmcloud-ac-show-output}
@@ -132,7 +133,6 @@ ibmcloud ac show
 The command returns the following output:
 
 ```
-OK
 App Configuration instance being used is - 'App Configuration Instance 1'
 ```
 {: screen}
@@ -142,10 +142,10 @@ App Configuration instance being used is - 'App Configuration Instance 1'
 
 You can list all collections, by using the command:
 
-```sh
+```
 ibmcloud ac collections [--size SIZE] [--offset OFFSET] [--features FEATURES] [--tags TAGS] [--expand EXPAND] [--include INCLUDE]
 ```
-{: pre}
+{: codeblock}
 
 ### Command options 
 {: #ac-ibmcloud-ac-collections-command-options}
@@ -170,10 +170,10 @@ ibmcloud ac collections [--size SIZE] [--offset OFFSET] [--features FEATURES] [-
 
 To list all collections, run the following command:
 
-```sh
+```
 ibmcloud ac collections
 ```
-{: pre}
+{: codeblock}
 
 ### Output
 {: #ac-ibmcloud-ac-collections-output}
@@ -192,10 +192,10 @@ GHz Inc              ghzinc1
 
 You can create a collection, by using the command:
 
-```sh
+```
 ibmcloud ac collection create {--file FILE-PATH | --name NAME [--collection_id COLLECTION_ID] [--description DESCRIPTION] [--tags TAGS]}
 ```
-{: pre}
+{: codeblock}
 
 ### Command options 
 {: #ac-ibmcloud-ac-collection-create-command}
@@ -218,10 +218,10 @@ ibmcloud ac collection create {--file FILE-PATH | --name NAME [--collection_id C
 
 To create a collection with name `sample` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
-```sh
+```
 ibmcloud ac collection create --name sample --collection_id sampleId --description sampleDesc --tags sampleTag
 ```
-{: pre}
+{: codeblock}
 
 ### Output
 {: #ac-ibmcloud-ac-collection-create-output}
@@ -242,10 +242,10 @@ name            sample
 
 You can get a collection, by using the command:
 
-```sh
+```
 ibmcloud ac collection get --collection_id COLLECTION_ID
 ```
-{: pre}
+{: codeblock}
 
 ### Command options
 {: #ac-ibmcloud-ac-collection-get-command}
@@ -260,10 +260,10 @@ ibmcloud ac collection get --collection_id COLLECTION_ID
 
 To get a collection with Id `sampleId`, run the following command:
 
-```sh
+```
 ibmcloud ac collection get --collection_id sampleId
 ```
-{: pre}
+{: codeblock}
 
 ### Output
 {: #ac-ibmcloud-ac-collection-get-output}
@@ -281,10 +281,10 @@ collection_id   sampleId
 
 You can update a collection, by using the command:
 
-```sh
+```
 ibmcloud ac collection update {--file FILE-PATH | --name NAME --collection_id COLLECTION_ID --description DESCRIPTION --tags TAGS}
 ```
-{: pre}
+{: codeblock}
 
 ### Command options 
 {: #ac-ibmcloud-ac-collection-update-command}
@@ -307,10 +307,10 @@ ibmcloud ac collection update {--file FILE-PATH | --name NAME --collection_id CO
 
 To update description a collection with id `sampleId` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
-```sh
+```
 ibmcloud ac collection update --collection_id sampleId --name sample --description sampleDesc --tags sampleTag
 ```
-{: pre}
+{: codeblock}
 
 ### Output
 {: #ac-ibmcloud-ac-collection-update-output}
@@ -331,10 +331,10 @@ updated_time    2021-01-19T05:57:27Z
 
 You can delete a collection, by using the command:
 
-```sh
+```
 ibmcloud ac collection delete --collection_id COLLECTION_ID
 ```
-{: pre}
+{: codeblock}
 
 ### Command options 
 {: #ac-ibmcloud-ac-collection-delete-command}
@@ -349,10 +349,10 @@ ibmcloud ac collection delete --collection_id COLLECTION_ID
 
 To delete a collection with id `sampleId` , run the following command:
 
-```sh
+```
 ibmcloud ac collection delete --collection_id sampleId
 ```
-{: pre}
+{: codeblock}
 
 ### Output
 {: #ac-ibmcloud-ac-collection-delete-output}
@@ -369,10 +369,10 @@ OK
 
 You can list all features, by using the command:
 
-```sh
+```
 ibmcloud ac features [--size SIZE] [--offset OFFSET] [--tags TAGS] [--collections COLLECTIONS] [--segments SEGMENTS] [--expand EXPAND] [--include INCLUDE]
 ```
-{: pre}
+{: codeblock}
 
 ### Command options 
 {: #ac-ibmcloud-ac-features-command}
@@ -399,10 +399,10 @@ ibmcloud ac features [--size SIZE] [--offset OFFSET] [--tags TAGS] [--collection
 
 To list all features, run the following command:
 
-```sh
+```
 ibmcloud ac features
 ```
-{: pre}
+{: codeblock}
 
 ### Output
 {: #ac-ibmcloud-ac-features-output}
@@ -422,10 +422,10 @@ Cycle Rentals   cycle-rentals   true
 
 You can create a feature, by using the command:
 
-```sh
- ibmcloud ac feature create {--file FILE-PATH | --name NAME [--feature_id FEATURE_ID] --description DESCRIPTION --type TYPE --enabled_value ENABLED_VALUE --disabled_value DISABLED_VALUE --tags TAGS --segment_rules SEGMENT_RULES --collections COLLECTIONS}
 ```
-{: pre}
+ibmcloud ac feature create {--file FILE-PATH | --name NAME [--feature_id FEATURE_ID] --description DESCRIPTION --type TYPE --enabled_value ENABLED_VALUE --disabled_value DISABLED_VALUE --tags TAGS --segment_rules SEGMENT_RULES --collections COLLECTIONS}
+```
+{: codeblock}
 
 ### Command options 
 {: #ac-ibmcloud-ac-feature-create-command}
@@ -454,10 +454,10 @@ You can create a feature, by using the command:
 
 To create a collection with name `sample` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
-```sh
+```
 ibmcloud ac feature create --name "IBMers" --feature_id "ibm-discount" --description "Discount given to IBM employees" --type "BOOLEAN" --enabled_value true --disabled_value false --segment_rules '[{"rules":[{"segments":["ibm_employees"]}],"value": true,"order": 1}]' --collections '[{"collection_id":"corporatediscount","enabled": true}]'  --tags "discount,sale"
 ```
-{: pre}
+{: codeblock}
 
 ### Output
 {: #ac-ibmcloud-ac-feature-create-output}
@@ -483,10 +483,10 @@ updated_time     2021-02-02T17:52:46Z
 
 You can get a feature, by using the command:
 
-```sh
+```
 ibmcloud ac feature get --feature_id FEATURE_ID [--include INCLUDE]
 ```
-{: pre}
+{: codeblock}
 
 ### Command options
 {: #ac-ibmcloud-ac-feature-get-command}
@@ -503,10 +503,10 @@ ibmcloud ac feature get --feature_id FEATURE_ID [--include INCLUDE]
 
 To get a feature with Id `ibm-discount`, run the following command:
 
-```sh
+```
 ibmcloud ac feature get --feature_id ibm-discount
 ```
-{: pre}
+{: codeblock}
 
 ### Output
 {: #ac-ibmcloud-ac-feature-get-output}
@@ -524,10 +524,10 @@ IBMers  BOOLEAN  false           2021-02-02T17:52:46Z  ibm-discount  Discount gi
 
 You can update a feature, by using the command:
 
-```sh
+```
  ibmcloud ac feature update {--file FILE-PATH | --name NAME --feature_id FEATURE_ID --description DESCRIPTION --type TYPE --enabled_value ENABLED_VALUE --disabled_value DISABLED_VALUE --tags TAGS --segment_rules SEGMENT_RULES --collections COLLECTIONS}
 ```
-{: pre}
+{: codeblock}
 
 ### Command options 
 {: #ac-ibmcloud-ac-feature-update-command}
@@ -556,10 +556,10 @@ You can update a feature, by using the command:
 
 To update description a feature with id `ibm-discount` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
-```sh
+```
 ibmcloud ac feature update --name "Indian IBMers" --feature_id "ibm-discount" --description "Discount given to IBM Indian employees" --type "BOOLEAN" --enabled_value true --disabled_value false --segment_rules '[{"rules":[{"segments":["ibm_employees"]}],"value": true,"order": 1}]' --collections '[{"collection_id":"corporatediscount","enabled": true}]'  --tags "discount,sale"
 ```
-{: pre}
+{: codeblock}
 
 ### Output
 {: #ac-ibmcloud-ac-feature-update-output}
@@ -584,10 +584,10 @@ collections      <Array>
 
 You can delete a feature, by using the command:
 
-```sh
+```
 ibmcloud ac feature delete --feature_id FEATURE_ID
 ```
-{: pre}
+{: codeblock}
 
 ### Command options 
 {: #ac-ibmcloud-ac-feature-delete-command}
@@ -602,10 +602,10 @@ ibmcloud ac feature delete --feature_id FEATURE_ID
 
 To delete a feature with id `ibm-discount`, run the following command:
 
-```sh
+```
 ibmcloud ac feature delete --feature_id ibm-discount
 ```
-{: pre}
+{: codeblock}
 
 ### Output
 {: #ac-ibmcloud-ac-feature-delete-output}
@@ -622,10 +622,10 @@ OK
 
 You can list all segments, by using the command:
 
-```sh
+```
 ibmcloud ac segments [--size SIZE] [--offset OFFSET] [--tags TAGS] [--features FEATURES] [--expand EXPAND] [--include INCLUDE]
 ```
-{: pre}
+{: codeblock}
 
 ### Command options 
 {: #ac-ibmcloud-ac-segments-command}
@@ -650,10 +650,10 @@ ibmcloud ac segments [--size SIZE] [--offset OFFSET] [--tags TAGS] [--features F
 
 To list all segments, run the following command:
 
-```sh
+```
 ibmcloud ac segments
 ```
-{: pre}
+{: codeblock}
 
 ### Output
 {: #ac-ibmcloud-ac-segments-output}
@@ -672,10 +672,10 @@ IBM Employees   ibm_employees
 
 You can create a segment, by using the command:
 
-```sh
+```
 ibmcloud ac segment create {--file FILE-PATH | --name NAME [--segment_id SEGMENT_ID] --description DESCRIPTION --tags TAGS --rules RULES}
 ```
-{: pre}
+{: codeblock}
 
 ### Command options 
 {: #ac-ibmcloud-ac-segment-create-command}
@@ -700,10 +700,10 @@ ibmcloud ac segment create {--file FILE-PATH | --name NAME [--segment_id SEGMENT
 
 To create a collection with name `sample` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
-```sh
+```
 ibmcloud ac segment create --name "IBM Employees" --segment_id "ibm_employees" --description "IBM Employees Segment" --tags "ibm" --rules '[{"attribute_name": "email", "operator": "endsWith", "values": ["@ibm.com"]}]'
 ```
-{: pre}
+{: codeblock}
 
 ### Output
 {: #ac-ibmcloud-ac-segment-create-output}
@@ -724,10 +724,10 @@ updated_time   2021-02-02T19:04:22Z
 
 You can get a segment, by using the command:
 
-```sh
+```
 ibmcloud ac segment get --segment_id SEGMENT_ID [--include INCLUDE]
 ```
-{: pre}
+{: codeblock}
 
 ### Command options
 {: #ac-ibmcloud-ac-segment-get-command}
@@ -744,10 +744,10 @@ ibmcloud ac segment get --segment_id SEGMENT_ID [--include INCLUDE]
 
 To get a segment with Id `ibm_employees`, run the following command:
 
-```sh
+```
 ibmcloud ac segment get --segment_id ibm_employees
 ```
-{: pre}
+{: codeblock}
 
 ### Output
 {: #ac-ibmcloud-ac-segment-get-output}
@@ -765,10 +765,10 @@ ibm_employees  IBM Employees  -         2021-02-02T19:04:22Z  2021-02-02T19:04:2
 
 You can update a segment, by using the command:
 
-```sh
+```
 ibmcloud ac segment update {--file FILE-PATH | --name NAME --segment_id SEGMENT_ID --description DESCRIPTION --tags TAGS --rules RULES}
 ```
-{: pre}
+{: codeblock}
 
 ### Command options 
 {: #ac-ibmcloud-ac-segment-update-command}
@@ -793,10 +793,10 @@ ibmcloud ac segment update {--file FILE-PATH | --name NAME --segment_id SEGMENT_
 
 To update description a segment with id `ibm_employees` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
-```sh
+```
 ibmcloud ac segment update --name "IBM India Employees" --segment_id "ibm_employees" --description "IBM India Employees" --tags "ibm" --rules '[{"attribute_name": "email", "operator": "endsWith", "values": ["@in.ibm.com"]}]'
 ```
-{: pre}
+{: codeblock}
 
 ### Output
 {: #ac-ibmcloud-ac-segment-update-output}
@@ -817,10 +817,10 @@ segment_id     ibm_employees
 
 You can delete a segment, by using the command:
 
-```sh
+```
 ibmcloud ac segment delete --segment_id SEGMENT_ID
 ```
-{: pre}
+{: codeblock}
 
 ### Command options 
 {: #ac-ibmcloud-ac-segment-delete-command}
@@ -835,10 +835,10 @@ ibmcloud ac segment delete --segment_id SEGMENT_ID
 
 To delete a segment with id `ibm_employees`, run the following command:
 
-```sh
+```
 ibmcloud ac segment delete --segment_id ibm_employees
 ```
-{: pre}
+{: codeblock}
 
 ### Output
 {: #ac-ibmcloud-ac-segment-delete-output}
@@ -857,19 +857,19 @@ The plug-in provides you the functionality of creating or updating items in JSON
 
 Following is how you can create collection from a file.
 
-```sh
+```
 ibmcloud ac collection create {--file FILE-PATH | --name NAME [--collection_id COLLECTION_ID] [--description DESCRIPTION] [--tags TAGS]}
 ```
-{: pre}
+{: codeblock}
 
 Notice the '|' symbol. This indicates that there are two ways to use the command.
 
-```sh
+```
 ibmcloud ac collection create --file FILE-PATH
 OR
 ibmcloud ac collection create --name NAME [--collection_id COLLECTION_ID] [--description DESCRIPTION] [--tags TAGS]
 ```
-{: pre}
+{: codeblock}
 
 To view the supported JSON format visit the API Docs. https://cloud.ibm.com/apidocs/app-configuration
 
@@ -880,10 +880,10 @@ Use the file flag (cannot be combined with any other flag) to give the path of t
 
 To create a collection with id `corporateDiscount` stored in a file *create_collection_body.json*, run the following command:
 
-```sh
+```
 ibmcloud ac collection create --file create_collection_body.json
 ```
-{: pre}
+{: codeblock}
 
 Here is the content of 'create_collection_body.json':
 
@@ -895,7 +895,7 @@ Here is the content of 'create_collection_body.json':
     "tags": "discount,sale"
 }
 ```
-{: pre}
+{: codeblock}
 
 ### Output
 {: #ac-fileinput-output}
@@ -918,9 +918,9 @@ The behaviour for create and update of collection or feature or segment is simil
 
 Use this command to uninstall the App Configuration CLI plug-in.
 
-```sh
+```
 ibmcloud plugin uninstall app-configuration
 ```
-{: pre}
+{: codeblock}
 
 Uninstall returns a success message, if no errors.
