@@ -70,7 +70,7 @@ Plug-in 'app-configuration 0.0.1' was successfully installed into /Users/<userna
 ## ibmcloud ac init
 {: #ac-ibmcloud-ac-init}
 
-Before proceeding with initializing the CLI plug-in make sure that you have selected the API Endpoint, region in your ibmcloud account.
+Before proceeding with initializing the CLI plug-in make sure that you have selected the correct API Endpoint, region & account in your ibmcloud CLI.
 {: note}
 
 Initialize the cli plug-in by using the following command:
