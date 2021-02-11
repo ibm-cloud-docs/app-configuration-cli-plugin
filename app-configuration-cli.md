@@ -57,13 +57,13 @@ The command returns the following output:
 
 ```
 Looking up 'app-configuration' from repository 'IBM Cloud'...
-Plug-in 'app-configuration/1.0.0' found in repository 'IBM Cloud'
+Plug-in 'app-configuration/0.0.1' found in repository 'IBM Cloud'
 Attempting to download the binary file...
  14.9 MiB / 14.9 MiB [==============================================================================================================================================] 100.00% 14s
 14900000 bytes downloaded
 Installing binary...
 OK
-Plug-in 'app-configuration 1.0.0' was successfully installed into /Users/<username>/.bluemix/plugins/app-configuration. Use 'ibmcloud plugin show app-configuration' to show its details.
+Plug-in 'app-configuration 0.0.1' was successfully installed into /Users/<username>/.bluemix/plugins/app-configuration. Use 'ibmcloud plugin show app-configuration' to show its details.
 ```
 {: screen}
 
