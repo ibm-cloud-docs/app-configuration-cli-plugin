@@ -44,8 +44,6 @@ ibmcloud plugin install app-configuration
 ```
 {: pre}
 
-To run IBM Cloud App Configuration commands, use ibmcloud app-configuration or ibmcloud ac.
-{: note}
 
 You're notified on the command line when updates to the {{site.data.keyword.cloud_notm}} CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use the latest commands. You can view the current version of all installed plug-ins by running `ibmcloud plugin list`.
 {: tip}
@@ -57,20 +55,20 @@ The command returns the following output:
 
 ```
 Looking up 'app-configuration' from repository 'IBM Cloud'...
-Plug-in 'app-configuration/1.0.0' found in repository 'IBM Cloud'
+Plug-in 'app-configuration/0.0.1' found in repository 'IBM Cloud'
 Attempting to download the binary file...
  14.9 MiB / 14.9 MiB [==============================================================================================================================================] 100.00% 14s
 14900000 bytes downloaded
 Installing binary...
 OK
-Plug-in 'app-configuration 1.0.0' was successfully installed into /Users/<username>/.bluemix/plugins/app-configuration. Use 'ibmcloud plugin show app-configuration' to show its details.
+Plug-in 'app-configuration 0.0.1' was successfully installed into /Users/<username>/.bluemix/plugins/app-configuration. Use 'ibmcloud plugin show app-configuration' to show its details.
 ```
 {: screen}
 
 ## ibmcloud ac init
 {: #ac-ibmcloud-ac-init}
 
-Before proceeding with initializing the CLI plug-in make sure that you have selected the API Endpoint, region in your ibmcloud account.
+Before proceeding with initializing the CLI plug-in make sure that you have selected the correct API Endpoint, region & account in your ibmcloud CLI.
 {: note}
 
 Initialize the cli plug-in by using the following command:
@@ -871,7 +869,7 @@ ibmcloud ac collection create --name NAME [--collection_id COLLECTION_ID] [--des
 ```
 {: codeblock}
 
-To view the supported JSON format visit the API Docs. https://cloud.ibm.com/apidocs/app-configuration
+To view the supported JSON format visit the [API Docs](https://cloud.ibm.com/apidocs/app-configuration).
 
 Use the file flag (cannot be combined with any other flag) to give the path of the file.
 
@@ -911,7 +909,7 @@ updated_time    2021-02-02T19:17:07Z
 ```
 {: screen}
 
-The behaviour for create and update of collection or feature or segment is similar as above. Visit API Docs to for JSON format strucutre - https://cloud.ibm.com/apidocs/app-configuration
+The behaviour for create and update of collection or feature or segment is similar as above. For accepted JSON format structure, visit the [API Docs](https://cloud.ibm.com/apidocs/app-configuration)
 
 ## ibmcloud plug-in uninstall
 {: #ac-ibmcloud-plugin-uninstall}
