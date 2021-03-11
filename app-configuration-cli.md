@@ -303,7 +303,7 @@ ibmcloud ac collection update {--file FILE-PATH | --name NAME --collection_id CO
 ### Example
 {: #ac-ibmcloud-ac-collection-update-example}
 
-To update description a collection with id `sampleId` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
+To update a collection with id `sampleId` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
 ```sh
 ibmcloud ac collection update --collection_id sampleId --name sample --description sampleDesc --tags sampleTag
