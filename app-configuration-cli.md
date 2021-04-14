@@ -1119,7 +1119,7 @@ version: 1.1, pre-release   -             Email_Property   email-property   Prop
 You can update a property, by using the command:
 
 ```sh
-ibmcloud ac property update (--file FILE-PATH | --property_id PROPERTY-ID [--name NAME] [--description DESCRIPTION] [--type TYPE] [--value VALUE] [--tags TAGS] [--segment_rules SEGMENT-RULES] [--collections COLLECTIONS])
+ibmcloud ac property update (--file FILE-PATH | --property_id PROPERTY-ID [--name NAME] [--description DESCRIPTION] [--value VALUE] [--tags TAGS] [--segment_rules SEGMENT-RULES] [--collections COLLECTIONS])
 ```
 {: pre}
 
@@ -1139,8 +1139,6 @@ ibmcloud ac property update (--file FILE-PATH | --property_id PROPERTY-ID [--nam
 <dd>Tags associated with the segment. Required field - input either as a flag or from file.</dd>
 <dt>--value VALUE</dt>
 <dd>Property value. Required field - input either as a flag or from file.</dd>
-<dt>--type TYPE</dt>
-<dd>Property type. Required field - input either as a flag or from file.</dd>
 <dt>--collections COLLECTIONS</dt>
 <dd>Collections Array. Required field - input either as a flag or from file.</dd>
 <dt>--file FILE</dt>
@@ -1153,7 +1151,7 @@ ibmcloud ac property update (--file FILE-PATH | --property_id PROPERTY-ID [--nam
 To update description a property with id `email-property` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
 ```sh
-avinashkumar$ ibmcloud ac property update --name Email_Property --property_id email-property --description Email_Property_Updated --type STRING --value VALUE --tags Updated_Tags --segment_rules '[{"rules":[{"segments":["kmu9n7px"]}],"value":"$default","order":1}]' --collections '[]'
+avinashkumar$ ibmcloud ac property update --name Email_Property --property_id email-property --description Email_Property_Updated --value VALUE --tags Updated_Tags --segment_rules '[{"rules":[{"segments":["kmu9n7px"]}],"value":"$default","order":1}]' --collections '[]'
 ```
 {: pre}
 
@@ -1182,7 +1180,7 @@ type             STRING
 You can patch a property, by using the command:
 
 ```sh
-ibmcloud ac property patch (--file FILE-PATH | --property_id PROPERTY-ID [--name NAME] [--description DESCRIPTION] [--type TYPE] [--value VALUE] [--tags TAGS] [--segment_rules SEGMENT-RULES])
+ibmcloud ac property patch (--file FILE-PATH | --property_id PROPERTY-ID [--name NAME] [--description DESCRIPTION][--value VALUE] [--tags TAGS] [--segment_rules SEGMENT-RULES])
 ```
 {: pre}
 
@@ -1202,8 +1200,6 @@ ibmcloud ac property patch (--file FILE-PATH | --property_id PROPERTY-ID [--name
 <dd>Tags associated with the segment. Required field - input either as a flag or from file.</dd>
 <dt>--value VALUE</dt>
 <dd>Property value. Required field - input either as a flag or from file.</dd>
-<dt>--type TYPE</dt>
-<dd>Property type. Required field - input either as a flag or from file.</dd>
 <dt>--file FILE</dt>
 <dd>Input via file. File format Supported - JSON</dd>
 </dl>
@@ -1214,7 +1210,7 @@ ibmcloud ac property patch (--file FILE-PATH | --property_id PROPERTY-ID [--name
 To update description a property with id `email-property` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
 ```sh
-avinashkumar$ ibmcloud ac property patch --name Email_Property --property_id email-property --description Email_Property_Patched --type STRING --value VALUE --tags Updated_Tags --segment_rules '[{"rules":[{"segments":["kmu9n7px"]}],"value":"$default","order":1}]'
+avinashkumar$ ibmcloud ac property patch --name Email_Property --property_id email-property --description Email_Property_Patched --value VALUE --tags Updated_Tags --segment_rules '[{"rules":[{"segments":["kmu9n7px"]}],"value":"$default","order":1}]'
 ```
 {: pre}
 
