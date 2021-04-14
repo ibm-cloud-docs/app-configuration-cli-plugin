@@ -1185,7 +1185,7 @@ ibmcloud ac property patch (--file FILE-PATH | --property_id PROPERTY-ID [--name
 {: pre}
 
 ### Command options 
-{: #ac-ibmcloud-ac-property-update-command}
+{: #ac-ibmcloud-ac-property-patch-command}
 
 <dl>
 <dt>--name NAME</dt>
@@ -1205,9 +1205,9 @@ ibmcloud ac property patch (--file FILE-PATH | --property_id PROPERTY-ID [--name
 </dl>
 
 ### Example
-{: #ac-ibmcloud-ac-property-update-example}
+{: #ac-ibmcloud-ac-property-patch-example}
 
-To update description a property with id `email-property` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
+To patch description of a property with id `email-property` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
 ```sh
 avinashkumar$ ibmcloud ac property patch --name Email_Property --property_id email-property --description Email_Property_Patched --value VALUE --tags Updated_Tags --segment_rules '[{"rules":[{"segments":["kmu9n7px"]}],"value":"$default","order":1}]'
@@ -1215,7 +1215,7 @@ avinashkumar$ ibmcloud ac property patch --name Email_Property --property_id ema
 {: pre}
 
 ### Output
-{: #ac-ibmcloud-ac-property-update-output}
+{: #ac-ibmcloud-ac-property-patch-output}
 
 The command returns the following output:
 
