@@ -1,5 +1,5 @@
 ---
- 
+
 copyright:
   years: 2021
 lastupdated: "2021-02-11"
@@ -57,7 +57,7 @@ The command returns the following output:
 Looking up 'app-configuration' from repository 'IBM Cloud'...
 Plug-in 'app-configuration' found in repository 'IBM Cloud'
 Attempting to download the binary file...
-[==============================================================================================================================================] 100.00% 
+[==============================================================================================================================================] 100.00%
 Installing binary...
 OK
 Plug-in 'app-configuration' was successfully installed into /Users/<username>/.bluemix/plugins/app-configuration. Use 'ibmcloud plugin show app-configuration' to show its details.
@@ -144,7 +144,7 @@ ibmcloud ac collection list [--size SIZE] [--offset OFFSET] [--features FEATURES
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-collection-list-command-options}
 
 <dl>
@@ -194,7 +194,7 @@ ibmcloud ac collection create {--file FILE-PATH | --name NAME [--collection_id C
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-collection-create-command}
 
 <dl>
@@ -269,7 +269,7 @@ The command returns the following output:
 
 ```
 name            sample   
-collection_id   sampleId 
+collection_id   sampleId
 ```
 {: screen}
 
@@ -283,7 +283,7 @@ ibmcloud ac collection update {--file FILE-PATH | --name NAME --collection_id CO
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-collection-update-command}
 
 <dl>
@@ -333,7 +333,7 @@ ibmcloud ac collection delete --collection_id COLLECTION_ID
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-collection-delete-command}
 
 <dl>
@@ -371,7 +371,7 @@ ibmcloud ac feature list [--size SIZE] [--offset OFFSET] [--tags TAGS] [--collec
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-feature-list-command}
 
 <dl>
@@ -410,7 +410,7 @@ The command returns the following output:
 name            feature_id      segment_exists   
 Indian IBMers   ibm-discount    true   
 sampleFeature   sampleFeature   true   
-Cycle Rentals   cycle-rentals   true 
+Cycle Rentals   cycle-rentals   true
 ```
 {: screen}
 
@@ -424,7 +424,7 @@ ibmcloud ac feature create {--file FILE-PATH | --name NAME [--feature_id FEATURE
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-feature-create-command}
 
 <dl>
@@ -516,7 +516,7 @@ The command returns the following output:
 
 ```
 name    type     disabled_value  updated_time          feature_id    description                      enabled_value  created_time          order  rules    value   
-IBMers  BOOLEAN  false           2021-02-02T17:52:46Z  ibm-discount  Discount given to IBM employees  true           2021-02-02T17:52:46Z  1      <Array>  true 
+IBMers  BOOLEAN  false           2021-02-02T17:52:46Z  ibm-discount  Discount given to IBM employees  true           2021-02-02T17:52:46Z  1      <Array>  true
 ```
 {: screen}
 
@@ -530,7 +530,7 @@ ibmcloud ac feature update {--file FILE-PATH | --name NAME --feature_id FEATURE_
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-feature-update-command}
 
 <dl>
@@ -592,7 +592,7 @@ ibmcloud ac feature patch {--file FILE-PATH | --name NAME --feature_id FEATURE_I
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-feature-patch-command}
 
 <dl>
@@ -643,7 +643,7 @@ collections      <Array>
 {: screen}
 
 ## ibmcloud ac feature delete
-{: #ac-ibmcloud-ac-feature-delete}
+{: #ac-delete}
 
 You can delete a feature, by using the command:
 
@@ -652,7 +652,7 @@ ibmcloud ac feature delete --feature_id FEATURE_ID
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-feature-delete-command}
 
 <dl>
@@ -661,7 +661,7 @@ ibmcloud ac feature delete --feature_id FEATURE_ID
 </dl>
 
 ### Example
-{: #ac-ibmcloud-ac-feature-delete-example}
+{: #ac-delete-example}
 
 To delete a feature with id `ibm-discount`, run the following command:
 
@@ -671,7 +671,7 @@ ibmcloud ac feature delete --feature_id ibm-discount
 {: pre}
 
 ### Output
-{: #ac-ibmcloud-ac-feature-delete-output}
+{: #ac-delete-output}
 
 The command returns the following output:
 
@@ -690,7 +690,7 @@ ibmcloud ac feature toggle --feature_id FEATURE_ID --enabled ENABLED
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-feature-toggle-command}
 
 <dl>
@@ -717,7 +717,7 @@ The command returns the following output:
 
 ```
 name    type     disabled_value  updated_time          feature_id    description                      enabled_value  created_time          order  rules    value   
-IBMers  BOOLEAN  false           2021-02-02T17:52:46Z  ibm-discount  Discount given to IBM employees  true           2021-02-02T17:52:46Z  1      <Array>  true 
+IBMers  BOOLEAN  false           2021-02-02T17:52:46Z  ibm-discount  Discount given to IBM employees  true           2021-02-02T17:52:46Z  1      <Array>  true
 ```
 {: screen}
 
@@ -733,8 +733,8 @@ ibmcloud ac segment list [--size SIZE] [--offset OFFSET] [--tags TAGS] [--featur
 ```
 {: pre}
 
-### Command options 
-{: #ac-ibmcloud-ac-segment-list-command}
+### Command options
+{: #ac-command}
 
 <dl>
 <dt>--size SIZE (optional)</dt>
@@ -752,7 +752,7 @@ ibmcloud ac segment list [--size SIZE] [--offset OFFSET] [--tags TAGS] [--featur
 </dl>
 
 ### Example
-{: #ac-ibmcloud-ac-segments-example}
+{: #ac-example}
 
 To list all segments, run the following command:
 
@@ -762,19 +762,19 @@ ibmcloud ac segment list
 {: pre}
 
 ### Output
-{: #ac-ibmcloud-ac-segment-list	-output}
+{: #ac-output}
 
 The command returns the following output:
 
 ```
 name            segment_id   
 India IBMers    ibm_employees_01   
-IBM Employees   ibm_employees 
+IBM Employees   ibm_employees
 ```
 {: screen}
 
 ## ibmcloud ac segment create
-{: #ac-ibmcloud-ac-segment-create}
+{: #ac-create}
 
 You can create a segment, by using the command:
 
@@ -783,8 +783,8 @@ ibmcloud ac segment create {--file FILE-PATH | --name NAME [--segment_id SEGMENT
 ```
 {: pre}
 
-### Command options 
-{: #ac-ibmcloud-ac-segment-create-command}
+### Command options
+{: #ac-create-command}
 
 <dl>
 <dt>--name NAME</dt>
@@ -802,7 +802,7 @@ ibmcloud ac segment create {--file FILE-PATH | --name NAME [--segment_id SEGMENT
 </dl>
 
 ### Example
-{: #ac-ibmcloud-ac-segment-create-example}
+{: #ac-create-example}
 
 To create a collection with name `sample` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
@@ -876,7 +876,7 @@ ibmcloud ac segment update {--file FILE-PATH | --name NAME --segment_id SEGMENT_
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-segment-update-command}
 
 <dl>
@@ -928,7 +928,7 @@ ibmcloud ac segment delete --segment_id SEGMENT_ID
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-segment-delete-command}
 
 <dl>
@@ -966,7 +966,7 @@ ibmcloud ac property list [--expand EXPAND] [--sort SORT] [--tags TAGS] [--inclu
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-property-list-command}
 
 <dl>
@@ -1020,7 +1020,7 @@ ibmcloud ac property create (--file FILE-PATH | --name NAME [--property_id PROPE
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-property-create-command}
 
 <dl>
@@ -1123,7 +1123,7 @@ ibmcloud ac property update (--file FILE-PATH | --property_id PROPERTY-ID [--nam
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-property-update-command}
 
 <dl>
@@ -1184,7 +1184,7 @@ ibmcloud ac property patch (--file FILE-PATH | --property_id PROPERTY-ID [--name
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-property-patch-command}
 
 <dl>
@@ -1223,7 +1223,7 @@ The command returns the following output:
 name             Email_Property   
 value            VALUE   
 segment_rules    <Array>   
-tags             Updated_Tags 
+tags             Updated_Tags
 property_id      email-property   
 segment_exists   true   
 description      Email_Property_Patched
@@ -1242,7 +1242,7 @@ ibmcloud ac property delete --property_id PROPERTY_ID
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-property-delete-command}
 
 <dl>
@@ -1323,7 +1323,7 @@ Here is the content of 'create_collection_body.json':
 The command returns the following output:
 
 ```
-name            Corporate Discount 
+name            Corporate Discount
 collection_id   corporateDiscount   
 description     Discount for partner Organizations   
 created_time    2021-02-02T19:17:07Z   
