@@ -1,8 +1,8 @@
 ---
- 
+
 copyright:
   years: 2021
-lastupdated: "2021-02-17"
+lastupdated: "2021-04-20"
 
 keywords: app configuration CLI, app configuration command line, app configuration terminal, app configuration shell
 
@@ -145,7 +145,7 @@ ibmcloud ac collections [--size SIZE] [--offset OFFSET] [--features FEATURES] [-
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-collections-command-options}
 
 <dl>
@@ -195,7 +195,7 @@ ibmcloud ac collection create {--file FILE-PATH | --name NAME [--collection_id C
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-collection-create-command}
 
 <dl>
@@ -270,7 +270,7 @@ The command returns the following output:
 
 ```
 name            sample   
-collection_id   sampleId 
+collection_id   sampleId
 ```
 {: screen}
 
@@ -284,7 +284,7 @@ ibmcloud ac collection update {--file FILE-PATH | --name NAME --collection_id CO
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-collection-update-command}
 
 <dl>
@@ -334,7 +334,7 @@ ibmcloud ac collection delete --collection_id COLLECTION_ID
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-collection-delete-command}
 
 <dl>
@@ -372,7 +372,7 @@ ibmcloud ac features [--size SIZE] [--offset OFFSET] [--tags TAGS] [--collection
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-features-command}
 
 <dl>
@@ -411,7 +411,7 @@ The command returns the following output:
 name            feature_id      segment_exists   
 Indian IBMers   ibm-discount    true   
 sampleFeature   sampleFeature   true   
-Cycle Rentals   cycle-rentals   true 
+Cycle Rentals   cycle-rentals   true
 ```
 {: screen}
 
@@ -425,7 +425,7 @@ ibmcloud ac feature create {--file FILE-PATH | --name NAME [--feature_id FEATURE
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-feature-create-command}
 
 <dl>
@@ -513,7 +513,7 @@ The command returns the following output:
 
 ```
 name    type     disabled_value  updated_time          feature_id    description                      enabled_value  created_time          order  rules    value   
-IBMers  BOOLEAN  false           2021-02-02T17:52:46Z  ibm-discount  Discount given to IBM employees  true           2021-02-02T17:52:46Z  1      <Array>  true 
+IBMers  BOOLEAN  false           2021-02-02T17:52:46Z  ibm-discount  Discount given to IBM employees  true           2021-02-02T17:52:46Z  1      <Array>  true
 ```
 {: screen}
 
@@ -527,7 +527,7 @@ ibmcloud ac feature update {--file FILE-PATH | --name NAME --feature_id FEATURE_
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-feature-update-command}
 
 <dl>
@@ -587,7 +587,7 @@ ibmcloud ac feature delete --feature_id FEATURE_ID
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-feature-delete-command}
 
 <dl>
@@ -625,7 +625,7 @@ ibmcloud ac segments [--size SIZE] [--offset OFFSET] [--tags TAGS] [--features F
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-segments-command}
 
 <dl>
@@ -661,7 +661,7 @@ The command returns the following output:
 ```
 name            segment_id   
 India IBMers    ibm_employees_01   
-IBM Employees   ibm_employees 
+IBM Employees   ibm_employees
 ```
 {: screen}
 
@@ -675,7 +675,7 @@ ibmcloud ac segment create {--file FILE-PATH | --name NAME [--segment_id SEGMENT
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-segment-create-command}
 
 <dl>
@@ -768,7 +768,7 @@ ibmcloud ac segment update {--file FILE-PATH | --name NAME --segment_id SEGMENT_
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-segment-update-command}
 
 <dl>
@@ -820,7 +820,7 @@ ibmcloud ac segment delete --segment_id SEGMENT_ID
 ```
 {: pre}
 
-### Command options 
+### Command options
 {: #ac-ibmcloud-ac-segment-delete-command}
 
 <dl>
@@ -901,7 +901,7 @@ Here is the content of 'create_collection_body.json':
 The command returns the following output:
 
 ```
-name            Corporate Discount 
+name            Corporate Discount
 collection_id   corporateDiscount   
 description     Discount for partner Organizations   
 created_time    2021-02-02T19:17:07Z   
