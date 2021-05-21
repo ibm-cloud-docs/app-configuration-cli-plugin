@@ -149,15 +149,15 @@ ibmcloud ac environment list [--expand EXPAND] [--sort SORT] [--tags TAGS] [--in
 
 <dl>
 <dt>--limit LIMIT (optional)</dt>
-<dd>Used for pagination. Size of the number of records retrieved</dd>
+<dd>Used for pagination. The number of records to retrieve.</dd>
 <dt>--offset OFFSET (optional)</dt>
-<dd>Used for pagination. Offset used to retrieve records.</dd>
+<dd>Used for pagination. The number of records to skip.</dd>
 <dt>--tags TAGS (optional)</dt>
 <dd>Filter based on the tags.</dd>
 <dt>--sort SORT (optional)</dt>
 <dd>Sort the details based on the specified attribute.</dd>
 <dt>--expand EXPAND (optional)</dt>
-<dd>Expanded view of the environment details.</dd>
+<dd>Expanded view of the item.</dd>
 <dt>--include INCLUDE (optional)</dt>
 <dd>Include feature and property details in the response.</dd>
 </dl>
@@ -255,7 +255,7 @@ ibmcloud ac environment get --environment_id ENVIRONMENT_ID [--expand EXPAND] [-
 <dt>--environment_id ENVIRONMENT_ID</dt>
 <dd>Environment Id</dd>
 <dt>--expand EXPAND (optional)</dt>
-<dd>Expanded view of the environment details.</dd>
+<dd>Expanded view of the item.</dd>
 <dt>--include INCLUDE (optional)</dt>
 <dd>Include feature and property details in the response.</dd>
 </dl>
@@ -350,7 +350,7 @@ ibmcloud ac environment delete --environment_id ENVIRONMENT_ID
 
 <dl>
 <dt>--environment_id ENVIRONMENT_ID</dt>
-<dd>Environment Id</dd>
+<dd>Environment Id.</dd>
 </dl>
 
 ### Example
@@ -388,17 +388,19 @@ ibmcloud ac collection list [--sort SORT] [--limit LIMIT] [--offset OFFSET] [--f
 
 <dl>
 <dt>--limit LIMIT (optional)</dt>
-<dd>Used for pagination. Size of the number of records retrieved</dd>
+<dd>Used for pagination. The number of records to retrieve.</dd>
 <dt>--offset OFFSET (optional)</dt>
-<dd>Used for pagination. Offset used to retrieve records.</dd>
+<dd>Used for pagination. The number of records to skip.</dd>
 <dt>--features FEATURES (optional)</dt>
-<dd>Filter based on the feature's shortname.</dd>
+<dd>Filter collections by a list of comma separated features.</dd>
+<dt>--properties PROPERTIES (optional)</dt>
+<dd>Filter collections by a list of comma separated properties.</dd>
 <dt>--tags TAGS (optional)</dt>
 <dd>Filter based on the tags.</dd>
 <dt>--sort SORT (optional)</dt>
 <dd>Sort the details based on the specified attribute.</dd>
 <dt>--expand EXPAND (optional)</dt>
-<dd>Expanded view of the collection details.</dd>
+<dd>Expanded view of the item.</dd>
 <dt>--include INCLUDE (optional)</dt>
 <dd>Include feature and property details in the response.</dd>
 </dl>
@@ -491,10 +493,10 @@ ibmcloud ac collection get --collection_id COLLECTION_ID [--expand EXPAND] [--in
 <dl>
 <dt>--collection_id COLLECTION_ID</dt>
 <dd>Collection Id for the collection</dd>
-<dt>--expand EXPAND</dt>
-<dd>Optional.  Expanded view of the collection details.</dd>
-<dt>--include INCLUDE</dt>
-<dd>Optional.  Include feature and property details in the response.</dd>
+<dt>--expand EXPAND (optional)</dt>
+<dd>Expanded view of the collection details.</dd>
+<dt>--include INCLUDE (optional)</dt>
+<dd>Include feature and property details in the response.</dd>
 </dl>
 
 ### Example
@@ -623,17 +625,17 @@ ibmcloud ac feature list --environment_id ENVIRONMENT_ID [--sort SORT] [--limit 
 <dt>--environment_id ENVIRONMENT_ID</dt>
 <dd>Environment Id</dd>
 <dt>--limit LIMIT (optional)</dt>
-<dd>Used for pagination. Size of the number of records retrieved</dd>
+<dd>Used for pagination. The number of records to retrieve.</dd>
 <dt>--include INCLUDE (optional)</dt>
 <dd>Feature details to include the associated collections or rules details in the response.</dd>
 <dt>--offset OFFSET (optional)</dt>
-<dd>Used for pagination. Offset used to retrieve records.</dd>
+<dd>Used for pagination. The number of records to skip.</dd>
 <dt>--collections COLLECTIONS (optional)</dt>
 <dd>Filter features by a list of comma separated collections.</dd>
 <dt>--segments SEGMENTS (optional)</dt>
 <dd>Filter features by a list of comma separated segments</dd>
 <dt>--expand EXPAND (optional)</dt>
-<dd>Expanded view the feature details.</dd>
+<dd>Expanded view of the item.</dd>
 <dt>--tags TAGS (optional)</dt>
 <dd>Filter features by a list of comma separated tags.</dd>
 <dt>--sort SORT (optional)</dt>
@@ -694,7 +696,7 @@ ibmcloud ac feature create {--file FILE-PATH | --environment_id ENVIRONMENT_ID -
 <dt>--tags TAGS</dt>
 <dd>Tags associated with the feature. Required field - input either as a flag or from file.</dd>
 <dt>--segment_rules SEGMENT_RULES</dt>
-<dd>Segment Rule array.</dd>
+<dd>Specify the targeting rules that is used to set different values for different segments.</dd>
 <dt>--enabled ENABLED</dt>
 <dd>The state of the feature flag.</dd>
 <dt>--collections COLLECTIONS</dt>
@@ -752,7 +754,7 @@ ibmcloud ac feature get --environment_id ENVIRONMENT_ID --feature_id FEATURE_ID 
 <dt>--feature_id FEATURE_ID</dt>
 <dd>Feature Id for the feature flag.</dd>
 <dt>--include INCLUDE (optional)</dt>
-<dd>Feature details to include the associated collections details in the response.</dd>
+<dd>Include the associated collections in the response.</dd>
 </dl>
 
 ### Example
@@ -807,7 +809,7 @@ ibmcloud ac feature update {--file FILE-PATH | --environment_id ENVIRONMENT_ID -
 <dt>--enabled ENABLED</dt>
 <dd>The state of the feature flag.</dd>
 <dt>--segment_rules SEGMENT_RULES</dt>
-<dd>Segment Rule array.</dd>
+<dd>Specify the targeting rules that is used to set different values for different segments.</dd>
 <dt>--collections COLLECTIONS</dt>
 <dd>Collections array.</dd>
 <dt>--file FILE</dt>
@@ -872,7 +874,7 @@ ibmcloud ac feature patch {--file FILE-PATH | --environment_id ENVIRONMENT_ID --
 <dt>--tags TAGS</dt>
 <dd>Tags associated with the feature. Required field - input either as a flag or from file.</dd>
 <dt>--segment_rules SEGMENT_RULES</dt>
-<dd>Segment Rule array.</dd>
+<dd>Specify the targeting rules that is used to set different values for different segments.</dd>
 <dt>--file FILE</dt>
 <dd>Input via file. File format Supported - JSON</dd>
 </dl>
@@ -964,7 +966,7 @@ ibmcloud ac feature toggle --environment_id ENVIRONMENT_ID --feature_id FEATURE_
 <dt>--feature_id FEATURE_ID</dt>
 <dd>Feature Id</dd>
 <dt>--enabled ENABLED</dt>
-<dd>Whether to enable Feature</dd>
+<dd>The state of the feature flag.</dd>
 </dl>
 
 ### Example
@@ -1005,13 +1007,11 @@ ibmcloud ac segment list [--limit LIMIT] [--offset OFFSET] [--sort SORT] [--tags
 
 <dl>
 <dt>--limit LIMIT (optional)</dt>
-<dd>Used for pagination. Size of the number of records retrieved</dd>
+<dd>Used for pagination. The number of records to retrieve.</dd>
 <dt>--include INCLUDE (optional)</dt>
 <dd>Segment details to include the associated rules in the response.</dd>
 <dt>--offset OFFSET (optional)</dt>
-<dd>Used for pagination. Offset used to retrieve records.</dd>
-<dt>--features FEATURES (optional)</dt>
-<dd>Instructs to include the feature details based on the segments association.</dd>
+<dd>Used for pagination. The number of records to skip.</dd>
 <dt>--expand EXPAND (optional)</dt>
 <dd>Expanded view the segment details.</dd>
 <dt>--tags TAGS (optional)</dt>
@@ -1063,7 +1063,7 @@ ibmcloud ac segment create {--file FILE-PATH | --name NAME [--segment_id SEGMENT
 <dt>--description DESCRIPTION</dt>
 <dd>Description of the segment. Required field - input either as a flag or from file.</dd>
 <dt>--rules RULES</dt>
-<dd>Rule array. Required field - input either as a flag or from file.</dd>
+<dd>List of rules that determine if the entity is part of the segment. Required field - input either as a flag or from file.</dd>
 <dt>--tags TAGS</dt>
 <dd>Tags associated with the segment. Required field - input either as a flag or from file.</dd>
 <dt>--file FILE</dt>
@@ -1109,7 +1109,7 @@ ibmcloud ac segment get --segment_id SEGMENT_ID [--include INCLUDE]
 
 <dl>
 <dt>--segment_id SEGMENT_ID</dt>
-<dd>Feature Id for the feature flag.</dd>
+<dd>Segment Id.</dd>
 <dt>--include INCLUDE (optional)</dt>
 <dd>Instructs to include the feature and property details based on the segments association.</dd>
 </dl>
@@ -1156,7 +1156,7 @@ ibmcloud ac segment update {--file FILE-PATH | --name NAME --segment_id SEGMENT_
 <dt>--description DESCRIPTION</dt>
 <dd>Description of the segment. Required field - input either as a flag or from file.</dd>
 <dt>--rules RULES</dt>
-<dd>Rule array. Required field - input either as a flag or from file.</dd>
+<dd>List of rules that determine if the entity is part of the segment. Required field - input either as a flag or from file.</dd>
 <dt>--tags TAGS</dt>
 <dd>Tags associated with the segment. Required field - input either as a flag or from file.</dd>
 <dt>--file FILE</dt>
@@ -1242,11 +1242,11 @@ ibmcloud ac property list --environment_id ENVIRONMENT_ID [--expand EXPAND] [--s
 <dt>--environment_id ENVIRONMENT_ID</dt>
 <dd>Environment Id</dd>
 <dt>--limit LIMIT (optional)</dt>
-<dd>Used for pagination. Size of the number of records retrieved</dd>
+<dd>Used for pagination. The number of records to retrieve.</dd>
 <dt>--include INCLUDE (optional)</dt>
 <dd>Segment details to include the associated rules in the response.</dd>
 <dt>--offset OFFSET (optional)</dt>
-<dd>Used for pagination. Offset used to retrieve records.</dd>
+<dd>Used for pagination. The number of records to skip.</dd>
 <dt>--collections COLLECTIONS(optional)</dt>
 <dd>Filter features by a list of comma separated collections.</dd>
 <dt>--segments SEGMENTS(optional)</dt>
@@ -1304,15 +1304,15 @@ ibmcloud ac property create (--file FILE-PATH | --environment_id ENVIRONMENT_ID 
 <dt>--description DESCRIPTION</dt>
 <dd>Description of the property. Required field - input either as a flag or from file.</dd>
 <dt>--segment_rules SEGMENT_RULES</dt>
-<dd>Rule array. Required field - input either as a flag or from file.</dd>
+<dd>Specify the targeting rules that is used to set different values for different segments. Required field - input either as a flag or from file.</dd>
 <dt>--tags TAGS</dt>
-<dd>Tags associated with the segment. Required field - input either as a flag or from file.</dd>
+<dd>Tags associated with the property. Required field - input either as a flag or from file.</dd>
 <dt>--value VALUE</dt>
 <dd>Property value. Required field - input either as a flag or from file.</dd>
 <dt>--type TYPE</dt>
 <dd>Property type. Required field - input either as a flag or from file.</dd>
 <dt>--collections COLLECTIONS</dt>
-<dd>Collections Array. Required field - input either as a flag or from file.</dd>
+<dd>List of collection ids representing the collections that are associated with the specified property. Required field - input either as a flag or from file.</dd>
 <dt>--file FILE</dt>
 <dd>Input via file. File format Supported - JSON</dd>
 </dl>
@@ -1411,13 +1411,13 @@ ibmcloud ac property update (--file FILE-PATH | --environment_id ENVIRONMENT_ID 
 <dt>--description DESCRIPTION</dt>
 <dd>Description of the property. Required field - input either as a flag or from file.</dd>
 <dt>--segment_rules SEGMENT_RULES</dt>
-<dd>Rule array. Required field - input either as a flag or from file.</dd>
+<dd>Specify the targeting rules that is used to set different values for different segments. Required field - input either as a flag or from file.</dd>
 <dt>--tags TAGS</dt>
-<dd>Tags associated with the segment. Required field - input either as a flag or from file.</dd>
+<dd>Tags associated with the property. Required field - input either as a flag or from file.</dd>
 <dt>--value VALUE</dt>
 <dd>Property value. Required field - input either as a flag or from file.</dd>
 <dt>--collections COLLECTIONS</dt>
-<dd>Collections Array. Required field - input either as a flag or from file.</dd>
+<dd>List of collection ids representing the collections that are associated with the specified property. Required field - input either as a flag or from file.</dd>
 <dt>--file FILE</dt>
 <dd>Input via file. File format Supported - JSON</dd>
 </dl>
@@ -1474,9 +1474,9 @@ ibmcloud ac property patch (--file FILE-PATH | --environment_id ENVIRONMENT_ID -
 <dt>--description DESCRIPTION</dt>
 <dd>Description of the property. Required field - input either as a flag or from file.</dd>
 <dt>--segment_rules SEGMENT_RULES</dt>
-<dd>Rule array. Required field - input either as a flag or from file.</dd>
+<dd>Specify the targeting rules that is used to set different values for different segments. Required field - input either as a flag or from file.</dd>
 <dt>--tags TAGS</dt>
-<dd>Tags associated with the segment. Required field - input either as a flag or from file.</dd>
+<dd>Tags associated with the property. Required field - input either as a flag or from file.</dd>
 <dt>--value VALUE</dt>
 <dd>Property value. Required field - input either as a flag or from file.</dd>
 <dt>--file FILE</dt>
