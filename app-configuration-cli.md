@@ -200,7 +200,7 @@ ibmcloud ac environment create {--file FILE-PATH | --name NAME [--environment_id
 <dl>
 <dt>--name NAME</dt>
 <dd>Environment name. Required field - input either as a flag or from file.</dd>
-<dt>--collection_id COLLECTION_ID (optional)</dt>
+<dt>--environment_id ENVIRONMENT_ID (optional)</dt>
 <dd>Environment Id. If this value is not provided, name will automatically become the Id. Optional field - input either as a flag or from file.</dd>
 <dt>--description DESCRIPTION (optional)</dt>
 <dd>Description of the environment. Optional field - input either as a flag or from file.</dd>
@@ -297,7 +297,7 @@ ibmcloud ac environment update (--file FILE-PATH | --environment_id ENVIRONMENT_
 <dl>
 <dt>--name NAME</dt>
 <dd>Environment name. Required field - input either as a flag or from file.</dd>
-<dt>--collection_id COLLECTION_ID (optional)</dt>
+<dt>--environment_id ENVIRONMENT_ID (optional)</dt>
 <dd>Environment Id. Required field - input either as a flag or from file.</dd>
 <dt>--description DESCRIPTION (optional)</dt>
 <dd>Description of the environment. Required field - input either as a flag or from file.</dd>
@@ -665,7 +665,7 @@ Cycle Rentals   cycle-rentals   true
 You can create a feature, by using the command:
 
 ```sh
-ibmcloud ac feature create {--file FILE-PATH | --environment_id ENVIRONMENT_ID --name NAME [--feature_id FEATURE_ID] --description DESCRIPTION --type TYPE --enabled_value ENABLED_VALUE --disabled_value DISABLED_VALUE --tags TAGS --segment_rules SEGMENT_RULES --collections COLLECTIONS}
+ibmcloud ac feature create {--file FILE-PATH | --environment_id ENVIRONMENT_ID --name NAME [--feature_id FEATURE_ID] --description DESCRIPTION --type TYPE --enabled_value ENABLED_VALUE --disabled_value DISABLED_VALUE --tags TAGS --enabled ENABLED --segment_rules SEGMENT_RULES --collections COLLECTIONS}
 ```
 {: pre}
 
@@ -691,6 +691,8 @@ ibmcloud ac feature create {--file FILE-PATH | --environment_id ENVIRONMENT_ID -
 <dd>Tags associated with the feature. Required field - input either as a flag or from file.</dd>
 <dt>--segment_rules SEGMENT_RULES</dt>
 <dd>Segment Rule array.</dd>
+<dt>--enabled ENABLED</dt>
+<dd>The state of the feature flag.</dd>
 <dt>--collections COLLECTIONS</dt>
 <dd>Collections array.</dd>
 <dt>--file FILE</dt>
@@ -703,7 +705,7 @@ ibmcloud ac feature create {--file FILE-PATH | --environment_id ENVIRONMENT_ID -
 To create a collection with name `sample` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
 ```sh
-ibmcloud ac feature create --environment_id "production" --name "IBMers" --feature_id "ibm-discount" --description "Discount given to IBM employees" --type "BOOLEAN" --enabled_value true --disabled_value false --segment_rules '[{"rules":[{"segments":["ibm_employees"]}],"value": true,"order": 1}]' --collections '[{"collection_id":"corporatediscount","enabled": true}]'  --tags "discount,sale"
+ibmcloud ac feature create --environment_id "production" --name "IBMers" --feature_id "ibm-discount" --description "Discount given to IBM employees" --type "BOOLEAN" --enabled_value true --disabled_value false --segment_rules '[{"rules":[{"segments":["ibm_employees"]}],"value": true,"order": 1}]' --collections '[{"collection_id":"corporatediscount","enabled": true}]'  --tags "discount,sale" --enabled true
 ```
 {: pre}
 
@@ -721,6 +723,7 @@ name             IBMers
 feature_id       ibm-discount   
 description      Discount given to IBM employees   
 disabled_value   false   
+enabled          true
 created_time     2021-02-02T17:52:46Z   
 updated_time     2021-02-02T17:52:46Z
 ```
@@ -775,7 +778,7 @@ IBMers  BOOLEAN  false           2021-02-02T17:52:46Z  ibm-discount  Discount gi
 You can update a feature, by using the command:
 
 ```sh
-ibmcloud ac feature update {--file FILE-PATH | --environment_id ENVIRONMENT_ID --name NAME --feature_id FEATURE_ID --description DESCRIPTION --enabled_value ENABLED_VALUE --disabled_value DISABLED_VALUE --tags TAGS --segment_rules SEGMENT_RULES --collections COLLECTIONS}
+ibmcloud ac feature update {--file FILE-PATH | --environment_id ENVIRONMENT_ID --name NAME --feature_id FEATURE_ID --description DESCRIPTION --enabled_value ENABLED_VALUE --disabled_value DISABLED_VALUE --enabled ENABLED --tags TAGS --segment_rules SEGMENT_RULES --collections COLLECTIONS}
 ```
 {: pre}
 
@@ -797,6 +800,8 @@ ibmcloud ac feature update {--file FILE-PATH | --environment_id ENVIRONMENT_ID -
 <dd>Value of the feature when it is disabled. Required field - input either as a flag or from file.</dd>
 <dt>--tags TAGS</dt>
 <dd>Tags associated with the feature. Required field - input either as a flag or from file.</dd>
+<dt>--enabled ENABLED</dt>
+<dd>The state of the feature flag.</dd>
 <dt>--segment_rules SEGMENT_RULES</dt>
 <dd>Segment Rule array.</dd>
 <dt>--collections COLLECTIONS</dt>
@@ -811,7 +816,7 @@ ibmcloud ac feature update {--file FILE-PATH | --environment_id ENVIRONMENT_ID -
 To update description a feature with id `ibm-discount` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
 ```sh
-ibmcloud ac feature update --environment_id "production" --name "Indian IBMers" --feature_id "ibm-discount" --description "Discount given to IBM Indian employees" --enabled_value true --disabled_value false --segment_rules '[{"rules":[{"segments":["ibm_employees"]}],"value": true,"order": 1}]' --collections '[{"collection_id":"corporatediscount","enabled": true}]'  --tags "discount,sale"
+ibmcloud ac feature update --environment_id "production" --name "Indian IBMers" --feature_id "ibm-discount" --description "Discount given to IBM Indian employees" --enabled_value true --disabled_value false --segment_rules '[{"rules":[{"segments":["ibm_employees"]}],"value": true,"order": 1}]' --collections '[{"collection_id":"corporatediscount","enabled": true}]'  --tags "discount,sale" --enabled true
 ```
 {: pre}
 
@@ -829,6 +834,7 @@ segment_rules    <Array>
 created_time     2021-02-02T17:52:46Z   
 name             Indian IBMers   
 type             BOOLEAN   
+enabled          true
 collections      <Array>   
 ```
 {: screen}
