@@ -400,7 +400,7 @@ ibmcloud ac collection list [--sort SORT] [--limit LIMIT] [--offset OFFSET] [--f
 <dt>--expand EXPAND (optional)</dt>
 <dd>Expanded view of the collection details.</dd>
 <dt>--include INCLUDE (optional)</dt>
-<dd>Include feature details in the response.</dd>
+<dd>Include feature and property details in the response.</dd>
 </dl>
 
 ### Example
@@ -481,7 +481,7 @@ name            sample
 You can get a collection, by using the command:
 
 ```sh
-ibmcloud ac collection get --collection_id COLLECTION_ID
+ibmcloud ac collection get --collection_id COLLECTION_ID [--expand EXPAND] [--include INCLUDE]
 ```
 {: pre}
 
@@ -491,6 +491,10 @@ ibmcloud ac collection get --collection_id COLLECTION_ID
 <dl>
 <dt>--collection_id COLLECTION_ID</dt>
 <dd>Collection Id for the collection</dd>
+<dt>--expand EXPAND</dt>
+<dd>Optional.  Expanded view of the collection details.</dd>
+<dt>--include INCLUDE</dt>
+<dd>Optional.  Include feature and property details in the response.</dd>
 </dl>
 
 ### Example
@@ -1107,7 +1111,7 @@ ibmcloud ac segment get --segment_id SEGMENT_ID [--include INCLUDE]
 <dt>--segment_id SEGMENT_ID</dt>
 <dd>Feature Id for the feature flag.</dd>
 <dt>--include INCLUDE (optional)</dt>
-<dd>Instructs to include the feature details based on the segments association.</dd>
+<dd>Instructs to include the feature and property details based on the segments association.</dd>
 </dl>
 
 ### Example
