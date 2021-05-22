@@ -379,7 +379,7 @@ OK
 You can list all collections, by using the command:
 
 ```sh
-ibmcloud ac collection list [--sort SORT] [--limit LIMIT] [--offset OFFSET] [--features FEATURES] [--tags TAGS] [--expand EXPAND] [--include INCLUDE]
+ibmcloud ac collection list [--sort SORT] [--limit LIMIT] [--offset OFFSET] [--features FEATURES] [--properties PROPERTIES] [--tags TAGS] [--expand EXPAND] [--include INCLUDE]
 ```
 {: pre}
 
@@ -998,7 +998,7 @@ IBMers  BOOLEAN  false           2021-02-02T17:52:46Z  ibm-discount  Discount gi
 You can list all segments, by using the command:
 
 ```sh
-ibmcloud ac segment list [--limit LIMIT] [--offset OFFSET] [--sort SORT] [--tags TAGS] [--features FEATURES] [--expand EXPAND] [--include INCLUDE]
+ibmcloud ac segment list [--limit LIMIT] [--offset OFFSET] [--sort SORT] [--tags TAGS] [--expand EXPAND] [--include INCLUDE]
 ```
 {: pre}
 
