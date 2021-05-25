@@ -845,13 +845,13 @@ collections      <Array>
 ```
 {: screen}
 
-## ibmcloud ac feature patch
+## ibmcloud ac feature update-values
 {: #ac-ibmcloud-ac-feature-patch}
 
-You can patch a feature, by using the command:
+You can update values of a feature(this method allows the update of feature name, feature enabled_value, feature disabled_value, tags, description and feature segment rules, however this method does not allow toggling the feature flag and assigning feature to a collection.), by using the command:
 
 ```sh
-ibmcloud ac feature patch {--file FILE-PATH | --environment_id ENVIRONMENT_ID --name NAME --feature_id FEATURE_ID --description DESCRIPTION --enabled_value ENABLED_VALUE --disabled_value DISABLED_VALUE --tags TAGS --segment_rules SEGMENT_RULES}
+ibmcloud ac feature update-values {--file FILE-PATH | --environment_id ENVIRONMENT_ID --name NAME --feature_id FEATURE_ID --description DESCRIPTION --enabled_value ENABLED_VALUE --disabled_value DISABLED_VALUE --tags TAGS --segment_rules SEGMENT_RULES}
 ```
 {: pre}
 
@@ -882,10 +882,10 @@ ibmcloud ac feature patch {--file FILE-PATH | --environment_id ENVIRONMENT_ID --
 ### Example
 {: #ac-ibmcloud-ac-feature-patch-example}
 
-To patch description a feature with id `ibm-discount` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
+To update description a feature with id `ibm-discount` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
 ```sh
-ibmcloud ac feature patch --environment_id "production" --name "Indian IBMers" --feature_id "ibm-discount" --description "Discount given to IBM Indian employees" --enabled_value true --disabled_value false --segment_rules '[{"rules":[{"segments":["ibm_employees"]}],"value": true,"order": 1}]'  --tags "discount,sale"
+ibmcloud ac feature update-values --environment_id "production" --name "Indian IBMers" --feature_id "ibm-discount" --description "Discount given to IBM Indian employees" --enabled_value true --disabled_value false --segment_rules '[{"rules":[{"segments":["ibm_employees"]}],"value": true,"order": 1}]'  --tags "discount,sale"
 ```
 {: pre}
 
@@ -1451,13 +1451,13 @@ type             STRING
 {: screen}
 
 
-## ibmcloud ac property patch
+## ibmcloud ac property update-values
 {: #ac-ibmcloud-ac-property-patch}
 
-You can patch a property, by using the command:
+You can update the property values(Property value and targeting rules can be updated, however this method does not allow assigning property to a collection.), by using the command:
 
 ```sh
-ibmcloud ac property patch (--file FILE-PATH | --environment_id ENVIRONMENT_ID --property_id PROPERTY_ID [--name NAME] [--description DESCRIPTION][--value VALUE] [--tags TAGS] [--segment_rules SEGMENT-RULES])
+ibmcloud ac property update-values (--file FILE-PATH | --environment_id ENVIRONMENT_ID --property_id PROPERTY_ID [--name NAME] [--description DESCRIPTION][--value VALUE] [--tags TAGS] [--segment_rules SEGMENT-RULES])
 ```
 {: pre}
 
@@ -1486,10 +1486,10 @@ ibmcloud ac property patch (--file FILE-PATH | --environment_id ENVIRONMENT_ID -
 ### Example
 {: #ac-ibmcloud-ac-property-patch-example}
 
-To patch description of a property with id `email-property` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
+To update description of a property with id `email-property` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
 ```sh
-ibmcloud ac property patch --environment_id "production" --name Email_Property --property_id email-property --description Email_Property_Patched --value VALUE --tags Updated_Tags --segment_rules '[{"rules":[{"segments":["kmu9n7px"]}],"value":"$default","order":1}]'
+ibmcloud ac property update-values --environment_id "production" --name Email_Property --property_id email-property --description Email_Property_Updated --value VALUE --tags Updated_Tags --segment_rules '[{"rules":[{"segments":["kmu9n7px"]}],"value":"$default","order":1}]'
 ```
 {: pre}
 
@@ -1505,7 +1505,7 @@ segment_rules    <Array>
 tags             Updated_Tags
 property_id      email-property   
 segment_exists   true   
-description      Email_Property_Patched
+description      Email_Property_Updated
 type             STRING  
 ```
 {: screen}
