@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021
-lastupdated: "2021-04-21"
+lastupdated: "2021-05-21"
 
 keywords: app configuration CLI, app configuration command line, app configuration terminal, app configuration shell
 
@@ -134,13 +134,252 @@ App Configuration instance being used is - 'App Configuration Instance 1'
 ```
 {: screen}
 
+## ibmcloud ac environment list
+{: #ac-ibmcloud-ac-environment-list}
+
+You can list all environment, by using the command:
+
+```sh
+ibmcloud ac environment list [--expand EXPAND] [--sort SORT] [--tags TAGS] [--include INCLUDE] [--limit LIMIT] [--offset OFFSET]
+```
+{: pre}
+
+### Command options
+{: #ac-ibmcloud-ac-environment-list-command-options}
+
+<dl>
+<dt>--limit LIMIT (optional)</dt>
+<dd>Used for pagination. The number of records to retrieve.</dd>
+<dt>--offset OFFSET (optional)</dt>
+<dd>Used for pagination. The number of records to skip.</dd>
+<dt>--tags TAGS (optional)</dt>
+<dd>Filter based on the tags.</dd>
+<dt>--sort SORT (optional)</dt>
+<dd>Sort the details based on the specified attribute.</dd>
+<dt>--expand EXPAND (optional)</dt>
+<dd>Expanded view of the item.</dd>
+<dt>--include INCLUDE (optional)</dt>
+<dd>Include feature and property details in the response.</dd>
+</dl>
+
+### Example
+{: #ac-ibmcloud-ac-environment-list-example}
+
+To list all environments, run the following command:
+
+```sh
+ibmcloud ac environment list
+```
+{: pre}
+
+### Output
+{: #ac-ibmcloud-ac-environment-list-output}
+
+The command returns the following output:
+
+```
+name               environment_id   
+Prod Environment   prodEnvironment   
+Dev environment    devEnvironment
+```
+{: screen}
+
+## ibmcloud ac environment create
+{: #ac-ibmcloud-ac-environment-create}
+
+You can create a environment, by using the command:
+
+```sh
+ibmcloud ac environment create {--file FILE-PATH | --name NAME [--environment_id ENVIRONMENT_ID] [--description DESCRIPTION] [--tags TAGS] [--color_code COLOR_CODE]}
+```
+{: pre}
+
+### Command options
+{: #ac-ibmcloud-ac-environment-create-command}
+
+<dl>
+<dt>--name NAME</dt>
+<dd>Environment name. Required field - input either as a flag or from file.</dd>
+<dt>--environment_id ENVIRONMENT_ID (optional)</dt>
+<dd>Environment Id. If this value is not provided, name will automatically become the Id. Optional field - input either as a flag or from file.</dd>
+<dt>--description DESCRIPTION (optional)</dt>
+<dd>Description of the environment. Optional field - input either as a flag or from file.</dd>
+<dt>--tags TAGS (optional)</dt>
+<dd>Tags associated with the environment. Optional field - input either as a flag or from file.</dd>
+<dt>--color_code COLOR_CODE (optional)</dt>
+<dd>Color code to distinguish the environment. The Hex code for the color. Optional field - input either as a flag or from file.</dd>
+<dt>--file FILE</dt>
+<dd>Input via file. File format Supported - JSON</dd>
+</dl>
+
+### Example
+{: #ac-ibmcloud-ac-environment-create-example}
+
+To create a environment with name `Production_Environment` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
+
+```sh
+ibmcloud ac environment create --name Production_Environment --environment_id prodEnvironment --description sampleDesc --tags sampleTag --color_code "#FF0000"
+```
+{: pre}
+
+### Output
+{: #ac-ibmcloud-ac-environment-create-output}
+
+The command returns the following output:
+
+```
+updated_time     2021-05-21T05:28:07.000Z   
+name             Production_Environment   
+environment_id   prodEnvironment   
+description      sampleDesc   
+tags             sampleTag   
+color_code       #FF0000   
+created_time     2021-05-21T05:28:07.000Z 
+```
+{: screen}
+
+## ibmcloud ac environment get
+{: #ac-ibmcloud-ac-environment-get}
+
+You can get a environment, by using the command:
+
+```sh
+ibmcloud ac environment get --environment_id ENVIRONMENT_ID [--expand EXPAND] [--include INCLUDE]
+```
+{: pre}
+
+### Command options
+{: #ac-ibmcloud-ac-environment-get-command}
+
+<dl>
+<dt>--environment_id ENVIRONMENT_ID</dt>
+<dd>Environment Id</dd>
+<dt>--expand EXPAND (optional)</dt>
+<dd>Expanded view of the item.</dd>
+<dt>--include INCLUDE (optional)</dt>
+<dd>Include feature and property details in the response.</dd>
+</dl>
+
+### Example
+{: #ac-ibmcloud-ac-environment-get-example}
+
+To get a environment with Id `prodEnvironment`, run the following command:
+
+```sh
+ibmcloud ac environment get --environment_id prodEnvironment
+```
+{: pre}
+
+### Output
+{: #ac-ibmcloud-ac-environment-get-output}
+
+The command returns the following output:
+
+```
+name             Production_Environment   
+environment_id   prodEnvironment
+```
+{: screen}
+
+## ibmcloud ac environment update
+{: #ac-ibmcloud-ac-environment-update}
+
+You can update a environment, by using the command:
+
+```sh
+ibmcloud ac environment update (--file FILE-PATH | --environment_id ENVIRONMENT_ID --name NAME --description DESCRIPTION --tags TAGS --color_code COLOR_CODE)
+```
+{: pre}
+
+### Command options
+{: #ac-ibmcloud-ac-environment-update-command}
+
+<dl>
+<dt>--name NAME</dt>
+<dd>Environment name. Required field - input either as a flag or from file.</dd>
+<dt>--environment_id ENVIRONMENT_ID (optional)</dt>
+<dd>Environment Id. Required field - input either as a flag or from file.</dd>
+<dt>--description DESCRIPTION (optional)</dt>
+<dd>Description of the environment. Required field - input either as a flag or from file.</dd>
+<dt>--tags TAGS (optional)</dt>
+<dd>Tags associated with the environment. Required field - input either as a flag or from file.</dd>
+<dt>--color_code COLOR_CODE (optional)</dt>
+<dd>Color code to distinguish the environment. The Hex code for the color. Required field - input either as a flag or from file.</dd>
+<dt>--file FILE</dt>
+<dd>Input via file. File format Supported - JSON</dd>
+</dl>
+
+### Example
+{: #ac-ibmcloud-ac-environment-update-example}
+
+To update a environment with id `prodEnvironment` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
+
+```sh
+ibmcloud ac environment update --name Production_Environment --environment_id prodEnvironment --description sampleUpdatedDesc --tags sampleUpdatedTag --color_code "#FF0000"
+```
+{: pre}
+
+### Output
+{: #ac-ibmcloud-ac-environment-update-output}
+
+The command returns the following output:
+
+```
+name             Production_Environment   
+environment_id   prodEnvironment   
+description      sampleUpdatedDesc   
+tags             sampleUpdatedTag   
+color_code       #FF0000   
+created_time     2021-05-21T05:28:07.000Z   
+updated_time     2021-05-21T05:33:00.000Z
+```
+{: screen}
+
+## ibmcloud ac environment delete
+{: #ac-ibmcloud-ac-environment-delete}
+
+You can delete a environment, by using the command:
+
+```sh
+ibmcloud ac environment delete --environment_id ENVIRONMENT_ID
+```
+{: pre}
+
+### Command options
+{: #ac-ibmcloud-ac-environment-delete-command}
+
+<dl>
+<dt>--environment_id ENVIRONMENT_ID</dt>
+<dd>Environment Id.</dd>
+</dl>
+
+### Example
+{: #ac-ibmcloud-ac-environment-delete-example}
+
+To delete a environment with id `prodEnvironment` , run the following command:
+
+```sh
+ibmcloud ac environment delete --environment_id prodEnvironment
+```
+{: pre}
+
+### Output
+{: #ac-ibmcloud-ac-environment-delete-output}
+
+The command returns the following output:
+
+```
+OK
+```
+{: screen}
+
 ## ibmcloud ac collection list
 {: #ac-ibmcloud-ac-collection-list}
 
 You can list all collections, by using the command:
 
 ```sh
-ibmcloud ac collection list [--size SIZE] [--offset OFFSET] [--features FEATURES] [--tags TAGS] [--expand EXPAND] [--include INCLUDE]
+ibmcloud ac collection list [--sort SORT] [--limit LIMIT] [--offset OFFSET] [--features FEATURES] [--properties PROPERTIES] [--tags TAGS] [--expand EXPAND] [--include INCLUDE]
 ```
 {: pre}
 
@@ -148,18 +387,22 @@ ibmcloud ac collection list [--size SIZE] [--offset OFFSET] [--features FEATURES
 {: #ac-ibmcloud-ac-collection-list-command-options}
 
 <dl>
-<dt>--size SIZE (optional)</dt>
-<dd>Used for pagination. Size of the number of records retrieved</dd>
+<dt>--limit LIMIT (optional)</dt>
+<dd>Used for pagination. The number of records to retrieve.</dd>
 <dt>--offset OFFSET (optional)</dt>
-<dd>Used for pagination. Offset used to retrieve records.</dd>
+<dd>Used for pagination. The number of records to skip.</dd>
 <dt>--features FEATURES (optional)</dt>
-<dd>Filter based on the feature's shortname.</dd>
+<dd>Filter collections by a list of comma separated features.</dd>
+<dt>--properties PROPERTIES (optional)</dt>
+<dd>Filter collections by a list of comma separated properties.</dd>
 <dt>--tags TAGS (optional)</dt>
 <dd>Filter based on the tags.</dd>
+<dt>--sort SORT (optional)</dt>
+<dd>Sort the details based on the specified attribute.</dd>
 <dt>--expand EXPAND (optional)</dt>
-<dd>Expanded view of the collection details.</dd>
+<dd>Expanded view of the item.</dd>
 <dt>--include INCLUDE (optional)</dt>
-<dd>Include feature details in the response.</dd>
+<dd>Include feature and property details in the response.</dd>
 </dl>
 
 ### Example
@@ -240,7 +483,7 @@ name            sample
 You can get a collection, by using the command:
 
 ```sh
-ibmcloud ac collection get --collection_id COLLECTION_ID
+ibmcloud ac collection get --collection_id COLLECTION_ID [--expand EXPAND] [--include INCLUDE]
 ```
 {: pre}
 
@@ -250,6 +493,10 @@ ibmcloud ac collection get --collection_id COLLECTION_ID
 <dl>
 <dt>--collection_id COLLECTION_ID</dt>
 <dd>Collection Id for the collection</dd>
+<dt>--expand EXPAND (optional)</dt>
+<dd>Expanded view of the collection details.</dd>
+<dt>--include INCLUDE (optional)</dt>
+<dd>Include feature and property details in the response.</dd>
 </dl>
 
 ### Example
@@ -367,7 +614,7 @@ OK
 You can list all features, by using the command:
 
 ```sh
-ibmcloud ac feature list [--size SIZE] [--offset OFFSET] [--tags TAGS] [--collections COLLECTIONS] [--segments SEGMENTS] [--expand EXPAND] [--include INCLUDE]
+ibmcloud ac feature list --environment_id ENVIRONMENT_ID [--sort SORT] [--limit LIMIT] [--offset OFFSET] [--tags TAGS] [--collections COLLECTIONS] [--segments SEGMENTS] [--expand EXPAND] [--include INCLUDE]
 ```
 {: pre}
 
@@ -375,20 +622,24 @@ ibmcloud ac feature list [--size SIZE] [--offset OFFSET] [--tags TAGS] [--collec
 {: #ac-ibmcloud-ac-feature-list-command}
 
 <dl>
-<dt>--size SIZE (optional)</dt>
-<dd>Used for pagination. Size of the number of records retrieved</dd>
+<dt>--environment_id ENVIRONMENT_ID</dt>
+<dd>Environment Id</dd>
+<dt>--limit LIMIT (optional)</dt>
+<dd>Used for pagination. The number of records to retrieve.</dd>
 <dt>--include INCLUDE (optional)</dt>
 <dd>Feature details to include the associated collections or rules details in the response.</dd>
 <dt>--offset OFFSET (optional)</dt>
-<dd>Used for pagination. Offset used to retrieve records.</dd>
+<dd>Used for pagination. The number of records to skip.</dd>
 <dt>--collections COLLECTIONS (optional)</dt>
 <dd>Filter features by a list of comma separated collections.</dd>
 <dt>--segments SEGMENTS (optional)</dt>
 <dd>Filter features by a list of comma separated segments</dd>
 <dt>--expand EXPAND (optional)</dt>
-<dd>Expanded view the feature details.</dd>
+<dd>Expanded view of the item.</dd>
 <dt>--tags TAGS (optional)</dt>
 <dd>Filter features by a list of comma separated tags.</dd>
+<dt>--sort SORT (optional)</dt>
+<dd>Sort the details based on the specified attribute.</dd>
 </dl>
 
 ### Example
@@ -397,7 +648,7 @@ ibmcloud ac feature list [--size SIZE] [--offset OFFSET] [--tags TAGS] [--collec
 To list all features, run the following command:
 
 ```sh
-ibmcloud ac feature list
+ibmcloud ac feature list --environment_id "production"
 ```
 {: pre}
 
@@ -420,7 +671,7 @@ Cycle Rentals   cycle-rentals   true
 You can create a feature, by using the command:
 
 ```sh
-ibmcloud ac feature create {--file FILE-PATH | --name NAME [--feature_id FEATURE_ID] --description DESCRIPTION --type TYPE --enabled_value ENABLED_VALUE --disabled_value DISABLED_VALUE --tags TAGS --segment_rules SEGMENT_RULES --collections COLLECTIONS}
+ibmcloud ac feature create {--file FILE-PATH | --environment_id ENVIRONMENT_ID --name NAME [--feature_id FEATURE_ID] --description DESCRIPTION --type TYPE --enabled_value ENABLED_VALUE --disabled_value DISABLED_VALUE --tags TAGS --enabled ENABLED --segment_rules SEGMENT_RULES --collections COLLECTIONS}
 ```
 {: pre}
 
@@ -428,6 +679,8 @@ ibmcloud ac feature create {--file FILE-PATH | --name NAME [--feature_id FEATURE
 {: #ac-ibmcloud-ac-feature-create-command}
 
 <dl>
+<dt>--environment_id ENVIRONMENT_ID</dt>
+<dd>Environment Id</dd>
 <dt>--name NAME</dt>
 <dd> Feature name. Required field - input either as a flag or from file.</dd>
 <dt>--feature_id FEATURE_ID (optional)</dt>
@@ -443,7 +696,9 @@ ibmcloud ac feature create {--file FILE-PATH | --name NAME [--feature_id FEATURE
 <dt>--tags TAGS</dt>
 <dd>Tags associated with the feature. Required field - input either as a flag or from file.</dd>
 <dt>--segment_rules SEGMENT_RULES</dt>
-<dd>Segment Rule array.</dd>
+<dd>Specify the targeting rules that is used to set different values for different segments.</dd>
+<dt>--enabled ENABLED</dt>
+<dd>The state of the feature flag.</dd>
 <dt>--collections COLLECTIONS</dt>
 <dd>Collections array.</dd>
 <dt>--file FILE</dt>
@@ -456,7 +711,7 @@ ibmcloud ac feature create {--file FILE-PATH | --name NAME [--feature_id FEATURE
 To create a collection with name `sample` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
 ```sh
-ibmcloud ac feature create --name "IBMers" --feature_id "ibm-discount" --description "Discount given to IBM employees" --type "BOOLEAN" --enabled_value true --disabled_value false --segment_rules '[{"rules":[{"segments":["ibm_employees"]}],"value": true,"order": 1}]' --collections '[{"collection_id":"corporatediscount","enabled": true}]'  --tags "discount,sale"
+ibmcloud ac feature create --environment_id "production" --name "IBMers" --feature_id "ibm-discount" --description "Discount given to IBM employees" --type "BOOLEAN" --enabled_value true --disabled_value false --segment_rules '[{"rules":[{"segments":["ibm_employees"]}],"value": true,"order": 1}]' --collections '[{"collection_id":"corporatediscount","enabled": true}]'  --tags "discount,sale" --enabled true
 ```
 {: pre}
 
@@ -474,6 +729,7 @@ name             IBMers
 feature_id       ibm-discount   
 description      Discount given to IBM employees   
 disabled_value   false   
+enabled          true
 created_time     2021-02-02T17:52:46Z   
 updated_time     2021-02-02T17:52:46Z
 ```
@@ -485,7 +741,7 @@ updated_time     2021-02-02T17:52:46Z
 You can get a feature, by using the command:
 
 ```sh
-ibmcloud ac feature get --feature_id FEATURE_ID [--include INCLUDE]
+ibmcloud ac feature get --environment_id ENVIRONMENT_ID --feature_id FEATURE_ID [--include INCLUDE]
 ```
 {: pre}
 
@@ -493,10 +749,12 @@ ibmcloud ac feature get --feature_id FEATURE_ID [--include INCLUDE]
 {: #ac-ibmcloud-ac-feature-get-command}
 
 <dl>
+<dt>--environment_id ENVIRONMENT_ID</dt>
+<dd>Environment Id</dd>
 <dt>--feature_id FEATURE_ID</dt>
 <dd>Feature Id for the feature flag.</dd>
 <dt>--include INCLUDE (optional)</dt>
-<dd>Feature details to include the associated collections details in the response.</dd>
+<dd>Include the associated collections in the response.</dd>
 </dl>
 
 ### Example
@@ -505,7 +763,7 @@ ibmcloud ac feature get --feature_id FEATURE_ID [--include INCLUDE]
 To get a feature with Id `ibm-discount`, run the following command:
 
 ```sh
-ibmcloud ac feature get --feature_id ibm-discount
+ibmcloud ac feature get --environment_id "production" --feature_id ibm-discount
 ```
 {: pre}
 
@@ -526,7 +784,7 @@ IBMers  BOOLEAN  false           2021-02-02T17:52:46Z  ibm-discount  Discount gi
 You can update a feature, by using the command:
 
 ```sh
-ibmcloud ac feature update {--file FILE-PATH | --name NAME --feature_id FEATURE_ID --description DESCRIPTION --enabled_value ENABLED_VALUE --disabled_value DISABLED_VALUE --tags TAGS --segment_rules SEGMENT_RULES --collections COLLECTIONS}
+ibmcloud ac feature update {--file FILE-PATH | --environment_id ENVIRONMENT_ID --name NAME --feature_id FEATURE_ID --description DESCRIPTION --enabled_value ENABLED_VALUE --disabled_value DISABLED_VALUE --enabled ENABLED --tags TAGS --segment_rules SEGMENT_RULES --collections COLLECTIONS}
 ```
 {: pre}
 
@@ -534,6 +792,8 @@ ibmcloud ac feature update {--file FILE-PATH | --name NAME --feature_id FEATURE_
 {: #ac-ibmcloud-ac-feature-update-command}
 
 <dl>
+<dt>--environment_id ENVIRONMENT_ID</dt>
+<dd>Environment Id</dd>
 <dt>--name NAME</dt>
 <dd> Feature name. Required field - input either as a flag or from file.</dd>
 <dt>--feature_id FEATURE_ID</dt>
@@ -546,8 +806,10 @@ ibmcloud ac feature update {--file FILE-PATH | --name NAME --feature_id FEATURE_
 <dd>Value of the feature when it is disabled. Required field - input either as a flag or from file.</dd>
 <dt>--tags TAGS</dt>
 <dd>Tags associated with the feature. Required field - input either as a flag or from file.</dd>
+<dt>--enabled ENABLED</dt>
+<dd>The state of the feature flag.</dd>
 <dt>--segment_rules SEGMENT_RULES</dt>
-<dd>Segment Rule array.</dd>
+<dd>Specify the targeting rules that is used to set different values for different segments.</dd>
 <dt>--collections COLLECTIONS</dt>
 <dd>Collections array.</dd>
 <dt>--file FILE</dt>
@@ -560,7 +822,7 @@ ibmcloud ac feature update {--file FILE-PATH | --name NAME --feature_id FEATURE_
 To update description a feature with id `ibm-discount` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
 ```sh
-ibmcloud ac feature update --name "Indian IBMers" --feature_id "ibm-discount" --description "Discount given to IBM Indian employees" --enabled_value true --disabled_value false --segment_rules '[{"rules":[{"segments":["ibm_employees"]}],"value": true,"order": 1}]' --collections '[{"collection_id":"corporatediscount","enabled": true}]'  --tags "discount,sale"
+ibmcloud ac feature update --environment_id "production" --name "Indian IBMers" --feature_id "ibm-discount" --description "Discount given to IBM Indian employees" --enabled_value true --disabled_value false --segment_rules '[{"rules":[{"segments":["ibm_employees"]}],"value": true,"order": 1}]' --collections '[{"collection_id":"corporatediscount","enabled": true}]'  --tags "discount,sale" --enabled true
 ```
 {: pre}
 
@@ -578,17 +840,18 @@ segment_rules    <Array>
 created_time     2021-02-02T17:52:46Z   
 name             Indian IBMers   
 type             BOOLEAN   
+enabled          true
 collections      <Array>   
 ```
 {: screen}
 
-## ibmcloud ac feature patch
+## ibmcloud ac feature update-values
 {: #ac-ibmcloud-ac-feature-patch}
 
-You can patch a feature, by using the command:
+You can update values of a feature(this method allows the update of feature name, feature enabled_value, feature disabled_value, tags, description and feature segment rules, however this method does not allow toggling the feature flag and assigning feature to a collection.), by using the command:
 
 ```sh
-ibmcloud ac feature patch {--file FILE-PATH | --name NAME --feature_id FEATURE_ID --description DESCRIPTION --enabled_value ENABLED_VALUE --disabled_value DISABLED_VALUE --tags TAGS --segment_rules SEGMENT_RULES}
+ibmcloud ac feature update-values {--file FILE-PATH | --environment_id ENVIRONMENT_ID --name NAME --feature_id FEATURE_ID --description DESCRIPTION --enabled_value ENABLED_VALUE --disabled_value DISABLED_VALUE --tags TAGS --segment_rules SEGMENT_RULES}
 ```
 {: pre}
 
@@ -596,6 +859,8 @@ ibmcloud ac feature patch {--file FILE-PATH | --name NAME --feature_id FEATURE_I
 {: #ac-ibmcloud-ac-feature-patch-command}
 
 <dl>
+<dt>--environment_id ENVIRONMENT_ID</dt>
+<dd>Environment Id</dd>
 <dt>--name NAME</dt>
 <dd> Feature name. Required field - input either as a flag or from file.</dd>
 <dt>--feature_id FEATURE_ID</dt>
@@ -609,7 +874,7 @@ ibmcloud ac feature patch {--file FILE-PATH | --name NAME --feature_id FEATURE_I
 <dt>--tags TAGS</dt>
 <dd>Tags associated with the feature. Required field - input either as a flag or from file.</dd>
 <dt>--segment_rules SEGMENT_RULES</dt>
-<dd>Segment Rule array.</dd>
+<dd>Specify the targeting rules that is used to set different values for different segments.</dd>
 <dt>--file FILE</dt>
 <dd>Input via file. File format Supported - JSON</dd>
 </dl>
@@ -617,10 +882,10 @@ ibmcloud ac feature patch {--file FILE-PATH | --name NAME --feature_id FEATURE_I
 ### Example
 {: #ac-ibmcloud-ac-feature-patch-example}
 
-To patch description a feature with id `ibm-discount` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
+To update description a feature with id `ibm-discount` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
 ```sh
-ibmcloud ac feature patch --name "Indian IBMers" --feature_id "ibm-discount" --description "Discount given to IBM Indian employees" --enabled_value true --disabled_value false --segment_rules '[{"rules":[{"segments":["ibm_employees"]}],"value": true,"order": 1}]'  --tags "discount,sale"
+ibmcloud ac feature update-values --environment_id "production" --name "Indian IBMers" --feature_id "ibm-discount" --description "Discount given to IBM Indian employees" --enabled_value true --disabled_value false --segment_rules '[{"rules":[{"segments":["ibm_employees"]}],"value": true,"order": 1}]'  --tags "discount,sale"
 ```
 {: pre}
 
@@ -648,7 +913,7 @@ collections      <Array>
 You can delete a feature, by using the command:
 
 ```sh
-ibmcloud ac feature delete --feature_id FEATURE_ID
+ibmcloud ac feature delete --environment_id ENVIRONMENT_ID --feature_id FEATURE_ID
 ```
 {: pre}
 
@@ -656,6 +921,8 @@ ibmcloud ac feature delete --feature_id FEATURE_ID
 {: #ac-ibmcloud-ac-feature-delete-command}
 
 <dl>
+<dt>--environment_id ENVIRONMENT_ID</dt>
+<dd>Environment Id</dd>
 <dt>--feature_id FEATURE_ID</dt>
 <dd>Feature Id</dd>
 </dl>
@@ -666,7 +933,7 @@ ibmcloud ac feature delete --feature_id FEATURE_ID
 To delete a feature with id `ibm-discount`, run the following command:
 
 ```sh
-ibmcloud ac feature delete --feature_id ibm-discount
+ibmcloud ac feature delete --environment_id "production" --feature_id ibm-discount
 ```
 {: pre}
 
@@ -686,7 +953,7 @@ OK
 You can toggle a feature value, by using the command:
 
 ```sh
-ibmcloud ac feature toggle --feature_id FEATURE_ID --enabled ENABLED
+ibmcloud ac feature toggle --environment_id ENVIRONMENT_ID --feature_id FEATURE_ID --enabled ENABLED
 ```
 {: pre}
 
@@ -694,10 +961,12 @@ ibmcloud ac feature toggle --feature_id FEATURE_ID --enabled ENABLED
 {: #ac-ibmcloud-ac-feature-toggle-command}
 
 <dl>
+<dt>--environment_id ENVIRONMENT_ID</dt>
+<dd>Environment Id</dd>
 <dt>--feature_id FEATURE_ID</dt>
 <dd>Feature Id</dd>
 <dt>--enabled ENABLED</dt>
-<dd>Enable Feature</dd>
+<dd>The state of the feature flag.</dd>
 </dl>
 
 ### Example
@@ -706,7 +975,7 @@ ibmcloud ac feature toggle --feature_id FEATURE_ID --enabled ENABLED
 To toggle a feature value with id `ibm-discount`, run the following command:
 
 ```sh
-ibmcloud ac feature toggle --feature_id ibm-discount --enabled false
+ibmcloud ac feature toggle --environment_id "production" --feature_id ibm-discount --enabled false
 ```
 {: pre}
 
@@ -729,7 +998,7 @@ IBMers  BOOLEAN  false           2021-02-02T17:52:46Z  ibm-discount  Discount gi
 You can list all segments, by using the command:
 
 ```sh
-ibmcloud ac segment list [--size SIZE] [--offset OFFSET] [--tags TAGS] [--features FEATURES] [--expand EXPAND] [--include INCLUDE]
+ibmcloud ac segment list [--limit LIMIT] [--offset OFFSET] [--sort SORT] [--tags TAGS] [--expand EXPAND] [--include INCLUDE]
 ```
 {: pre}
 
@@ -737,18 +1006,18 @@ ibmcloud ac segment list [--size SIZE] [--offset OFFSET] [--tags TAGS] [--featur
 {: #ac-command}
 
 <dl>
-<dt>--size SIZE (optional)</dt>
-<dd>Used for pagination. Size of the number of records retrieved</dd>
+<dt>--limit LIMIT (optional)</dt>
+<dd>Used for pagination. The number of records to retrieve.</dd>
 <dt>--include INCLUDE (optional)</dt>
 <dd>Segment details to include the associated rules in the response.</dd>
 <dt>--offset OFFSET (optional)</dt>
-<dd>Used for pagination. Offset used to retrieve records.</dd>
-<dt>--features FEATURES (optional)</dt>
-<dd>Instructs to include the feature details based on the segments association.</dd>
+<dd>Used for pagination. The number of records to skip.</dd>
 <dt>--expand EXPAND (optional)</dt>
 <dd>Expanded view the segment details.</dd>
 <dt>--tags TAGS (optional)</dt>
 <dd>Filter segments by a list of comma separated tags.</dd>
+<dt>--sort SORT (optional)</dt>
+<dd>Sort the details based on the specified attribute.</dd>
 </dl>
 
 ### Example
@@ -794,7 +1063,7 @@ ibmcloud ac segment create {--file FILE-PATH | --name NAME [--segment_id SEGMENT
 <dt>--description DESCRIPTION</dt>
 <dd>Description of the segment. Required field - input either as a flag or from file.</dd>
 <dt>--rules RULES</dt>
-<dd>Rule array. Required field - input either as a flag or from file.</dd>
+<dd>List of rules that determine if the entity is part of the segment. Required field - input either as a flag or from file.</dd>
 <dt>--tags TAGS</dt>
 <dd>Tags associated with the segment. Required field - input either as a flag or from file.</dd>
 <dt>--file FILE</dt>
@@ -840,9 +1109,9 @@ ibmcloud ac segment get --segment_id SEGMENT_ID [--include INCLUDE]
 
 <dl>
 <dt>--segment_id SEGMENT_ID</dt>
-<dd>Feature Id for the feature flag.</dd>
+<dd>Segment Id.</dd>
 <dt>--include INCLUDE (optional)</dt>
-<dd>Instructs to include the feature details based on the segments association.</dd>
+<dd>Instructs to include the feature and property details based on the segments association.</dd>
 </dl>
 
 ### Example
@@ -887,7 +1156,7 @@ ibmcloud ac segment update {--file FILE-PATH | --name NAME --segment_id SEGMENT_
 <dt>--description DESCRIPTION</dt>
 <dd>Description of the segment. Required field - input either as a flag or from file.</dd>
 <dt>--rules RULES</dt>
-<dd>Rule array. Required field - input either as a flag or from file.</dd>
+<dd>List of rules that determine if the entity is part of the segment. Required field - input either as a flag or from file.</dd>
 <dt>--tags TAGS</dt>
 <dd>Tags associated with the segment. Required field - input either as a flag or from file.</dd>
 <dt>--file FILE</dt>
@@ -962,7 +1231,7 @@ OK
 You can list all properties, by using the command:
 
 ```sh
-ibmcloud ac property list [--expand EXPAND] [--sort SORT] [--tags TAGS] [--include INCLUDE] [--collections COLLECTIONS] [--segments SEGMENTS] [--size SIZE] [--offset OFFSET]
+ibmcloud ac property list --environment_id ENVIRONMENT_ID [--expand EXPAND] [--sort SORT] [--tags TAGS] [--include INCLUDE] [--collections COLLECTIONS] [--segments SEGMENTS] [--limit LIMIT] [--offset OFFSET]
 ```
 {: pre}
 
@@ -970,12 +1239,14 @@ ibmcloud ac property list [--expand EXPAND] [--sort SORT] [--tags TAGS] [--inclu
 {: #ac-ibmcloud-ac-property-list-command}
 
 <dl>
-<dt>--size SIZE (optional)</dt>
-<dd>Used for pagination. Size of the number of records retrieved</dd>
+<dt>--environment_id ENVIRONMENT_ID</dt>
+<dd>Environment Id</dd>
+<dt>--limit LIMIT (optional)</dt>
+<dd>Used for pagination. The number of records to retrieve.</dd>
 <dt>--include INCLUDE (optional)</dt>
 <dd>Segment details to include the associated rules in the response.</dd>
 <dt>--offset OFFSET (optional)</dt>
-<dd>Used for pagination. Offset used to retrieve records.</dd>
+<dd>Used for pagination. The number of records to skip.</dd>
 <dt>--collections COLLECTIONS(optional)</dt>
 <dd>Filter features by a list of comma separated collections.</dd>
 <dt>--segments SEGMENTS(optional)</dt>
@@ -985,7 +1256,7 @@ ibmcloud ac property list [--expand EXPAND] [--sort SORT] [--tags TAGS] [--inclu
 <dt>--tags TAGS (optional)</dt>
 <dd>Filter segments by a list of comma separated tags.</dd>
 <dt>--sort SORT (optional)</dt>
-<dd>Sort by property Id. (optional)</dd>
+<dd>Sort the details based on the specified attribute.</dd>
 </dl>
 
 ### Example
@@ -994,7 +1265,7 @@ ibmcloud ac property list [--expand EXPAND] [--sort SORT] [--tags TAGS] [--inclu
 To list all properties, run the following command:
 
 ```sh
-ibmcloud ac property list
+ibmcloud ac property list --environment_id "production"
 ```
 {: pre}
 
@@ -1016,7 +1287,7 @@ collections   name             property_id      description                 type
 You can create a property, by using the command:
 
 ```sh
-ibmcloud ac property create (--file FILE-PATH | --name NAME [--property_id PROPERTY-ID] --description DESCRIPTION --type TYPE --value VALUE --tags TAGS --segment_rules SEGMENT-RULES --collections COLLECTIONS)
+ibmcloud ac property create (--file FILE-PATH | --environment_id ENVIRONMENT_ID --name NAME [--property_id PROPERTY_ID] --description DESCRIPTION --type TYPE --value VALUE --tags TAGS --segment_rules SEGMENT-RULES --collections COLLECTIONS)
 ```
 {: pre}
 
@@ -1024,6 +1295,8 @@ ibmcloud ac property create (--file FILE-PATH | --name NAME [--property_id PROPE
 {: #ac-ibmcloud-ac-property-create-command}
 
 <dl>
+<dt>--environment_id ENVIRONMENT_ID</dt>
+<dd>Environment Id</dd>
 <dt>--name NAME</dt>
 <dd>Property name. Required field - input either as a flag or from file.</dd>
 <dt>--property_id PROPERTY_ID (optional)</dt>
@@ -1031,15 +1304,15 @@ ibmcloud ac property create (--file FILE-PATH | --name NAME [--property_id PROPE
 <dt>--description DESCRIPTION</dt>
 <dd>Description of the property. Required field - input either as a flag or from file.</dd>
 <dt>--segment_rules SEGMENT_RULES</dt>
-<dd>Rule array. Required field - input either as a flag or from file.</dd>
+<dd>Specify the targeting rules that is used to set different values for different segments. Required field - input either as a flag or from file.</dd>
 <dt>--tags TAGS</dt>
-<dd>Tags associated with the segment. Required field - input either as a flag or from file.</dd>
+<dd>Tags associated with the property. Required field - input either as a flag or from file.</dd>
 <dt>--value VALUE</dt>
 <dd>Property value. Required field - input either as a flag or from file.</dd>
 <dt>--type TYPE</dt>
 <dd>Property type. Required field - input either as a flag or from file.</dd>
 <dt>--collections COLLECTIONS</dt>
-<dd>Collections Array. Required field - input either as a flag or from file.</dd>
+<dd>List of collection ids representing the collections that are associated with the specified property. Required field - input either as a flag or from file.</dd>
 <dt>--file FILE</dt>
 <dd>Input via file. File format Supported - JSON</dd>
 </dl>
@@ -1050,7 +1323,7 @@ ibmcloud ac property create (--file FILE-PATH | --name NAME [--property_id PROPE
 To create a property with name `email-property` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
 ```sh
-ibmcloud ac property create --name Email_Property --property_id email-property --description Email_Property --type STRING --value VALUE --tags tags --segment_rules '[{"rules":[{"segments":["kmu9n7px"]}],"value":"$default","order":1}]' --collections '[]'
+ibmcloud ac property create --environment_id "production" --name Email_Property --property_id email-property --description Email_Property --type STRING --value VALUE --tags tags --segment_rules '[{"rules":[{"segments":["kmu9n7px"]}],"value":"$default","order":1}]' --collections '[]'
 ```
 {: pre}
 
@@ -1078,7 +1351,7 @@ collections      -
 You can get a property, by using the command:
 
 ```sh
-ibmcloud ac property get --property_id PROPERTY_ID [--include INCLUDE]
+ibmcloud ac property get --environment_id ENVIRONMENT_ID --property_id PROPERTY_ID [--include INCLUDE]
 ```
 {: pre}
 
@@ -1086,6 +1359,8 @@ ibmcloud ac property get --property_id PROPERTY_ID [--include INCLUDE]
 {: #ac-ibmcloud-ac-property-get-command}
 
 <dl>
+<dt>--environment_id ENVIRONMENT_ID</dt>
+<dd>Environment Id</dd>
 <dt>--property_id PROPERTY_ID</dt>
 <dd>Property Id for the property flag.</dd>
 <dt>--include INCLUDE (optional)</dt>
@@ -1098,7 +1373,7 @@ ibmcloud ac property get --property_id PROPERTY_ID [--include INCLUDE]
 To get a property with Id `email-property`, run the following command:
 
 ```sh
-ibmcloud ac property get --property_id email-property
+ibmcloud ac property get --environment_id "production" --property_id email-property
 ```
 {: pre}
 
@@ -1119,7 +1394,7 @@ version: 1.1, pre-release   -             Email_Property   email-property   Prop
 You can update a property, by using the command:
 
 ```sh
-ibmcloud ac property update (--file FILE-PATH | --property_id PROPERTY-ID [--name NAME] [--description DESCRIPTION] [--value VALUE] [--tags TAGS] [--segment_rules SEGMENT-RULES] [--collections COLLECTIONS])
+ibmcloud ac property update (--file FILE-PATH | --environment_id ENVIRONMENT_ID --property_id PROPERTY_ID [--name NAME] [--description DESCRIPTION] [--value VALUE] [--tags TAGS] [--segment_rules SEGMENT-RULES] [--collections COLLECTIONS])
 ```
 {: pre}
 
@@ -1127,6 +1402,8 @@ ibmcloud ac property update (--file FILE-PATH | --property_id PROPERTY-ID [--nam
 {: #ac-ibmcloud-ac-property-update-command}
 
 <dl>
+<dt>--environment_id ENVIRONMENT_ID</dt>
+<dd>Environment Id</dd>
 <dt>--name NAME</dt>
 <dd>Property name. Required field - input either as a flag or from file.</dd>
 <dt>--property_id PROPERTY_ID</dt>
@@ -1134,13 +1411,13 @@ ibmcloud ac property update (--file FILE-PATH | --property_id PROPERTY-ID [--nam
 <dt>--description DESCRIPTION</dt>
 <dd>Description of the property. Required field - input either as a flag or from file.</dd>
 <dt>--segment_rules SEGMENT_RULES</dt>
-<dd>Rule array. Required field - input either as a flag or from file.</dd>
+<dd>Specify the targeting rules that is used to set different values for different segments. Required field - input either as a flag or from file.</dd>
 <dt>--tags TAGS</dt>
-<dd>Tags associated with the segment. Required field - input either as a flag or from file.</dd>
+<dd>Tags associated with the property. Required field - input either as a flag or from file.</dd>
 <dt>--value VALUE</dt>
 <dd>Property value. Required field - input either as a flag or from file.</dd>
 <dt>--collections COLLECTIONS</dt>
-<dd>Collections Array. Required field - input either as a flag or from file.</dd>
+<dd>List of collection ids representing the collections that are associated with the specified property. Required field - input either as a flag or from file.</dd>
 <dt>--file FILE</dt>
 <dd>Input via file. File format Supported - JSON</dd>
 </dl>
@@ -1151,7 +1428,7 @@ ibmcloud ac property update (--file FILE-PATH | --property_id PROPERTY-ID [--nam
 To update description a property with id `email-property` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
 ```sh
-ibmcloud ac property update --name Email_Property --property_id email-property --description Email_Property_Updated --value VALUE --tags Updated_Tags --segment_rules '[{"rules":[{"segments":["kmu9n7px"]}],"value":"$default","order":1}]' --collections '[]'
+ibmcloud ac property update --environment_id "production" --name Email_Property --property_id email-property --description Email_Property_Updated --value VALUE --tags Updated_Tags --segment_rules '[{"rules":[{"segments":["kmu9n7px"]}],"value":"$default","order":1}]' --collections '[]'
 ```
 {: pre}
 
@@ -1174,13 +1451,13 @@ type             STRING
 {: screen}
 
 
-## ibmcloud ac property patch
+## ibmcloud ac property update-values
 {: #ac-ibmcloud-ac-property-patch}
 
-You can patch a property, by using the command:
+You can update the property values(Property value and targeting rules can be updated, however this method does not allow assigning property to a collection.), by using the command:
 
 ```sh
-ibmcloud ac property patch (--file FILE-PATH | --property_id PROPERTY-ID [--name NAME] [--description DESCRIPTION][--value VALUE] [--tags TAGS] [--segment_rules SEGMENT-RULES])
+ibmcloud ac property update-values (--file FILE-PATH | --environment_id ENVIRONMENT_ID --property_id PROPERTY_ID [--name NAME] [--description DESCRIPTION][--value VALUE] [--tags TAGS] [--segment_rules SEGMENT-RULES])
 ```
 {: pre}
 
@@ -1188,6 +1465,8 @@ ibmcloud ac property patch (--file FILE-PATH | --property_id PROPERTY-ID [--name
 {: #ac-ibmcloud-ac-property-patch-command}
 
 <dl>
+<dt>--environment_id ENVIRONMENT_ID</dt>
+<dd>Environment Id</dd>
 <dt>--name NAME</dt>
 <dd>Property name. Required field - input either as a flag or from file.</dd>
 <dt>--property_id PROPERTY_ID</dt>
@@ -1195,9 +1474,9 @@ ibmcloud ac property patch (--file FILE-PATH | --property_id PROPERTY-ID [--name
 <dt>--description DESCRIPTION</dt>
 <dd>Description of the property. Required field - input either as a flag or from file.</dd>
 <dt>--segment_rules SEGMENT_RULES</dt>
-<dd>Rule array. Required field - input either as a flag or from file.</dd>
+<dd>Specify the targeting rules that is used to set different values for different segments. Required field - input either as a flag or from file.</dd>
 <dt>--tags TAGS</dt>
-<dd>Tags associated with the segment. Required field - input either as a flag or from file.</dd>
+<dd>Tags associated with the property. Required field - input either as a flag or from file.</dd>
 <dt>--value VALUE</dt>
 <dd>Property value. Required field - input either as a flag or from file.</dd>
 <dt>--file FILE</dt>
@@ -1207,10 +1486,10 @@ ibmcloud ac property patch (--file FILE-PATH | --property_id PROPERTY-ID [--name
 ### Example
 {: #ac-ibmcloud-ac-property-patch-example}
 
-To patch description of a property with id `email-property` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
+To update description of a property with id `email-property` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
 
 ```sh
-ibmcloud ac property patch --name Email_Property --property_id email-property --description Email_Property_Patched --value VALUE --tags Updated_Tags --segment_rules '[{"rules":[{"segments":["kmu9n7px"]}],"value":"$default","order":1}]'
+ibmcloud ac property update-values --environment_id "production" --name Email_Property --property_id email-property --description Email_Property_Updated --value VALUE --tags Updated_Tags --segment_rules '[{"rules":[{"segments":["kmu9n7px"]}],"value":"$default","order":1}]'
 ```
 {: pre}
 
@@ -1226,7 +1505,7 @@ segment_rules    <Array>
 tags             Updated_Tags
 property_id      email-property   
 segment_exists   true   
-description      Email_Property_Patched
+description      Email_Property_Updated
 type             STRING  
 ```
 {: screen}
@@ -1238,7 +1517,7 @@ type             STRING
 You can delete a property, by using the command:
 
 ```sh
-ibmcloud ac property delete --property_id PROPERTY_ID
+ibmcloud ac property delete --environment_id ENVIRONMENT_ID --property_id PROPERTY_ID
 ```
 {: pre}
 
@@ -1246,6 +1525,8 @@ ibmcloud ac property delete --property_id PROPERTY_ID
 {: #ac-ibmcloud-ac-property-delete-command}
 
 <dl>
+<dt>--environment_id ENVIRONMENT_ID</dt>
+<dd>Environment Id</dd>
 <dt>--property_id PROPERTY_ID</dt>
 <dd>Property Id</dd>
 </dl>
@@ -1256,7 +1537,7 @@ ibmcloud ac property delete --property_id PROPERTY_ID
 To delete a property with id `ibm_employees`, run the following command:
 
 ```sh
-ibmcloud ac property delete --property_id ibm_employees
+ibmcloud ac property delete --environment_id "production" --property_id ibm_employees
 ```
 {: pre}
 
