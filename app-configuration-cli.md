@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021
-lastupdated: "2021-05-21"
+lastupdated: "2021-06-02"
 
 keywords: app configuration CLI, app configuration command line, app configuration terminal, app configuration shell
 
@@ -1548,6 +1548,86 @@ The command returns the following output:
 
 ```
 OK
+```
+{: screen}
+
+## ibmcloud ac export
+{: #ac-ibmcloud-ac-export}
+
+You can export configuration data of the selected instance, by using the command:
+
+```sh
+ibmcloud ac export [--file FILE]
+```
+{: pre}
+
+### Command options
+{: #ac-ibmcloud-ac-export-command}
+
+<dl>
+<dt>--file FILE (optional)</dt>
+<dd>Path of file to where configuration will be exported.</dd>
+</dl>
+
+### Example
+{: #ac-ibmcloud-ac-export-example}
+
+To export configuration data of the selected instance, run the following command:
+
+```sh
+ibmcloud ac export --file exportedConfig.json
+```
+{: pre}
+
+### Output
+{: #ac-ibmcloud-ac-export-output}
+
+The command returns the following output:
+
+```
+OK
+Configuration exported to file exportedConfig.json
+```
+{: screen}
+
+## ibmcloud ac import
+{: #ac-ibmcloud-ac-import}
+
+You can import configuration data from a file to the selected instance, by using the command:
+
+```sh
+ibmcloud ac import --file FILE [--clean CLEAN]
+```
+{: pre}
+
+### Command options
+{: #ac-ibmcloud-ac-import-command}
+
+<dl>
+<dt>--file FILE</dt>
+<dd>Path of file from where configuration will be imported.</dd>
+<dt>--clean CLEAN (optional)</dt>
+<dd>If set to 'true', clears the existing data in the service instance before performing import of the configuration data.</dd>
+</dl>
+
+### Example
+{: #ac-ibmcloud-ac-import-example}
+
+To import configuration data from a file to the selected instance, run the following command:
+
+```sh
+ibmcloud ac import --file exportedConfig.json
+```
+{: pre}
+
+### Output
+{: #ac-ibmcloud-ac-import-output}
+
+The command returns the following output:
+
+```
+OK
+Configuration imported from file exportedConfig.json
 ```
 {: screen}
 
