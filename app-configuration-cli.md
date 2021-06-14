@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021
-lastupdated: "2021-06-02"
+lastupdated: "2021-06-15"
 
 keywords: app configuration CLI, app configuration command line, app configuration terminal, app configuration shell
 
@@ -73,9 +73,18 @@ Before proceeding with initializing the CLI plug-in make sure that you have sele
 Initialize the cli plug-in by using the following command:
 
 ```sh
-ibmcloud ac init
+ibmcloud ac init --instance_id INSTANCE_ID
 ```
 {: pre}
+
+
+### Command options
+{: #ac-ibmcloud-ac-init-command}
+
+<dl>
+<dt>--instance_id INSTANCE_ID (optional)</dt>
+<dd>GUID of the App Configuration instance to use.</dd>
+</dl>
 
 ### Example
 {: #ac-ibmcloud-ac-init-example}
@@ -90,23 +99,23 @@ ibmcloud ac init
 ### Output
 {: #ac-ibmcloud-ac-init-output}
 
-The command returns the following output:
+The command returns the following output (Instance name followed by a space along with GUID):
 
 ```
 Initializing IBM Cloud App Configuration Service plug-in...
 
 Select a App Configuration instance:
-1. App Configuration Instance 1
-2. App Configuration Instance 2
+1. App_Configuration_Instance_1 123
+2. App_Configuration_Instance_2 456
 Enter a number> 1
-App Configuration instance selected is - 'App Configuration Instance 1'
+App Configuration instance selected is - App_Configuration_Instance_1 (GUID - 123)
 ```
 {: screen}
 
 ## ibmcloud ac show
 {: #ac-ibmcloud-ac-show}
 
-To see the name of the instance that is currently being used, use this command.
+To see the name and GUID of the instance that is currently being used, use this command.
 
 ```sh
 ibmcloud ac show
@@ -130,7 +139,7 @@ ibmcloud ac show
 The command returns the following output:
 
 ```
-App Configuration instance being used is - 'App Configuration Instance 1'
+App Configuration instance being used is - App_Configuration_Instance_1 (GUID - 123)
 ```
 {: screen}
 
