@@ -115,7 +115,7 @@ App Configuration instance selected is - App_Configuration_Instance_1 (GUID - 12
 ## ibmcloud ac show
 {: #ac-ibmcloud-ac-show}
 
-To see the name of the instance that is currently being used, use this command.
+To see the name and GUID of the instance that is currently being used, use this command.
 
 ```sh
 ibmcloud ac show
