@@ -79,7 +79,7 @@ ibmcloud ac init --instance_id INSTANCE_ID
 
 
 ### Command options
-{: #ac-ibmcloud-ac-environment-create-command}
+{: #ac-ibmcloud-ac-init-command}
 
 <dl>
 <dt>--instance_id INSTANCE_ID (optional)</dt>
