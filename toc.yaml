@@ -1,0 +1,16 @@
+toc:
+  properties:
+    subcollection: app-configuration-cli-plugin
+    service-name: App Configuration
+    category: devops
+    audience: services
+    href: /docs/app-configuration-cli-plugin/app-configuration-cli.html
+    console-page: /catalog/services/app-configuration
+    product-page: https://www.ibm.com/cloud/devops/app-configuration
+    path: app-configuration-cli-plugin
+    label: App Configuration CLI reference
+  entries:
+  - navgroup:
+    id: reference
+    topics:
+    -  app-configuration-cli.md

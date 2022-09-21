@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2021
-lastupdated: "2021-06-15"
+  years: 2021, 2022
+lastupdated: "2022-09-21"
 
 keywords: app configuration CLI, app configuration command line, app configuration terminal, app configuration shell
 
@@ -33,6 +33,7 @@ To run {{site.data.keyword.cloud_notm}} {{site.data.keyword.appconfig_short}} co
 * An {{site.data.keyword.cloud_notm}} account. If you do not have an account, click [here](https://cloud.ibm.com/) to create one.
 * An instance of [{{site.data.keyword.cloud_notm}} {{site.data.keyword.appconfig_short}}](https://cloud.ibm.com/catalog/services/app-configuration) service.
 * [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-getting-started).
+* Optionally, if you want to use private endpoint support that is provided by the {{site.data.keyword.cloud_notm}} platform, make sure you [enable VRF and service endpoints](https://cloud.ibm.com/docs/account?topic=account-vrf-service-endpoint&interface=ui). 
 
 ## Installing {{site.data.keyword.appconfig_short}} CLI plug-in
 {: #ac-install-cli}
@@ -43,7 +44,6 @@ Install the {{site.data.keyword.appconfig_short}} CLI plug-in by running the fol
 ibmcloud plugin install app-configuration
 ```
 {: pre}
-
 
 You're notified on the command line when updates to the {{site.data.keyword.cloud_notm}} CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use the latest commands. You can view the current version of all installed plug-ins by running `ibmcloud plugin list`.
 {: tip}
@@ -63,6 +63,18 @@ OK
 Plug-in 'app-configuration' was successfully installed into /Users/<username>/.bluemix/plugins/app-configuration. Use 'ibmcloud plugin show app-configuration' to show its details.
 ```
 {: screen}
+
+## Logging in to the CLI with a private endpoint
+{: #ac-ibmcloud-login-cli-private-endpoint}
+
+For enhanced control and security over your data when using CLI, you have the option of using private routes to {{site.data.keyword.cloud_notm}} endpoints. You must first enable virtual routing and forwarding in your account, and then you can enable the use of {{site.data.keyword.cloud_notm}} private service endpoints. For more information about setting up your account to support the private connectivity option, see [Enabling VRF and service endpoints](https://cloud.ibm.com/docs/account?topic=account-vrf-service-endpoint).
+
+To log in to a private endpoint by using the CLI by using the following command:
+
+```sh
+ibmcloud login -a private.cloud.ibm.com
+```
+{: pre}
 
 ## ibmcloud ac init
 {: #ac-ibmcloud-ac-init}
