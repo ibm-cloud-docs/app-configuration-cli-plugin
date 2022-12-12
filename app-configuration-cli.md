@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021, 2022
-lastupdated: "2022-12-09"
+lastupdated: "2022-12-12"
 
 keywords: app configuration CLI, app configuration command line, app configuration terminal, app configuration shell
 
@@ -161,14 +161,19 @@ ibmcloud ac environment list [--expand EXPAND] [--sort SORT] [--tags TAGS] [--in
 
 `--limit LIMIT` (optional)
 :  Used for pagination. The number of records to retrieve.
+
 `--offset OFFSET` (optional)
 :  Used for pagination. The number of records to skip.
+
 `--tags TAGS` (optional)
 :  Filter based on the tags.
+
 `--sort SORT` (optional)
 :  Sort the details based on the specified attribute.
+
 `--expand EXPAND` (optional)
 :  Expanded view of the item.
+
 `--include INCLUDE` (optional)
 :  Include feature and property details in the response.
 
@@ -209,14 +214,19 @@ ibmcloud ac environment create {--file FILE-PATH | --name NAME [--environment_id
 
 `--name NAME`
 :  Environment name. Required field - input either as a flag or from file.
+
 `--environment_id ENVIRONMENT_ID` (optional)
 :  Environment ID. If this value is not provided, name will automatically become the ID. Optional field - input either as a flag or from file.
+
 `--description DESCRIPTION` (optional)
 :  Description of the environment. Optional field - input either as a flag or from file.
+
 `--tags TAGS` (optional)
 :  Tags associated with the environment. Optional field - input either as a flag or from file.
+
 `--color_code COLOR_CODE` (optional)
 :  Color code to distinguish the environment. The Hex code for the color. Optional field - input either as a flag or from file.
+
 `--file FILE`
 :  Input through the file. File format Supported - JSON
 
@@ -261,8 +271,10 @@ ibmcloud ac environment get --environment_id ENVIRONMENT_ID [--expand EXPAND] [-
 
 `--environment_id ENVIRONMENT_ID`
 :  Environment ID
+
 `--expand EXPAND` (optional)
 :  Expanded view of the item.
+
 `--include INCLUDE` (optional)
 :  Include feature and property details in the response.
 
@@ -302,14 +314,19 @@ ibmcloud ac environment update (--file FILE-PATH | --environment_id ENVIRONMENT_
 
 `--name NAME`
 :  Environment name. Required field - input either as a flag or from file.
+
 `--environment_id ENVIRONMENT_ID` (optional)
 :  Environment ID. Required field - input either as a flag or from file.
+
 `--description DESCRIPTION` (optional)
 :  Description of the environment. Required field - input either as a flag or from file.
+
 `--tags TAGS` (optional)
 :  Tags associated with the environment. Required field - input either as a flag or from file.
+
 `--color_code COLOR_CODE` (optional)
 :  Color code to distinguish the environment. The Hex code for the color. Required field - input either as a flag or from file.
+
 `--file FILE`
 :  Input through the file. File format Supported - JSON
 
@@ -390,18 +407,25 @@ ibmcloud ac collection list [--sort SORT] [--limit LIMIT] [--offset OFFSET] [--f
 
 `--limit LIMIT` (optional)
 :  Used for pagination. The number of records to retrieve.
+
 `--offset OFFSET` (optional)
 :  Used for pagination. The number of records to skip.
+
 `--features FEATURES` (optional)
 :  Filter collections by a list of comma-separated features.
+
 `--properties PROPERTIES` (optional)
 :  Filter collections by a list of comma-separated properties.
+
 `--tags TAGS` (optional)
 :  Filter based on the tags.
+
 `--sort SORT` (optional)
 :  Sort the details based on the specified attribute.
+
 `--expand EXPAND` (optional)
 :  Expanded view of the item.
+
 `--include INCLUDE` (optional)
 :  Include feature and property details in the response.
 
@@ -442,12 +466,16 @@ ibmcloud ac collection create {--file FILE-PATH | --name NAME [--collection_id C
 
 `--name NAME`
 :  Collection name. Required field - input either as a flag or from file.
+
 `--collection_id COLLECTION_ID` (optional)
 :  Collection ID. If this value is not provided, name will automatically become the ID. Optional field - input either as a flag or from file.
+
 `--description DESCRIPTION` (optional)
 :  Description of the collection. Optional field - input either as a flag or from file.
+
 `--tags TAGS` (optional)
 :  Tags associated with the collection. Optional field - input either as a flag or from file.
+
 `--file FILE`
 :  Input through the file. File format Supported - JSON
 
@@ -489,9 +517,11 @@ ibmcloud ac collection get --collection_id COLLECTION_ID [--expand EXPAND] [--in
 {: #ac-ibmcloud-ac-collection-get-command}
 
 `--collection_id COLLECTION_ID`
-:  Collection ID for the collection
+:  Collection ID for the collection.
+
 `--expand EXPAND` (optional)
 :  Expanded view of the collection details.
+
 `--include INCLUDE` (optional)
 :  Include feature and property details in the response.
 
@@ -531,12 +561,16 @@ ibmcloud ac collection update {--file FILE-PATH | --name NAME --collection_id CO
 
 `--collection_id COLLECTION_ID`
 :  Collection ID. Required field - input either as a flag or from file.
+
 `--name NAME`
 :  Collection name. Required field - input either as a flag or from file.
+
 `--description DESCRIPTION`
 :  Description of the collection. Required field - input either as a flag or from file.
+
 `--tags TAGS` (optional) File format Supported
 :  Tags associated with the collection. Required field - input either as a flag or from file.
+
 `--file FILE`
 :  Input from the file. File format Supported - JSON
 
@@ -615,20 +649,28 @@ ibmcloud ac feature list --environment_id ENVIRONMENT_ID [--sort SORT] [--limit 
 
 `--environment_id ENVIRONMENT_ID`
 :  Environment ID
+
 `--limit LIMIT` (optional)
 :  Used for pagination. The number of records to retrieve.
+
 `--include INCLUDE` (optional)
 :  Feature details to include the associated collections or rules details in the response.
+
 `--offset OFFSET` (optional)
 :  Used for pagination. The number of records to skip.
+
 `--collections COLLECTIONS` (optional)
 :  Filter features by a list of comma-separated collections.
+
 `--segments SEGMENTS` (optional)
-:  Filter features by a list of comma-separated segments
+:  Filter features by a list of comma-separated segments.
+
 `--expand EXPAND` (optional)
 :  Expanded view of the item.
+
 `--tags TAGS` (optional)
 :  Filter features by a list of comma-separated tags.
+
 `--sort SORT` (optional)
 :  Sort the details based on the specified attribute.
 
@@ -670,26 +712,37 @@ ibmcloud ac feature create {--file FILE-PATH | --environment_id ENVIRONMENT_ID -
 
 `--environment_id ENVIRONMENT_ID`
 :  Environment ID
+
 `--name NAME`
 :  Feature name. Required field - input either as a flag or from file.
+
 `--feature_id FEATURE_ID` (optional)
 :  Feature ID. If this value is not provided, name will automatically become the ID. Optional field - input either as a flag or from file.
+
 `--description DESCRIPTION`
 :  Description of the feature. Required field - input either as a flag or from file.
+
 `--type TYPE`
 :  Type of the feature (Boolean, String, Number). Required field - input either as a flag or from file.
+
 `--enabled_value ENABLED_VALUE`
 :  Value of the feature when it is enabled. Required field - input either as a flag or from file.
+
 `--disabled_value DISABLED_VALUE`
 :  Value of the feature when it is disabled. Required field - input either as a flag or from file.
+
 `--tags TAGS`
 :  Tags associated with the feature. Required field - input either as a flag or from file.
+
 `--segment_rules SEGMENT_RULES`
 :  Specify the targeting rules that are used to set different values for different segments.
+
 `--enabled ENABLED`
 :  The state of the feature flag.
+
 `--collections COLLECTIONS`
 :  Collections array.
+
 `--file FILE`
 :  Input through file. File format Supported - JSON
 
@@ -738,8 +791,10 @@ ibmcloud ac feature get --environment_id ENVIRONMENT_ID --feature_id FEATURE_ID 
 
 `--environment_id ENVIRONMENT_ID`
 :  Environment ID
+
 `--feature_id FEATURE_ID`
 :  Feature ID for the feature flag.
+
 `--include INCLUDE` (optional)
 :  Include the associated collections in the response.
 
@@ -779,24 +834,34 @@ ibmcloud ac feature update {--file FILE-PATH | --environment_id ENVIRONMENT_ID -
 
 `--environment_id ENVIRONMENT_ID`
 :  Environment ID
+
 `--name NAME`
 :  Feature name. Required field - input either as a flag or from file.
+
 `--feature_id FEATURE_ID`
 :  Feature ID. Required field - input either as a flag or from file.
+
 `--description DESCRIPTION`
 :  Description of the feature. Required field - input either as a flag or from file.
+
 `--enabled_value ENABLED_VALUE`
 :  Value of the feature when it is enabled. Required field - input either as a flag or from file.
+
 `--disabled_value DISABLED_VALUE`
 :  Value of the feature when it is disabled. Required field - input either as a flag or from file.
+
 `--tags TAGS`
 :  Tags associated with the feature. Required field - input either as a flag or from file.
+
 `--enabled ENABLED`
 :  The state of the feature flag.
+
 `--segment_rules SEGMENT_RULES`
 :  Specify the targeting rules that are used to set different values for different segments.
+
 `--collections COLLECTIONS`
 :  Collections array.
+
 `--file FILE`
 :  Input through the file. File format Supported - JSON.
 
@@ -844,20 +909,28 @@ ibmcloud ac feature update-values {--file FILE-PATH | --environment_id ENVIRONME
 
 `--environment_id ENVIRONMENT_ID`
 :  Environment ID
+
 `--name NAME`
 :  Feature name. Required field - input either as a flag or from file.
+
 `--feature_id FEATURE_ID`
 :  Feature ID. Required field - input either as a flag or from file.
+
 `--description DESCRIPTION`
 :  Description of the feature. Required field - input either as a flag or from file.
+
 `--enabled_value ENABLED_VALUE`
 :  Value of the feature when it is enabled. Required field - input either as a flag or from file.
+
 `--disabled_value DISABLED_VALUE`
 :  Value of the feature when it is unavailable. Required field - input either as a flag or from file.
+
 `--tags TAGS`
 :  Tags associated with the feature. Required field - input either as a flag or from file.
+
 `--segment_rules SEGMENT_RULES`
 :  Specify the targeting rules that are used to set different values for different segments.
+
 `--file FILE`
 :  Input through the file. File format Supported - JSON
 
@@ -904,6 +977,7 @@ ibmcloud ac feature delete --environment_id ENVIRONMENT_ID --feature_id FEATURE_
 
 `--environment_id ENVIRONMENT_ID`
 :  Environment ID
+
 `--feature_id FEATURE_ID`
 :  Feature ID
 
@@ -942,8 +1016,10 @@ ibmcloud ac feature toggle --environment_id ENVIRONMENT_ID --feature_id FEATURE_
 
 `--environment_id ENVIRONMENT_ID`
 :  Environment ID
+
 `--feature_id FEATURE_ID`
 :  Feature ID
+
 `--enabled ENABLED`
 :  The state of the feature flag.
 
@@ -983,14 +1059,19 @@ ibmcloud ac segment list [--limit LIMIT] [--offset OFFSET] [--sort SORT] [--tags
 
 `--limit LIMIT` (optional)
 :  Used for pagination. The number of records to retrieve.
+
 `--include INCLUDE` (optional)
 :  Segment details to include the associated rules in the response.
+
 `--offset OFFSET` (optional)
 :  Used for pagination. The number of records to skip.
+
 `--expand EXPAND` (optional)
 :  Expanded view the segment details.
+
 `--tags TAGS` (optional)
 :  Filter segments by a list of comma-separated tags.
+
 `--sort SORT` (optional)
 :  Sort the details based on the specified attribute.
 
@@ -1031,14 +1112,19 @@ ibmcloud ac segment create {--file FILE-PATH | --name NAME [--segment_id SEGMENT
 
 `--name NAME`
 :  Segment name. Required field - input either as a flag or from file.
+
 `--segment_id SEGMENT_ID` (optional)
 :  Segment ID. If this value is not provided, name will automatically become the ID. Optional field - input either as a flag or from file.
+
 `--description DESCRIPTION`
 :  Description of the segment. Required field - input either as a flag or from file.
+
 `--rules RULES`
 :  List of rules that determine whether the entity is part of the segment. Required field - input either as a flag or from file.
+
 `--tags TAGS`
 :  Tags associated with the segment. Required field - input either as a flag or from file.
+
 `--file FILE`
 :  Input through a file. File format Supported - JSON
 
@@ -1081,6 +1167,7 @@ ibmcloud ac segment get --segment_id SEGMENT_ID [--include INCLUDE]
 
 `--segment_id SEGMENT_ID`
 :  Segment ID.
+
 `--include INCLUDE` (optional)
 :  Instructs to include the feature and property details based on the segments association.
 
@@ -1120,14 +1207,19 @@ ibmcloud ac segment update {--file FILE-PATH | --name NAME --segment_id SEGMENT_
 
 `--name NAME`
 :  Segment name. Required field - input either as a flag or from file.
+
 `--segment_id SEGMENT_ID`
 :  Segment ID. Required field - input either as a flag or from file.
+
 `--description DESCRIPTION`
 :  Description of the segment. Required field - input either as a flag or from file.
+
 `--rules RULES`
 :  List of rules that determine whether the entity is part of the segment. Required field - input either as a flag or from file.
+
 `--tags TAGS`
 :  Tags associated with the segment. Required field - input either as a flag or from file.
+
 `--file FILE`
 :  Input through a file. File format Supported - JSON
 
@@ -1206,20 +1298,28 @@ ibmcloud ac property list --environment_id ENVIRONMENT_ID [--expand EXPAND] [--s
 
 `--environment_id ENVIRONMENT_ID`
 :  Environment ID
+
 `--limit LIMIT` (optional)
 :  Used for pagination. The number of records to retrieve.
+
 `--include INCLUDE` (optional)
 :  Segment details to include the associated rules in the response.
+
 `--offset OFFSET` (optional)
 :  Used for pagination. The number of records to skip.
+
 `--collections COLLECTIONS` (optional)
 :  Filter features by a list of comma-separated collections.
+
 `--segments SEGMENTS` (optional)
 :  Filter features by a list of comma-separated segments.
+
 `--expand EXPAND` (optional)
 :  Expanded view the segment details.
+
 `--tags TAGS` (optional)
 :  Filter segments by a list of comma-separated tags.
+
 `--sort SORT` (optional)
 :  Sort the details based on the specified attribute.
 
@@ -1260,22 +1360,31 @@ ibmcloud ac property create (--file FILE-PATH | --environment_id ENVIRONMENT_ID 
 
 `--environment_id ENVIRONMENT_ID`
 :  Environment ID
+
 `--name NAME`
 :  Property name. Required field - input either as a flag or from file.
+
 `--property_id PROPERTY_ID` (optional)
 :  Property ID. If this value is not provided, name will automatically become the Id. Optional field - input either as a flag or from file.
+
 `--description DESCRIPTION`
 :  Description of the property. Required field - input either as a flag or from file.
+
 `--segment_rules SEGMENT_RULES`
 :  Specify the targeting rules that are used to set different values for different segments. Required field - input either as a flag or from file.
+
 `--tags TAGS`
 :  Tags associated with the property. Required field - input either as a flag or from file.
+
 `--value VALUE`
 :  Property value. Required field - input either as a flag or from file.
+
 `--type TYPE`
 :  Property type. Required field - input either as a flag or from file.
+
 `--collections COLLECTIONS`
 :  List of collection IDs representing the collections that are associated with the specified property. Required field - input either as a flag or from file.
+
 `--file FILE`
 :  Input through a file. File format Supported - JSON
 
@@ -1322,8 +1431,10 @@ ibmcloud ac property get --environment_id ENVIRONMENT_ID --property_id PROPERTY_
 
 `--environment_id ENVIRONMENT_ID`
 :  Environment ID
+
 `--property_id PROPERTY_ID`
 :  Property ID for the property flag.
+
 `--include INCLUDE` (optional)
 :  Property details to include the associated collections or rules details in the response.
 
@@ -1363,20 +1474,28 @@ ibmcloud ac property update (--file FILE-PATH | --environment_id ENVIRONMENT_ID 
 
 `--environment_id ENVIRONMENT_ID`
 :  Environment ID
+
 `--name NAME`
 :  Property name. Required field - input either as a flag or from file.
+
 `--property_id PROPERTY_ID`
 :  Property ID. Required field - input either as a flag or from file.
+
 `--description DESCRIPTION`
 :  Description of the property. Required field - input either as a flag or from file.
+
 `--segment_rules SEGMENT_RULES`
 :  Specify the targeting rules that are used to set different values for different segments. Required field - input either as a flag or from file.
+
 `--tags TAGS`
 :  Tags associated with the property. Required field - input either as a flag or from file.
+
 `--value VALUE`
 :  Property value. Required field - input either as a flag or from file.
+
 `--collections COLLECTIONS`
 :  List of collection IDs representing the collections that are associated with the specified property. Required field - input either as a flag or from file.
+
 `--file FILE`
 :  Input through a file. File format Supported - JSON
 
@@ -1423,18 +1542,25 @@ ibmcloud ac property update-values (--file FILE-PATH | --environment_id ENVIRONM
 
 `--environment_id ENVIRONMENT_ID`
 :  Environment ID
+
 `--name NAME`
 :  Property name. Required field - input either as a flag or from file.
+
 `--property_id PROPERTY_ID`
 :  Property ID. Required field - input either as a flag or from file.
+
 `--description DESCRIPTION`
 :  Description of the property. Required field - input either as a flag or from file.
+
 `--segment_rules SEGMENT_RULES`
 :  Specify the targeting rules that are used to set different values for different segments. Required field - input either as a flag or from file.
+
 `--tags TAGS`
 :  Tags associated with the property. Required field - input either as a flag or from file.
+
 `--value VALUE`
 :  Property value. Required field - input either as a flag or from file.
+
 `--file FILE`
 :  Input through file. File format Supported - JSON
 
@@ -1480,6 +1606,7 @@ ibmcloud ac property delete --environment_id ENVIRONMENT_ID --property_id PROPER
 
 `--environment_id ENVIRONMENT_ID`
 :  Environment ID
+
 `--property_id PROPERTY_ID`
 :  Property ID
 
@@ -1555,6 +1682,7 @@ ibmcloud ac import --file FILE [--clean CLEAN]
 
 `--file FILE`
 :  Path of file from where configuration will be imported.
+
 `--clean CLEAN` (optional)
 :  If set to 'true', clears the existing data in the service instance before performing import of the configuration data.
 
