@@ -1636,7 +1636,7 @@ OK
 You can export configuration data of the selected instance, by using the command:
 
 ```sh
-ibmcloud ac export [--file FILE]
+ibmcloud ac export [--file FILE] [--output OUTPUT]
 ```
 {: pre}
 
@@ -1645,6 +1645,9 @@ ibmcloud ac export [--file FILE]
 
 `--file FILE` (optional)
 :  Path of file to where configuration will be exported.
+
+`--output OUTPUT` (optional)
+:  Choose an output format - can be 'json' or 'yaml'. (default "json")
 
 ### Example
 {: #ac-ibmcloud-ac-export-example}
