@@ -1052,18 +1052,18 @@ ibmcloud app-configuration feature-delete \
 ```
 {: pre}
 
-### `ibmcloud app-configuration toggle-feature`
-{: #app-configuration-cli-toggle-feature-command}
+### `ibmcloud app-configuration feature-toggle`
+{: #app-configuration-cli-feature-toggle-command}
 
 Toggle a feature.
 
 ```sh
-ibmcloud app-configuration toggle-feature --environment-id ENVIRONMENT-ID --feature-id FEATURE-ID --enabled ENABLED
+ibmcloud app-configuration feature-toggle --environment-id ENVIRONMENT-ID --feature-id FEATURE-ID --enabled ENABLED
 ```
 
 
 #### Command options
-{: #app-configuration-toggle-feature-cli-options}
+{: #app-configuration-feature-toggle-cli-options}
 
 `--environment-id` (string)
 :   Environment Id. Required.
@@ -1075,10 +1075,10 @@ ibmcloud app-configuration toggle-feature --environment-id ENVIRONMENT-ID --feat
 :   The state of the feature flag. Required.
 
 #### Example
-{: #app-configuration-toggle-feature-examples}
+{: #app-configuration-feature-toggle-examples}
 
 ```sh
-ibmcloud app-configuration toggle-feature \
+ibmcloud app-configuration feature-toggle \
     --environment-id environment_id \
     --feature-id feature_id \
     --enabled true
@@ -1647,19 +1647,19 @@ ibmcloud app-configuration segment-delete \
 
 Snapshots are a way to capture the current configuration of your app or environment and sync the modified config into a Git repo.
 
-### `ibmcloud app-configuration snapshots`
-{: #app-configuration-cli-snapshots-command}
+### `ibmcloud app-configuration gitconfigs`
+{: #app-configuration-cli-gitconfigs-command}
 
 List all the Git configs.
 Note: If the `--all-pages` option is not set, the command will only retrieve a single page of the collection.
 
 ```sh
-ibmcloud app-configuration snapshots [--sort SORT] [--collection-id COLLECTION-ID] [--environment-id ENVIRONMENT-ID] [--limit LIMIT] [--offset OFFSET] [--search SEARCH]
+ibmcloud app-configuration gitconfigs [--sort SORT] [--collection-id COLLECTION-ID] [--environment-id ENVIRONMENT-ID] [--limit LIMIT] [--offset OFFSET] [--search SEARCH]
 ```
 
 
 #### Command options
-{: #app-configuration-snapshots-cli-options}
+{: #app-configuration-gitconfigs-cli-options}
 
 `--sort` (string)
 :   Sort the git configurations details based on the specified attribute. By default, items are sorted by name.
@@ -1686,13 +1686,13 @@ ibmcloud app-configuration snapshots [--sort SORT] [--collection-id COLLECTION-I
 :   Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the '[Name]' of the entity.
 
 `--all-pages` (bool)
-:   Invoke multiple requests to display all pages of the collection for snapshots.
+:   Invoke multiple requests to display all pages of the collection for gitconfigs.
 
 #### Example
-{: #app-configuration-snapshots-examples}
+{: #app-configuration-gitconfigs-examples}
 
 ```sh
-ibmcloud app-configuration snapshots \
+ibmcloud app-configuration gitconfigs \
     --sort created_time \
     --collection-id collection_id \
     --environment-id environment_id \
@@ -1864,52 +1864,52 @@ ibmcloud app-configuration gitconfig-delete \
 ```
 {: pre}
 
-### `ibmcloud app-configuration promote-gitconfig`
-{: #app-configuration-cli-promote-gitconfig-command}
+### `ibmcloud app-configuration gitconfig-promote`
+{: #app-configuration-cli-gitconfig-promote-command}
 
 Promote configuration, this api will write or update your chosen configuration to the GitHub based on the git url, file path and branch data. In simple words this api will create or updates the bootstrap json file.
 
 ```sh
-ibmcloud app-configuration promote-gitconfig --git-config-id GIT-CONFIG-ID
+ibmcloud app-configuration gitconfig-promote --git-config-id GIT-CONFIG-ID
 ```
 
 
 #### Command options
-{: #app-configuration-promote-gitconfig-cli-options}
+{: #app-configuration-gitconfig-promote-cli-options}
 
 `--git-config-id` (string)
 :   Git Config Id. Required.
 
 #### Example
-{: #app-configuration-promote-gitconfig-examples}
+{: #app-configuration-gitconfig-promote-examples}
 
 ```sh
-ibmcloud app-configuration promote-gitconfig \
+ibmcloud app-configuration gitconfig-promote \
     --git-config-id git_config_id
 ```
 {: pre}
 
-### `ibmcloud app-configuration restore-gitconfig`
-{: #app-configuration-cli-restore-gitconfig-command}
+### `ibmcloud app-configuration gitconfig-restore`
+{: #app-configuration-cli-gitconfig-restore-command}
 
 Restore configuration, this api will write or update your chosen configuration from the GitHub to App configuration instance. The api will read the contents in the json file that was created using promote API and recreate or updates the App configuration instance with the file contents like properties, features and segments.
 
 ```sh
-ibmcloud app-configuration restore-gitconfig --git-config-id GIT-CONFIG-ID
+ibmcloud app-configuration gitconfig-restore --git-config-id GIT-CONFIG-ID
 ```
 
 
 #### Command options
-{: #app-configuration-restore-gitconfig-cli-options}
+{: #app-configuration-gitconfig-restore-cli-options}
 
 `--git-config-id` (string)
 :   Git Config Id. Required.
 
 #### Example
-{: #app-configuration-restore-gitconfig-examples}
+{: #app-configuration-gitconfig-restore-examples}
 
 ```sh
-ibmcloud app-configuration restore-gitconfig \
+ibmcloud app-configuration gitconfig-restore \
     --git-config-id git_config_id
 ```
 {: pre}
@@ -2186,18 +2186,18 @@ ibmcloud app-configuration workflowconfig-delete \
 
 Export and Import configurations from and to App Configuration instance.
 
-### `ibmcloud app-configuration import-config`
-{: #app-configuration-cli-import-config-command}
+### `ibmcloud app-configuration instance-import`
+{: #app-configuration-cli-instance-import-command}
 
 Import configuration to the instance.
 
 ```sh
-ibmcloud app-configuration import-config [--environments ENVIRONMENTS] [--collections COLLECTIONS] [--segments SEGMENTS] [--clean CLEAN]
+ibmcloud app-configuration instance-import [--environments ENVIRONMENTS] [--collections COLLECTIONS] [--segments SEGMENTS] [--clean CLEAN]
 ```
 
 
 #### Command options
-{: #app-configuration-import-config-cli-options}
+{: #app-configuration-instance-import-cli-options}
 
 `--environments` ([`ImportEnvironmentSchema[]`](#cli-import-environment-schema-example-schema))
 :   Array will contain features and properties per environment.
@@ -2218,10 +2218,10 @@ ibmcloud app-configuration import-config [--environments ENVIRONMENTS] [--collec
 :   Full instance import requires query parameter `clean=true` to perform wiping of the existing data.
 
 #### Example
-{: #app-configuration-import-config-examples}
+{: #app-configuration-instance-import-examples}
 
 ```sh
-ibmcloud app-configuration import-config \
+ibmcloud app-configuration instance-import \
     --environments '[{"name": "Dev", "environment_id": "dev", "description": "Environment created on instance creation", "tags": "exampleString", "color_code": "#FDD13A", "features": [{"name": "Cycle Rentals", "feature_id": "cycle-rentals", "description": "exampleString", "type": "NUMERIC", "format": "TEXT", "enabled_value": "1", "disabled_value": "2", "enabled": true, "rollout_percentage": 100, "tags": "exampleString", "segment_rules": [{"rules": [{"segments": ["exampleString","anotherTestString"]}], "value": "exampleString", "order": 38, "rollout_percentage": 100}], "collections": [{"collection_id": "web-app"}], "isOverridden": true}], "properties": [{"name": "Daily Discount", "property_id": "daily_discount", "description": "exampleString", "type": "NUMERIC", "format": "TEXT", "value": "100", "tags": "pre-release, v1.2", "segment_rules": [{"rules": [{"segments": ["exampleString","anotherTestString"]}], "value": "200", "order": 1}], "collections": [{"collection_id": "web-app"}], "isOverridden": true}]}]' \
     --collections '[{"collection_id": "web-app", "name": "web-app", "description": "web app collection", "tags": "v1"}]' \
     --segments '[{"name": "Testers", "segment_id": "khpwj68h", "description": "Testers", "tags": "test", "rules": [{"attribute_name": "email", "operator": "is", "values": ["john@bluecharge.com","alice@bluecharge.com"]}]}]' \
@@ -2229,36 +2229,36 @@ ibmcloud app-configuration import-config \
 ```
 {: pre}
 
-### `ibmcloud app-configuration instance-config`
-{: #app-configuration-cli-instance-config-command}
+### `ibmcloud app-configuration instance-export`
+{: #app-configuration-cli-instance-export-command}
 
 Get the instance configuration.
 
 ```sh
-ibmcloud app-configuration instance-config
+ibmcloud app-configuration instance-export
 ```
 
 
 #### Example
-{: #app-configuration-instance-config-examples}
+{: #app-configuration-instance-export-examples}
 
 ```sh
-ibmcloud app-configuration instance-config
+ibmcloud app-configuration instance-export
 ```
 {: pre}
 
-### `ibmcloud app-configuration promote-restore-config`
-{: #app-configuration-cli-promote-restore-config-command}
+### `ibmcloud app-configuration gitconfig-promote-restore`
+{: #app-configuration-cli-gitconfig-promote-restore-command}
 
 This api will either promote or restore your chosen configuration from or to the GitHub based on the git url, file path and branch data.
 
 ```sh
-ibmcloud app-configuration promote-restore-config --git-config-id GIT-CONFIG-ID --action ACTION
+ibmcloud app-configuration gitconfig-promote-restore --git-config-id GIT-CONFIG-ID --action ACTION
 ```
 
 
 #### Command options
-{: #app-configuration-promote-restore-config-cli-options}
+{: #app-configuration-gitconfig-promote-restore-cli-options}
 
 `--git-config-id` (string)
 :   Git Config Id. Required.
@@ -2269,10 +2269,10 @@ ibmcloud app-configuration promote-restore-config --git-config-id GIT-CONFIG-ID 
     Allowable values are: `promote`, `restore`.
 
 #### Example
-{: #app-configuration-promote-restore-config-examples}
+{: #app-configuration-gitconfig-promote-restore-examples}
 
 ```sh
-ibmcloud app-configuration promote-restore-config \
+ibmcloud app-configuration gitconfig-promote-restore \
     --git-config-id git_config_id \
     --action promote
 ```
