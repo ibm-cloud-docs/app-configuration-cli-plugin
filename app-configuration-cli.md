@@ -832,7 +832,7 @@ ibmcloud app-configuration feature-create \
     --disabled-value "false" \
     --description 'Feature flag to enable Cycle Rentals' \
     --format TEXT \
-    --enabled true \
+    --enabled=false \
     --rollout-percentage 100 \
     --tags 'version: 1.1, pre-release' \
     --segment-rules '[{"rules": [{"segments": ["betausers","premiumusers"]}], "value": "true", "order": 1, "rollout_percentage": 50}]' \
@@ -1081,7 +1081,15 @@ ibmcloud app-configuration feature-toggle --environment-id ENVIRONMENT-ID --feat
 ibmcloud app-configuration feature-toggle \
     --environment-id environment_id \
     --feature-id feature_id \
-    --enabled true
+    --enabled=true
+```
+{: pre}
+
+```sh
+ibmcloud app-configuration feature-toggle \
+    --environment-id environment_id \
+    --feature-id feature_id \
+    --enabled=false
 ```
 {: pre}
 
