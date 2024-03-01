@@ -6,8 +6,6 @@ lastupdated: "2024-02-26"
 
 keywords: App Configuration CLI, App Configuration command line, App Configuration terminal, App Configuration shell
 
-subcollection: app-configuration
-
 ---
 
 {{site.data.keyword.attribute-definition-list}}
