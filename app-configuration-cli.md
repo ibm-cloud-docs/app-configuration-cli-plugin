@@ -1873,6 +1873,9 @@ ibmcloud app-configuration gitconfig-delete \
 ### `ibmcloud app-configuration gitconfig-promote`
 {: #app-configuration-cli-gitconfig-promote-command}
 
+Use the command [ibmcloud app-configuration gitconfig-promote-restore --git-config-id GIT-CONFIG-ID --action promote](/docs/app-configuration?topic=app-configuration-app-configuration-cli#app-configuration-cli-gitconfig-promote-restore-command) instead.
+{: deprecated}
+
 Promote configuration, this api will write or update your chosen configuration to the GitHub based on the git url, file path and branch data. In simple words this api will create or updates the bootstrap json file.
 
 ```sh
@@ -1897,6 +1900,9 @@ ibmcloud app-configuration gitconfig-promote \
 
 ### `ibmcloud app-configuration gitconfig-restore`
 {: #app-configuration-cli-gitconfig-restore-command}
+
+Use the command [ibmcloud app-configuration gitconfig-promote-restore --git-config-id GIT-CONFIG-ID --action restore](/docs/app-configuration?topic=app-configuration-app-configuration-cli#app-configuration-cli-gitconfig-promote-restore-command) instead.
+{: deprecated}
 
 Restore configuration, this api will write or update your chosen configuration from the GitHub to App configuration instance. The api will read the contents in the json file that was created using promote API and recreate or updates the App configuration instance with the file contents like properties, features and segments.
 
