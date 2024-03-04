@@ -305,7 +305,7 @@ ibmcloud app-configuration environments \
 Create an environment.
 
 ```sh
-ibmcloud app-configuration environment-create --name NAME --environment-id ENVIRONMENT-ID [--description DESCRIPTION] [--tags TAGS] [--color-code COLOR-CODE]
+ibmcloud app-configuration environment-create {--name NAME --environment-id ENVIRONMENT-ID [--description DESCRIPTION] [--tags TAGS] [--color-code COLOR-CODE] | --file FILE}
 ```
 
 
@@ -333,6 +333,9 @@ ibmcloud app-configuration environment-create --name NAME --environment-id ENVIR
 `--color-code` (string)
 :   Color code to distinguish the environment. The Hex code for the color. For example `#FF0000` for `red`.
 
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
+
 #### Example
 {: #app-configuration-environment-create-examples}
 
@@ -352,7 +355,7 @@ ibmcloud app-configuration environment-create \
 Update an environment.
 
 ```sh
-ibmcloud app-configuration environment-update --environment-id ENVIRONMENT-ID [--name NAME] [--description DESCRIPTION] [--tags TAGS] [--color-code COLOR-CODE]
+ibmcloud app-configuration environment-update {--environment-id ENVIRONMENT-ID [--name NAME] [--description DESCRIPTION] [--tags TAGS] [--color-code COLOR-CODE] | --file FILE}
 ```
 
 
@@ -377,6 +380,9 @@ ibmcloud app-configuration environment-update --environment-id ENVIRONMENT-ID [-
 
 `--color-code` (string)
 :   Color code to distinguish the environment. The Hex code for the color. For example `#FF0000` for `red`.
+
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
 
 #### Example
 {: #app-configuration-environment-update-examples}
@@ -531,7 +537,7 @@ ibmcloud app-configuration collections \
 Create a collection.
 
 ```sh
-ibmcloud app-configuration collection-create --name NAME --collection-id COLLECTION-ID [--description DESCRIPTION] [--tags TAGS]
+ibmcloud app-configuration collection-create {--name NAME --collection-id COLLECTION-ID [--description DESCRIPTION] [--tags TAGS] | --file FILE}
 ```
 
 
@@ -556,6 +562,9 @@ ibmcloud app-configuration collection-create --name NAME --collection-id COLLECT
 `--tags` (string)
 :   Tags associated with the collection.
 
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
+
 #### Example
 {: #app-configuration-collection-create-examples}
 
@@ -574,7 +583,7 @@ ibmcloud app-configuration collection-create \
 Update the collection name, tags and description. Collection Id cannot be updated.
 
 ```sh
-ibmcloud app-configuration collection-update --collection-id COLLECTION-ID [--name NAME] [--description DESCRIPTION] [--tags TAGS]
+ibmcloud app-configuration collection-update {--collection-id COLLECTION-ID [--name NAME] [--description DESCRIPTION] [--tags TAGS] | --file FILE}
 ```
 
 
@@ -596,6 +605,9 @@ ibmcloud app-configuration collection-update --collection-id COLLECTION-ID [--na
 
 `--tags` (string)
 :   Tags associated with the collection.
+
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
 
 #### Example
 {: #app-configuration-collection-update-examples}
@@ -753,7 +765,7 @@ ibmcloud app-configuration features \
 Create a feature flag.
 
 ```sh
-ibmcloud app-configuration feature-create --environment-id ENVIRONMENT-ID --name NAME --feature-id FEATURE-ID --type TYPE --enabled-value ENABLED-VALUE --disabled-value DISABLED-VALUE [--description DESCRIPTION] [--format FORMAT] [--enabled ENABLED] [--rollout-percentage ROLLOUT-PERCENTAGE] [--tags TAGS] [--segment-rules SEGMENT-RULES] [--collections COLLECTIONS]
+ibmcloud app-configuration feature-create {--environment-id ENVIRONMENT-ID --name NAME --feature-id FEATURE-ID --type TYPE --enabled-value ENABLED-VALUE --disabled-value DISABLED-VALUE [--description DESCRIPTION] [--format FORMAT] [--enabled ENABLED] [--rollout-percentage ROLLOUT-PERCENTAGE] [--tags TAGS] [--segment-rules SEGMENT-RULES] [--collections COLLECTIONS] | --file FILE}
 ```
 
 
@@ -819,6 +831,9 @@ ibmcloud app-configuration feature-create --environment-id ENVIRONMENT-ID --name
 
     Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--collections=@path/to/file.json`.
 
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
+
 #### Example
 {: #app-configuration-feature-create-examples}
 
@@ -846,7 +861,7 @@ ibmcloud app-configuration feature-create \
 Update a feature flag details.
 
 ```sh
-ibmcloud app-configuration feature-update --environment-id ENVIRONMENT-ID --feature-id FEATURE-ID [--name NAME] [--description DESCRIPTION] [--enabled-value ENABLED-VALUE] [--disabled-value DISABLED-VALUE] [--enabled ENABLED] [--rollout-percentage ROLLOUT-PERCENTAGE] [--tags TAGS] [--segment-rules SEGMENT-RULES] [--collections COLLECTIONS]
+ibmcloud app-configuration feature-update {--environment-id ENVIRONMENT-ID --feature-id FEATURE-ID [--name NAME] [--description DESCRIPTION] [--enabled-value ENABLED-VALUE] [--disabled-value DISABLED-VALUE] [--enabled ENABLED] [--rollout-percentage ROLLOUT-PERCENTAGE] [--tags TAGS] [--segment-rules SEGMENT-RULES] [--collections COLLECTIONS] | --file FILE}
 ```
 
 
@@ -900,6 +915,9 @@ ibmcloud app-configuration feature-update --environment-id ENVIRONMENT-ID --feat
 
     Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--collections=@path/to/file.json`.
 
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
+
 #### Example
 {: #app-configuration-feature-update-examples}
 
@@ -925,7 +943,7 @@ ibmcloud app-configuration feature-update \
 Update the feature values. This method can be executed only by the `writer` role. This method allows the update of feature name, feature enabled_value, feature disabled_value, tags, description and feature segment rules, however this method does not allow toggling the feature flag and assigning feature to a collection.
 
 ```sh
-ibmcloud app-configuration feature-values-update --environment-id ENVIRONMENT-ID --feature-id FEATURE-ID [--name NAME] [--description DESCRIPTION] [--tags TAGS] [--enabled-value ENABLED-VALUE] [--disabled-value DISABLED-VALUE] [--rollout-percentage ROLLOUT-PERCENTAGE] [--segment-rules SEGMENT-RULES]
+ibmcloud app-configuration feature-values-update {--environment-id ENVIRONMENT-ID --feature-id FEATURE-ID [--name NAME] [--description DESCRIPTION] [--tags TAGS] [--enabled-value ENABLED-VALUE] [--disabled-value DISABLED-VALUE] [--rollout-percentage ROLLOUT-PERCENTAGE] [--segment-rules SEGMENT-RULES] | --file FILE}
 ```
 
 
@@ -970,6 +988,9 @@ ibmcloud app-configuration feature-values-update --environment-id ENVIRONMENT-ID
 :   Specify the targeting rules that is used to set different property values for different segments.
 
     Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--segment-rules=@path/to/file.json`.
+
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
 
 #### Example
 {: #app-configuration-feature-values-update-examples}
@@ -1177,7 +1198,7 @@ ibmcloud app-configuration properties \
 Create a Property.
 
 ```sh
-ibmcloud app-configuration property-create --environment-id ENVIRONMENT-ID --name NAME --property-id PROPERTY-ID --type TYPE --value VALUE [--description DESCRIPTION] [--format FORMAT] [--tags TAGS] [--segment-rules SEGMENT-RULES] [--collections COLLECTIONS]
+ibmcloud app-configuration property-create {--environment-id ENVIRONMENT-ID --name NAME --property-id PROPERTY-ID --type TYPE --value VALUE [--description DESCRIPTION] [--format FORMAT] [--tags TAGS] [--segment-rules SEGMENT-RULES] [--collections COLLECTIONS] | --file FILE}
 ```
 
 
@@ -1230,6 +1251,9 @@ ibmcloud app-configuration property-create --environment-id ENVIRONMENT-ID --nam
 
     Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--collections=@path/to/file.json`.
 
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
+
 #### Example
 {: #app-configuration-property-create-examples}
 
@@ -1254,7 +1278,7 @@ ibmcloud app-configuration property-create \
 Update a Property.
 
 ```sh
-ibmcloud app-configuration property-update --environment-id ENVIRONMENT-ID --property-id PROPERTY-ID [--name NAME] [--description DESCRIPTION] [--value VALUE] [--tags TAGS] [--segment-rules SEGMENT-RULES] [--collections COLLECTIONS]
+ibmcloud app-configuration property-update {--environment-id ENVIRONMENT-ID --property-id PROPERTY-ID [--name NAME] [--description DESCRIPTION] [--value VALUE] [--tags TAGS] [--segment-rules SEGMENT-RULES] [--collections COLLECTIONS] | --file FILE}
 ```
 
 
@@ -1295,6 +1319,9 @@ ibmcloud app-configuration property-update --environment-id ENVIRONMENT-ID --pro
 
     Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--collections=@path/to/file.json`.
 
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
+
 #### Example
 {: #app-configuration-property-update-examples}
 
@@ -1317,7 +1344,7 @@ ibmcloud app-configuration property-update \
 Update the property values. This method can be executed by the `writer` role. Property value and targeting rules can be updated, however this method does not allow assigning property to a collection.
 
 ```sh
-ibmcloud app-configuration property-values-update --environment-id ENVIRONMENT-ID --property-id PROPERTY-ID [--name NAME] [--description DESCRIPTION] [--tags TAGS] [--value VALUE] [--segment-rules SEGMENT-RULES]
+ibmcloud app-configuration property-values-update {--environment-id ENVIRONMENT-ID --property-id PROPERTY-ID [--name NAME] [--description DESCRIPTION] [--tags TAGS] [--value VALUE] [--segment-rules SEGMENT-RULES] | --file FILE}
 ```
 
 
@@ -1352,6 +1379,9 @@ ibmcloud app-configuration property-values-update --environment-id ENVIRONMENT-I
 :   Specify the targeting rules that is used to set different property values for different segments.
 
     Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--segment-rules=@path/to/file.json`.
+
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
 
 #### Example
 {: #app-configuration-property-values-update-examples}
@@ -1504,7 +1534,7 @@ ibmcloud app-configuration segments \
 Create a segment.
 
 ```sh
-ibmcloud app-configuration segment-create --name NAME --segment-id SEGMENT-ID --rules RULES [--description DESCRIPTION] [--tags TAGS]
+ibmcloud app-configuration segment-create {--name NAME --segment-id SEGMENT-ID --rules RULES [--description DESCRIPTION] [--tags TAGS] | --file FILE}
 ```
 
 
@@ -1534,6 +1564,9 @@ ibmcloud app-configuration segment-create --name NAME --segment-id SEGMENT-ID --
 `--tags` (string)
 :   Tags associated with the segments.
 
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
+
 #### Example
 {: #app-configuration-segment-create-examples}
 
@@ -1553,7 +1586,7 @@ ibmcloud app-configuration segment-create \
 Update the segment properties.
 
 ```sh
-ibmcloud app-configuration segment-update --segment-id SEGMENT-ID [--name NAME] [--description DESCRIPTION] [--tags TAGS] [--rules RULES]
+ibmcloud app-configuration segment-update {--segment-id SEGMENT-ID [--name NAME] [--description DESCRIPTION] [--tags TAGS] [--rules RULES] | --file FILE}
 ```
 
 
@@ -1580,6 +1613,9 @@ ibmcloud app-configuration segment-update --segment-id SEGMENT-ID [--name NAME] 
 :   List of rules that determine if the entity belongs to the segment during feature / property evaluation. An entity is identified by an unique identifier and the attributes that it defines. Any feature flag and property value evaluation is performed in the context of an entity when it is targeted to segments.
 
     Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--rules=@path/to/file.json`.
+
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
 
 #### Example
 {: #app-configuration-segment-update-examples}
@@ -1875,6 +1911,9 @@ ibmcloud app-configuration gitconfig-delete \
 ### `ibmcloud app-configuration gitconfig-promote`
 {: #app-configuration-cli-gitconfig-promote-command}
 
+Use the command [ibmcloud app-configuration gitconfig-promote-restore --git-config-id GIT-CONFIG-ID --action promote](/docs/app-configuration?topic=app-configuration-app-configuration-cli#app-configuration-cli-gitconfig-promote-restore-command) instead.
+{: deprecated}
+
 Promote configuration, this api will write or update your chosen configuration to the GitHub based on the git url, file path and branch data. In simple words this api will create or updates the bootstrap json file.
 
 ```sh
@@ -1899,6 +1938,9 @@ ibmcloud app-configuration gitconfig-promote \
 
 ### `ibmcloud app-configuration gitconfig-restore`
 {: #app-configuration-cli-gitconfig-restore-command}
+
+Use the command [ibmcloud app-configuration gitconfig-promote-restore --git-config-id GIT-CONFIG-ID --action restore](/docs/app-configuration?topic=app-configuration-app-configuration-cli#app-configuration-cli-gitconfig-promote-restore-command) instead.
+{: deprecated}
 
 Restore configuration, this api will write or update your chosen configuration from the GitHub to App configuration instance. The api will read the contents in the json file that was created using promote API and recreate or updates the App configuration instance with the file contents like properties, features and segments.
 
