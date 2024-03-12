@@ -1,12 +1,12 @@
 ---
 
 copyright:
-  years: 2021, 2023
-lastupdated: "2023-10-04"
+  years: 2021, 2024
+lastupdated: "2024-02-26"
 
-keywords: app configuration CLI, app configuration command line, app configuration terminal, app configuration shell
+keywords: App Configuration CLI, App Configuration command line, App Configuration terminal, App Configuration shell
 
-subcollection: app-configuration-cli-plugin
+subcollection: app-configuration
 
 ---
 
@@ -15,11 +15,10 @@ subcollection: app-configuration-cli-plugin
 # App Configuration CLI
 {: #app-configuration-cli}
 
-The {{site.data.keyword.cloud_notm}} command-line interface (CLI) provides extra capabilities for service offerings. {{site.data.keyword.cloud_notm}} CLI supports a plug-in framework to extend its capability. You can install the {{site.data.keyword.appconfig_short}} CLI plug-in from the {{site.data.keyword.cloud_notm}} plug-in repository. With the {{site.data.keyword.appconfig_short}} service CLI plug-in, you can easily manage {{site.data.keyword.appconfig_short}} service instances by using the CLI commands.
+With the {{site.data.keyword.appconfig_short}} service CLI plug-in, you can easily manage {{site.data.keyword.appconfig_short}} service instances by using the CLI commands.
 {: shortdesc}
 
-To run {{site.data.keyword.cloud_notm}} {{site.data.keyword.appconfig_short}} commands, use `ibmcloud app-configuration` or `ibmcloud ac`.
-{: tip}
+Current version: **`2.0.0`**
 
 ## Prerequisites
 {: #ac-prereqs}
@@ -42,6 +41,9 @@ ibmcloud plugin install app-configuration
 You're notified on the command-line when updates to the {{site.data.keyword.cloud_notm}} CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use the new commands. You can view the current version of all installed plug-ins by running `ibmcloud plugin list`.
 {: tip}
 
+To run {{site.data.keyword.cloud_notm}} {{site.data.keyword.appconfig_short}} commands, use `ibmcloud app-configuration` or `ibmcloud ac`.
+{: tip}
+
 ### Output
 {: #ac-install-cli-output}
 
@@ -58,1722 +60,2458 @@ Plug-in 'app-configuration' was successfully installed into /Users/<username>/.b
 ```
 {: screen}
 
-## Logging in to the CLI with a private endpoint
-{: #ac-ibmcloud-login-cli-private-endpoint}
+## Set service URL
+{: #ac-set-service-url}
 
-For enhanced control and security over your data when using CLI, you have the option of using private routes to {{site.data.keyword.cloud_notm}} endpoints. You must first enable virtual routing and forwarding in your account, and then you can enable the use of {{site.data.keyword.cloud_notm}} private service endpoints. For more information about setting up your account to support the private connectivity option, see [Enabling VRF and service endpoints](https://cloud.ibm.com/docs/account?topic=account-vrf-service-endpoint).
+To target the {{site.data.keyword.appconfig_short}} instance, use one of the following options.
 
-Use the following command to log in to a private endpoint by using the CLI:
+* Run the `ibmcloud app-configuration config set` command.
 
-```sh
-ibmcloud login -a private.cloud.ibm.com
-```
-{: pre}
+    ```sh
+     ibmcloud app-configuration config set service-url https://{region}.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/{instance_ID}
+    ```
+    {: pre}
 
-## ibmcloud ac init
-{: #ac-ibmcloud-ac-init}
 
-Before proceeding with initializing the CLI plug-in, make sure that you select the correct API endpoint, region, and account in your {{site.data.keyword.cloud_notm}} CLI.
-{: note}
+* Export an environment variable with your {{site.data.keyword.appconfig_short}} service endpoint URL.
 
-Initialize the cli plug-in by using the following command:
+    ```sh
+    export APP_CONFIGURATION_URL=https://{region}.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/{instance_ID}
+    ```
+    {: pre}
 
-```sh
-ibmcloud ac init --instance_id INSTANCE_ID
-```
-{: pre}
+* Set the service endpoint in the command.
+
+    ```sh
+    ibmcloud app-configuration environments --service-url https://{region}.apprapp.cloud.ibm.com/apprapp/feature/v1/instances/{instance_ID}
+    ```
+    {: pre}
+
+Replace `{region}` and `{instance_ID}` with the values that apply to your {{site.data.keyword.appconfig_short}} service instance. To find the endpoint URL see [Endpoint URLs](/apidocs/app-configuration#endpoint-url).
+
+
 
-### Command options
-{: #ac-ibmcloud-ac-init-command}
 
-`--instance_id INSTANCE_ID` (optional)
-:  GUID of the App Configuration instance to use.
 
-### Example
-{: #ac-ibmcloud-ac-init-example}
+<!-- Below content should be pasted from the generated CLI markdown -->
+<!-- This file: https://github.ibm.com/devx-app-services/appconfiguration-cli/tree/development/plugin/commands/appconfigurationv1/app-configuration-cli.md -->
 
-Log in to {{site.data.keyword.cloud_notm}} CLI and initialize the CLI to {{site.data.keyword.appconfig_short}} service instance `App Configuration Instance 1`.
+## Globals
+{: #app-configuration-globals}
 
+### Commands
+{: #app-configuration-commands}
+
+#### `ibmcloud app-configuration docs`
+{: #app-configuration-cli-docs-command}
+
+Opens the plugin documentation in the web browser.
+
+```sh
+ibmcloud app-configuration docs
+```
+
+##### Example
+{: #app-configuration-docs-examples}
+
 ```sh
-ibmcloud ac init
+ibmcloud app-configuration docs
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-init-output}
+### Options
+{: #app-configuration-global-options}
 
-The command returns the following output (Instance name followed by a space along with GUID):
+`--region` (string)
+:   The region where you provisioned your App Configuration instance. Available values: us-south, eu-gb, au-syd, us-east.
 
-```sh
-Initializing IBM Cloud App Configuration Service plug-in...
+`--guid` (string)
+:   App Configuration service instance ID.
 
-Select a App Configuration instance:
-1. App_Configuration_Instance_1 123
-2. App_Configuration_Instance_2 456
-Enter a number> 1
-App Configuration instance selected is - App_Configuration_Instance_1 (GUID - 123)
-```
-{: screen}
+`--output` (string)
+:   Choose an output format - can be 'json', 'yaml', or 'table'. Defaults to 'table'.
+
+`-j`, `--jmes-query` (string)
+:   Provide a JMESPath query to customize output.
+
+`--service-url` (string)
+:   Provide the base endpoint URL for the API.
 
-## ibmcloud ac show
-{: #ac-ibmcloud-ac-show}
+`-q`, `--quiet`
+:   Suppresses verbose messages.
 
-To see the name and GUID of the instance that is being used, use this command.
+`-v`, `--version`
+:   Prints the plugin version.
 
+#### Example
+{: #app-configuration-global-options-example}
+
 ```sh
-ibmcloud ac show
+ibmcloud app-configuration
+    --region=us-south \
+    --guid=provide-here-your-appconfig-instance-uuid \
+    --output=json \
+    --jmes-query="[:10]" \
+    --service-url="https://myservice.test.cloud.ibm.com"
+    --quiet
 ```
-{: pre}
+Note: This example only demonstrates the global options available to all sub-commands and is not a valid command itself.
 
-### Example
-{: #ac-ibmcloud-ac-show-example}
+### `ibmcloud app-configuration config`
+{: #app-configuration-cli-config-command}
 
-Prerequisite - Use the `ibmcloud ac init` command to select an instance first.
-{: note}
+Global parameters can also be stored in persistent configuration so that they do not need to be manually specified each time the plugin is invoked. Each parameter can be configured with the `config` command and its subcommands.
 
 ```sh
-ibmcloud ac show
+ibmcloud app-configuration config
 ```
-{: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-show-output}
+### `ibmcloud app-configuration config set`
+{: #app-configuration-cli-config-set-command}
 
-The command returns the following output:
+Set a new config value for a specific option. Each subcommand of the `set` command maps to a global option. Each subcommand accepts a single argument, the string representation of the value to store for the option.
 
+```sh
+ibmcloud app-configuration config set <option> <value>
 ```
-App Configuration instance being used is - App_Configuration_Instance_1 (GUID - 123)
+
+#### Examples
+{: #app-configuration-config-set-command-examples}
+
+```sh
+ibmcloud app-configuration config set service-url \
+    'https://ibm.cloud.com/my-api'
 ```
-{: screen}
 
-## ibmcloud ac environment list
-{: #ac-ibmcloud-ac-environment-list}
+### `ibmcloud app-configuration config get`
+{: #app-configuration-cli-config-get-command}
 
-You can list all environment, by using the command:
+Print out the currently set value for a specific option. Each subcommand of the `get` command maps to a global option.
 
 ```sh
-ibmcloud ac environment list [--expand EXPAND] [--sort SORT] [--tags TAGS] [--include INCLUDE] [--limit LIMIT] [--offset OFFSET]
+ibmcloud app-configuration config get <option>
 ```
-{: pre}
 
-### Command options
-{: #ac-ibmcloud-ac-environment-list-command-options}
+#### Examples
+{: #app-configuration-config-get-command-examples}
+
+```sh
+ibmcloud app-configuration config get service-url
+```
 
-`--limit LIMIT` (optional)
-:  Used for pagination. The number of records to retrieve.
+### `ibmcloud app-configuration config unset`
+{: #app-configuration-cli-config-unset-command}
 
-`--offset OFFSET` (optional)
-:  Used for pagination. The number of records to skip.
+Unset the currently set value for a specific option. Each subcommand of the `unset` command maps to a global option.
 
-`--tags TAGS` (optional)
-:  Filter based on the tags.
+The subcommands available for this service are: `service-url`, .
 
-`--sort SORT` (optional)
-:  Sort the details based on the specified attribute.
+```sh
+ibmcloud app-configuration config unset <option>
+```
 
-`--expand EXPAND` (optional)
-:  Expanded view of the item.
+#### Examples
+{: #app-configuration-config-unset-command-examples}
 
-`--include INCLUDE` (optional)
-:  Include feature and property details in the response.
+```sh
+ibmcloud app-configuration config unset service-url
+```
 
-### Example
-{: #ac-ibmcloud-ac-environment-list-example}
+### `ibmcloud app-configuration config list`
+{: #app-configuration-cli-config-list-command}
 
-To list all environments, run the following command:
+List out all of the currently set config values.
 
 ```sh
-ibmcloud ac environment list
+ibmcloud app-configuration config list
 ```
-{: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-environment-list-output}
+#### Examples
+{: #app-configuration-config-list-command-examples}
 
-The command returns the following output:
-
 ```sh
-name               environment_id
-Prod Environment   prodEnvironment
-Dev environment    devEnvironment
+ibmcloud app-configuration config list
 ```
-{: screen}
+
+## Environments
+{: #app-configuration-environments-cli}
+
+Environments represent your application environments.
 
-## ibmcloud ac environment create
-{: #ac-ibmcloud-ac-environment-create}
+### `ibmcloud app-configuration environments`
+{: #app-configuration-cli-environments-command}
 
-You can create an environment, by using the command:
+List all the environments in the App Configuration service instance.
+Note: If the `--all-pages` option is not set, the command will only retrieve a single page of the collection.
 
 ```sh
-ibmcloud ac environment create {--file FILE-PATH | --name NAME [--environment_id ENVIRONMENT_ID] [--description DESCRIPTION] [--tags TAGS] [--color_code COLOR_CODE]}
+ibmcloud app-configuration environments [--expand EXPAND] [--sort SORT] [--tags TAGS] [--include INCLUDE] [--limit LIMIT] [--offset OFFSET] [--search SEARCH]
 ```
-{: pre}
+
+
+#### Command options
+{: #app-configuration-environments-cli-options}
 
-### Command options
-{: #ac-ibmcloud-ac-environment-create-command}
+`--expand` (bool)
+:   If set to `true`, returns expanded view of the resource details.
 
-`--name NAME`
-:  Environment name. Required field - input either as a flag or from file.
+`--sort` (string)
+:   Sort the environment details based on the specified attribute. By default, items are sorted by name.
 
-`--environment_id ENVIRONMENT_ID` (optional)
-:  Environment ID. If this value is not provided, name will automatically become the ID. Optional field - input either as a flag or from file.
+    Allowable values are: `created_time`, `updated_time`, `id`, `name`.
 
-`--description DESCRIPTION` (optional)
-:  Description of the environment. Optional field - input either as a flag or from file.
+`--tags` (string)
+:   Filter the resources to be returned based on the associated tags. Specify the parameter as a list of comma separated tags. Returns resources associated with any of the specified tags.
 
-`--tags TAGS` (optional)
-:  Tags associated with the environment. Optional field - input either as a flag or from file.
+`--include` ([]string)
+:   Include feature, property, snapshots details in the response.
 
-`--color_code COLOR_CODE` (optional)
-:  Color code to distinguish the environment. The Hex code for the color. Optional field - input either as a flag or from file.
+    Allowable list items are: `features`, `properties`, `snapshots`.
 
-`--file FILE`
-:  Input through the file. File format Supported - JSON
+`--limit` (int64)
+:   The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different set of records, use `limit` with `offset` to page through the available records.
 
-### Example
-{: #ac-ibmcloud-ac-environment-create-example}
+    The default value is `10`. The maximum value is `100`. The minimum value is `1`.
 
-To create an environment with name `Production_Environment` using flags ([click here](#ac-fileinput) for using commands with `--file` flag), run the following command:
+`--offset` (int64)
+:   The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset` value. Use `offset` with `limit` to page through the available records.
 
+    The default value is `0`. The minimum value is `0`.
+
+`--search` (string)
+:   Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the '[Name OR Tag]' of the entity.
+
+`--all-pages` (bool)
+:   Invoke multiple requests to display all pages of the collection for environments.
+
+#### Example
+{: #app-configuration-environments-examples}
+
 ```sh
-ibmcloud ac environment create --name Production_Environment --environment_id prodEnvironment --description sampleDesc --tags sampleTag --color_code "#FF0000"
+ibmcloud app-configuration environments \
+    --expand true \
+    --sort created_time \
+    --tags 'version 1.1,pre-release' \
+    --include features,properties,snapshots \
+    --limit 10 \
+    --offset 0 \
+    --search 'test tag'
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-environment-create-output}
+### `ibmcloud app-configuration environment-create`
+{: #app-configuration-cli-environment-create-command}
 
-The command returns the following output:
+Create an environment.
 
 ```sh
-updated_time     2021-05-21T05:28:07.000Z
-name             Production_Environment
-environment_id   prodEnvironment
-description      sampleDesc
-tags             sampleTag
-color_code       #FF0000
-created_time     2021-05-21T05:28:07.000Z
+ibmcloud app-configuration environment-create {--name NAME --environment-id ENVIRONMENT-ID [--description DESCRIPTION] [--tags TAGS] [--color-code COLOR-CODE] | --file FILE}
 ```
-{: screen}
 
-## ibmcloud ac environment get
-{: #ac-ibmcloud-ac-environment-get}
 
-You can get an environment detail, by using the command:
+#### Command options
+{: #app-configuration-environment-create-cli-options}
 
-```sh
-ibmcloud ac environment get --environment_id ENVIRONMENT_ID [--expand EXPAND] [--include INCLUDE]
-```
-{: pre}
+`--name` (string)
+:   Environment name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only. Required.
+
+    The maximum length is `256` characters.
+
+`--environment-id` (string)
+:   Environment id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only. Required.
+
+    The maximum length is `256` characters.
 
-### Command options
-{: #ac-ibmcloud-ac-environment-get-command}
+`--description` (string)
+:   Environment description.
 
-`--environment_id ENVIRONMENT_ID`
-:  Environment ID
+    The maximum length is `255` characters.
 
-`--expand EXPAND` (optional)
-:  Expanded view of the item.
+`--tags` (string)
+:   Tags associated with the environment.
 
-`--include INCLUDE` (optional)
-:  Include feature and property details in the response.
+`--color-code` (string)
+:   Color code to distinguish the environment. The Hex code for the color. For example `#FF0000` for `red`.
 
-### Example
-{: #ac-ibmcloud-ac-environment-get-example}
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
 
-To get an environment with ID `prodEnvironment`, run the following command:
+#### Example
+{: #app-configuration-environment-create-examples}
 
 ```sh
-ibmcloud ac environment get --environment_id prodEnvironment
+ibmcloud app-configuration environment-create \
+    --name 'Dev environment' \
+    --environment-id dev-environment \
+    --description 'Dev environment description' \
+    --tags development \
+    --color-code #FDD13A
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-environment-get-output}
+### `ibmcloud app-configuration environment-update`
+{: #app-configuration-cli-environment-update-command}
 
-The command returns the following output:
+Update an environment.
 
 ```sh
-name             Production_Environment
-environment_id   prodEnvironment
+ibmcloud app-configuration environment-update {--environment-id ENVIRONMENT-ID [--name NAME] [--description DESCRIPTION] [--tags TAGS] [--color-code COLOR-CODE] | --file FILE}
 ```
-{: screen}
 
-## ibmcloud ac environment update
-{: #ac-ibmcloud-ac-environment-update}
 
-You can update an environment, by using the command:
+#### Command options
+{: #app-configuration-environment-update-cli-options}
 
+`--environment-id` (string)
+:   Environment Id. Required.
+
+`--name` (string)
+:   Environment name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+
+    The maximum length is `256` characters.
+
+`--description` (string)
+:   Environment description.
+
+    The maximum length is `255` characters.
+
+`--tags` (string)
+:   Tags associated with the environment.
+
+`--color-code` (string)
+:   Color code to distinguish the environment. The Hex code for the color. For example `#FF0000` for `red`.
+
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
+
+#### Example
+{: #app-configuration-environment-update-examples}
+
 ```sh
-ibmcloud ac environment update (--file FILE-PATH | --environment_id ENVIRONMENT_ID --name NAME --description DESCRIPTION --tags TAGS --color_code COLOR_CODE)
+ibmcloud app-configuration environment-update \
+    --environment-id environment_id \
+    --name exampleString \
+    --description exampleString \
+    --tags exampleString \
+    --color-code #FDD13A
 ```
 {: pre}
 
-### Command options
-{: #ac-ibmcloud-ac-environment-update-command}
+### `ibmcloud app-configuration environment`
+{: #app-configuration-cli-environment-command}
 
-`--name NAME`
-:  Environment name. Required field - input either as a flag or from file.
+Retrieve the details of the environment.
+
+```sh
+ibmcloud app-configuration environment --environment-id ENVIRONMENT-ID [--expand EXPAND] [--include INCLUDE]
+```
 
-`--environment_id ENVIRONMENT_ID` (optional)
-:  Environment ID. Required field - input either as a flag or from file.
 
-`--description DESCRIPTION` (optional)
-:  Description of the environment. Required field - input either as a flag or from file.
+#### Command options
+{: #app-configuration-environment-cli-options}
 
-`--tags TAGS` (optional)
-:  Tags associated with the environment. Required field - input either as a flag or from file.
+`--environment-id` (string)
+:   Environment Id. Required.
 
-`--color_code COLOR_CODE` (optional)
-:  Color code to distinguish the environment. The Hex code for the color. Required field - input either as a flag or from file.
+`--expand` (bool)
+:   If set to `true`, returns expanded view of the resource details.
 
-`--file FILE`
-:  Input through the file. File format Supported - JSON
+`--include` ([]string)
+:   Include feature, property, snapshots details in the response.
 
-### Example
-{: #ac-ibmcloud-ac-environment-update-example}
+    Allowable list items are: `features`, `properties`, `snapshots`.
 
-To update an environment with ID `prodEnvironment` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
+#### Example
+{: #app-configuration-environment-examples}
 
 ```sh
-ibmcloud ac environment update --name Production_Environment --environment_id prodEnvironment --description sampleUpdatedDesc --tags sampleUpdatedTag --color_code "#FF0000"
+ibmcloud app-configuration environment \
+    --environment-id environment_id \
+    --expand true \
+    --include features,properties,snapshots
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-environment-update-output}
+### `ibmcloud app-configuration environment-delete`
+{: #app-configuration-cli-environment-delete-command}
 
-The command returns the following output:
+Delete an Environment.
 
 ```sh
-name             Production_Environment
-environment_id   prodEnvironment
-description      sampleUpdatedDesc
-tags             sampleUpdatedTag
-color_code       #FF0000
-created_time     2021-05-21T05:28:07.000Z
-updated_time     2021-05-21T05:33:00.000Z
+ibmcloud app-configuration environment-delete --environment-id ENVIRONMENT-ID
 ```
-{: screen}
+
 
-## ibmcloud ac environment delete
-{: #ac-ibmcloud-ac-environment-delete}
+#### Command options
+{: #app-configuration-environment-delete-cli-options}
 
-You can delete an environment, by using the command:
+`--environment-id` (string)
+:   Environment Id. Required.
 
+#### Example
+{: #app-configuration-environment-delete-examples}
+
 ```sh
-ibmcloud ac environment delete --environment_id ENVIRONMENT_ID
+ibmcloud app-configuration environment-delete \
+    --environment-id environment_id
 ```
 {: pre}
 
-### Command options
-{: #ac-ibmcloud-ac-environment-delete-command}
+## Collections
+{: #app-configuration-collections-cli}
 
-`--environment_id ENVIRONMENT_ID`
-:  Environment ID.
+Collections are a way to group feature flags and properties.
 
-### Example
-{: #ac-ibmcloud-ac-environment-delete-example}
+### `ibmcloud app-configuration collections`
+{: #app-configuration-cli-collections-command}
 
-To delete an environment with ID `prodEnvironment`, run the following command:
+List of all the collections in the App Configuration service instance.
+Note: If the `--all-pages` option is not set, the command will only retrieve a single page of the collection.
 
 ```sh
-ibmcloud ac environment delete --environment_id prodEnvironment
+ibmcloud app-configuration collections [--expand EXPAND] [--sort SORT] [--tags TAGS] [--features FEATURES] [--properties PROPERTIES] [--include INCLUDE] [--limit LIMIT] [--offset OFFSET] [--search SEARCH]
 ```
-{: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-environment-delete-output}
 
-The command returns the following output:
+#### Command options
+{: #app-configuration-collections-cli-options}
 
-```sh
-OK
-```
-{: screen}
+`--expand` (bool)
+:   If set to `true`, returns expanded view of the resource details.
 
-## ibmcloud ac collection list
-{: #ac-ibmcloud-ac-collection-list}
+`--sort` (string)
+:   Sort the collection details based on the specified attribute. By default, items are sorted by name.
 
-You can list all collections, by using the command:
+    Allowable values are: `created_time`, `updated_time`, `id`, `name`.
 
-```sh
-ibmcloud ac collection list [--sort SORT] [--limit LIMIT] [--offset OFFSET] [--features FEATURES] [--properties PROPERTIES] [--tags TAGS] [--expand EXPAND] [--include INCLUDE]
-```
-{: pre}
+`--tags` (string)
+:   Filter the resources to be returned based on the associated tags. Specify the parameter as a list of comma separated tags. Returns resources associated with any of the specified tags.
 
-### Command options
-{: #ac-ibmcloud-ac-collection-list-command-options}
+`--features` ([]string)
+:   Filter collections by a list of comma separated features.
 
-`--limit LIMIT` (optional)
-:  Used for pagination. The number of records to retrieve.
+`--properties` ([]string)
+:   Filter collections by a list of comma separated properties.
 
-`--offset OFFSET` (optional)
-:  Used for pagination. The number of records to skip.
+`--include` ([]string)
+:   Include feature, property, snapshots details in the response.
 
-`--features FEATURES` (optional)
-:  Filter collections by a list of comma-separated features.
+    Allowable list items are: `features`, `properties`, `snapshots`.
 
-`--properties PROPERTIES` (optional)
-:  Filter collections by a list of comma-separated properties.
+`--limit` (int64)
+:   The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different set of records, use `limit` with `offset` to page through the available records.
 
-`--tags TAGS` (optional)
-:  Filter based on the tags.
+    The default value is `10`. The maximum value is `100`. The minimum value is `1`.
 
-`--sort SORT` (optional)
-:  Sort the details based on the specified attribute.
+`--offset` (int64)
+:   The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset` value. Use `offset` with `limit` to page through the available records.
 
-`--expand EXPAND` (optional)
-:  Expanded view of the item.
+    The default value is `0`. The minimum value is `0`.
 
-`--include INCLUDE` (optional)
-:  Include feature and property details in the response.
+`--search` (string)
+:   Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the '[Name OR Tag]' of the entity.
 
-### Example
-{: #ac-ibmcloud-ac-collection-list-example}
+`--all-pages` (bool)
+:   Invoke multiple requests to display all pages of the collection for collections.
 
-To list all collections, run the following command:
+#### Example
+{: #app-configuration-collections-examples}
 
 ```sh
-ibmcloud ac collection list
+ibmcloud app-configuration collections \
+    --expand true \
+    --sort created_time \
+    --tags 'version 1.1,pre-release' \
+    --features my-feature-id,cycle-rentals \
+    --properties my-property-id,email-property \
+    --include features,properties,snapshots \
+    --limit 10 \
+    --offset 0 \
+    --search 'test tag'
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-collection-list-output}
+### `ibmcloud app-configuration collection-create`
+{: #app-configuration-cli-collection-create-command}
 
-The command returns the following output:
+Create a collection.
 
 ```sh
-name                 collection_id
-sample               sampleId
-GHz Inc              ghzinc1
+ibmcloud app-configuration collection-create {--name NAME --collection-id COLLECTION-ID [--description DESCRIPTION] [--tags TAGS] | --file FILE}
 ```
-{: screen}
 
-## ibmcloud ac collection create
-{: #ac-ibmcloud-ac-collection-create}
 
-You can create a collection, by using the command:
+#### Command options
+{: #app-configuration-collection-create-cli-options}
 
-```sh
-ibmcloud ac collection create {--file FILE-PATH | --name NAME [--collection_id COLLECTION_ID] [--description DESCRIPTION] [--tags TAGS]}
-```
-{: pre}
+`--name` (string)
+:   Collection name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only. Required.
 
-### Command options
-{: #ac-ibmcloud-ac-collection-create-command}
+    The maximum length is `256` characters.
 
-`--name NAME`
-:  Collection name. Required field - input either as a flag or from file.
+`--collection-id` (string)
+:   Collection Id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only. Required.
 
-`--collection_id COLLECTION_ID` (optional)
-:  Collection ID. If this value is not provided, name will automatically become the ID. Optional field - input either as a flag or from file.
+    The maximum length is `256` characters.
 
-`--description DESCRIPTION` (optional)
-:  Description of the collection. Optional field - input either as a flag or from file.
+`--description` (string)
+:   Collection description.
 
-`--tags TAGS` (optional)
-:  Tags associated with the collection. Optional field - input either as a flag or from file.
+    The maximum length is `255` characters.
 
-`--file FILE`
-:  Input through the file. File format Supported - JSON
+`--tags` (string)
+:   Tags associated with the collection.
 
-### Example
-{: #ac-ibmcloud-ac-collection-create-example}
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
 
-To create a collection with name `sample` using flags ([click here](#ac-fileinput) for using commands with `--file` flag), run the following command:
+#### Example
+{: #app-configuration-collection-create-examples}
 
 ```sh
-ibmcloud ac collection create --name sample --collection_id sampleId --description sampleDesc --tags sampleTag
+ibmcloud app-configuration collection-create \
+    --name 'Web App Collection' \
+    --collection-id web-app-collection \
+    --description 'Collection for Web application' \
+    --tags 'version: 1.1, pre-release'
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-collection-create-output}
+### `ibmcloud app-configuration collection-update`
+{: #app-configuration-cli-collection-update-command}
 
-The command returns the following output:
+Update the collection name, tags and description. Collection Id cannot be updated.
 
 ```sh
-collection_id   sampleId
-description     sampleDesc
-created_time    2021-01-18T08:15:45Z
-updated_time    2021-01-18T08:15:45Z
-name            sample
+ibmcloud app-configuration collection-update {--collection-id COLLECTION-ID [--name NAME] [--description DESCRIPTION] [--tags TAGS] | --file FILE}
 ```
-{: screen}
+
+
+#### Command options
+{: #app-configuration-collection-update-cli-options}
+
+`--collection-id` (string)
+:   Collection Id of the collection. Required.
+
+`--name` (string)
+:   Collection name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 
-## ibmcloud ac collection get
-{: #ac-ibmcloud-ac-collection-get}
+    The maximum length is `256` characters.
 
-You can get a collection, by using the command:
+`--description` (string)
+:   Description of the collection.
 
+    The maximum length is `255` characters.
+
+`--tags` (string)
+:   Tags associated with the collection.
+
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
+
+#### Example
+{: #app-configuration-collection-update-examples}
+
 ```sh
-ibmcloud ac collection get --collection_id COLLECTION_ID [--expand EXPAND] [--include INCLUDE]
+ibmcloud app-configuration collection-update \
+    --collection-id collection_id \
+    --name exampleString \
+    --description exampleString \
+    --tags exampleString
 ```
 {: pre}
+
+### `ibmcloud app-configuration collection`
+{: #app-configuration-cli-collection-command}
+
+Retrieve the details of the collection.
 
-### Command options
-{: #ac-ibmcloud-ac-collection-get-command}
+```sh
+ibmcloud app-configuration collection --collection-id COLLECTION-ID [--expand EXPAND] [--include INCLUDE]
+```
 
-`--collection_id COLLECTION_ID`
-:  Collection ID for the collection.
 
-`--expand EXPAND` (optional)
-:  Expanded view of the collection details.
+#### Command options
+{: #app-configuration-collection-cli-options}
 
-`--include INCLUDE` (optional)
-:  Include feature and property details in the response.
+`--collection-id` (string)
+:   Collection Id of the collection. Required.
 
-### Example
-{: #ac-ibmcloud-ac-collection-get-example}
+`--expand` (bool)
+:   If set to `true`, returns expanded view of the resource details.
 
-To get a collection with ID `sampleId`, run the following command:
+`--include` ([]string)
+:   Include feature, property, snapshots details in the response.
 
+    Allowable list items are: `features`, `properties`, `snapshots`.
+
+#### Example
+{: #app-configuration-collection-examples}
+
 ```sh
-ibmcloud ac collection get --collection_id sampleId
+ibmcloud app-configuration collection \
+    --collection-id collection_id \
+    --expand true \
+    --include features,properties,snapshots
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-collection-get-output}
+### `ibmcloud app-configuration collection-delete`
+{: #app-configuration-cli-collection-delete-command}
 
-The command returns the following output:
+Delete the collection.
 
 ```sh
-name            sample
-collection_id   sampleId
+ibmcloud app-configuration collection-delete --collection-id COLLECTION-ID
 ```
-{: screen}
+
 
-## ibmcloud ac collection update
-{: #ac-ibmcloud-ac-collection-update}
+#### Command options
+{: #app-configuration-collection-delete-cli-options}
 
-You can update a collection, by using the command:
+`--collection-id` (string)
+:   Collection Id of the collection. Required.
 
+#### Example
+{: #app-configuration-collection-delete-examples}
+
 ```sh
-ibmcloud ac collection update {--file FILE-PATH | --name NAME --collection_id COLLECTION_ID --description DESCRIPTION --tags TAGS}
+ibmcloud app-configuration collection-delete \
+    --collection-id collection_id
 ```
 {: pre}
+
+## Features
+{: #app-configuration-features-cli}
+
+Create and manage different types of feature flags for your apps and services.
+
+### `ibmcloud app-configuration features`
+{: #app-configuration-cli-features-command}
+
+List all the feature flags in the specified environment.
+Note: If the `--all-pages` option is not set, the command will only retrieve a single page of the collection.
+
+```sh
+ibmcloud app-configuration features --environment-id ENVIRONMENT-ID [--expand EXPAND] [--sort SORT] [--tags TAGS] [--collections COLLECTIONS] [--segments SEGMENTS] [--include INCLUDE] [--limit LIMIT] [--offset OFFSET] [--search SEARCH]
+```
+
+
+#### Command options
+{: #app-configuration-features-cli-options}
+
+`--environment-id` (string)
+:   Environment Id. Required.
+
+`--expand` (bool)
+:   If set to `true`, returns expanded view of the resource details.
+
+`--sort` (string)
+:   Sort the feature details based on the specified attribute. By default, items are sorted by name.
+
+    Allowable values are: `created_time`, `updated_time`, `id`, `name`.
+
+`--tags` (string)
+:   Filter the resources to be returned based on the associated tags. Specify the parameter as a list of comma separated tags. Returns resources associated with any of the specified tags.
+
+`--collections` ([]string)
+:   Filter features by a list of comma separated collections.
 
-### Command options
-{: #ac-ibmcloud-ac-collection-update-command}
+`--segments` ([]string)
+:   Filter features by a list of comma separated segments.
 
-`--collection_id COLLECTION_ID`
-:  Collection ID. Required field - input either as a flag or from file.
+`--include` ([]string)
+:   Include the associated collections or targeting rules or change request details in the response.
 
-`--name NAME`
-:  Collection name. Required field - input either as a flag or from file.
+    Allowable list items are: `collections`, `rules`, `change_request`.
 
-`--description DESCRIPTION`
-:  Description of the collection. Required field - input either as a flag or from file.
+`--limit` (int64)
+:   The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different set of records, use `limit` with `offset` to page through the available records.
 
-`--tags TAGS` (optional) File format Supported
-:  Tags associated with the collection. Required field - input either as a flag or from file.
+    The default value is `10`. The maximum value is `100`. The minimum value is `1`.
 
-`--file FILE`
-:  Input from the file. File format Supported - JSON
+`--offset` (int64)
+:   The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset` value. Use `offset` with `limit` to page through the available records.
 
-### Example
-{: #ac-ibmcloud-ac-collection-update-example}
+    The default value is `0`. The minimum value is `0`.
 
-To update a collection with ID `sampleId` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
+`--search` (string)
+:   Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the '[Name OR Tag]' of the entity.
 
+`--all-pages` (bool)
+:   Invoke multiple requests to display all pages of the collection for features.
+
+#### Example
+{: #app-configuration-features-examples}
+
 ```sh
-ibmcloud ac collection update --collection_id sampleId --name sample --description sampleDesc --tags sampleTag
+ibmcloud app-configuration features \
+    --environment-id environment_id \
+    --expand true \
+    --sort created_time \
+    --tags 'version 1.1,pre-release' \
+    --collections my-collection-id,ghzindiapvtltd \
+    --segments my-segment-id,beta-users \
+    --include collections,rules,change_request \
+    --limit 10 \
+    --offset 0 \
+    --search 'test tag'
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-collection-update-output}
+### `ibmcloud app-configuration feature-create`
+{: #app-configuration-cli-feature-create-command}
 
-The command returns the following output:
+Create a feature flag.
 
 ```sh
-name            sample
-collection_id   sampleId
-description     sampleDescUpdated
-created_time    2021-01-18T08:15:45Z
-updated_time    2021-01-19T05:57:27Z
+ibmcloud app-configuration feature-create {--environment-id ENVIRONMENT-ID --name NAME --feature-id FEATURE-ID --type TYPE --enabled-value ENABLED-VALUE --disabled-value DISABLED-VALUE [--description DESCRIPTION] [--format FORMAT] [--enabled ENABLED] [--rollout-percentage ROLLOUT-PERCENTAGE] [--tags TAGS] [--segment-rules SEGMENT-RULES] [--collections COLLECTIONS] | --file FILE}
 ```
-{: screen}
 
-## ibmcloud ac collection delete
-{: #ac-ibmcloud-ac-collection-delete}
 
-You can delete a collection, by using the command:
+#### Command options
+{: #app-configuration-feature-create-cli-options}
 
-```sh
-ibmcloud ac collection delete --collection_id COLLECTION_ID
-```
-{: pre}
+`--environment-id` (string)
+:   Environment Id. Required.
+
+`--name` (string)
+:   Feature name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only. Required.
+
+    The maximum length is `256` characters.
+
+`--feature-id` (string)
+:   Feature id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only. Required.
+
+    The maximum length is `256` characters.
+
+`--type` (string)
+:   Type of the feature (BOOLEAN, STRING, NUMERIC). If `type` is `STRING`, then `format` attribute is required. Required.
+
+    Allowable values are: `BOOLEAN`, `STRING`, `NUMERIC`.
+
+`--enabled-value` (interface{})
+:   Value of the feature when it is enabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String - YAML value as per the `type` and `format` attributes. Required.
+
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--enabled-value=@path/to/file.json`.
+
+`--disabled-value` (interface{})
+:   Value of the feature when it is disabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String - YAML value as per the `type` and `format` attributes. Required.
+
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--disabled-value=@path/to/file.json`.
+
+`--description` (string)
+:   Feature description.
+
+    The maximum length is `255` characters.
+
+`--format` (string)
+:   Format of the feature (TEXT, JSON, YAML) and it is a required attribute when `type` is `STRING`. It is not required for `BOOLEAN` and `NUMERIC` types. This property is populated in the response body of `POST, PUT and GET` calls if the type `STRING` is used and not populated for `BOOLEAN` and `NUMERIC` types.
+
+    Allowable values are: `TEXT`, `JSON`, `YAML`.
+
+`--enabled` (bool)
+:   The state of the feature flag.
+
+`--rollout-percentage` (int64)
+:   Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
+
+    The default value is `100`. The maximum value is `100`. The minimum value is `0`.
 
-### Command options
-{: #ac-ibmcloud-ac-collection-delete-command}
+`--tags` (string)
+:   Tags associated with the feature.
 
-`--collection_id COLLECTION_ID`
-:  Collection ID
+`--segment-rules` ([`FeatureSegmentRule[]`](#cli-feature-segment-rule-example-schema))
+:   Specify the targeting rules that is used to set different feature flag values for different segments.
 
-### Example
-{: #ac-ibmcloud-ac-collection-delete-example}
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--segment-rules=@path/to/file.json`.
 
-To delete a collection with ID `sampleId`, run the following command:
+`--collections` ([`CollectionRef[]`](#cli-collection-ref-example-schema))
+:   List of collection id representing the collections that are associated with the specified feature flag.
 
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--collections=@path/to/file.json`.
+
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
+
+#### Example
+{: #app-configuration-feature-create-examples}
+
 ```sh
-ibmcloud ac collection delete --collection_id sampleId
+ibmcloud app-configuration feature-create \
+    --environment-id environment_id \
+    --name 'Cycle Rentals' \
+    --feature-id cycle-rentals \
+    --type BOOLEAN \
+    --enabled-value "true" \
+    --disabled-value "false" \
+    --description 'Feature flag to enable Cycle Rentals' \
+    --format TEXT \
+    --enabled=false \
+    --rollout-percentage 100 \
+    --tags 'version: 1.1, pre-release' \
+    --segment-rules '[{"rules": [{"segments": ["betausers","premiumusers"]}], "value": "true", "order": 1, "rollout_percentage": 50}]' \
+    --collections '[{"collection_id": "ghzinc"}]'
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-collection-delete-output}
+### `ibmcloud app-configuration feature-update`
+{: #app-configuration-cli-feature-update-command}
 
-The command returns the following output:
+Update a feature flag details.
 
 ```sh
-OK
+ibmcloud app-configuration feature-update {--environment-id ENVIRONMENT-ID --feature-id FEATURE-ID [--name NAME] [--description DESCRIPTION] [--enabled-value ENABLED-VALUE] [--disabled-value DISABLED-VALUE] [--enabled ENABLED] [--rollout-percentage ROLLOUT-PERCENTAGE] [--tags TAGS] [--segment-rules SEGMENT-RULES] [--collections COLLECTIONS] | --file FILE}
 ```
-{: screen}
 
-## ibmcloud ac feature list
-{: #ac-ibmcloud-ac-feature-list}
 
-You can list all features, by using the command:
+#### Command options
+{: #app-configuration-feature-update-cli-options}
 
-```sh
-ibmcloud ac feature list --environment_id ENVIRONMENT_ID [--sort SORT] [--limit LIMIT] [--offset OFFSET] [--tags TAGS] [--collections COLLECTIONS] [--segments SEGMENTS] [--expand EXPAND] [--include INCLUDE]
-```
-{: pre}
+`--environment-id` (string)
+:   Environment Id. Required.
+
+`--feature-id` (string)
+:   Feature Id. Required.
+
+`--name` (string)
+:   Feature name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+
+    The maximum length is `256` characters.
+
+`--description` (string)
+:   Feature description.
 
-### Command options
-{: #ac-ibmcloud-ac-feature-list-command}
+    The maximum length is `255` characters.
 
-`--environment_id ENVIRONMENT_ID`
-:  Environment ID
+`--enabled-value` (interface{})
+:   Value of the feature when it is enabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String - YAML value as per the `type` and `format` attributes.
 
-`--limit LIMIT` (optional)
-:  Used for pagination. The number of records to retrieve.
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--enabled-value=@path/to/file.json`.
 
-`--include INCLUDE` (optional)
-:  Feature details to include the associated collections or rules details in the response.
+`--disabled-value` (interface{})
+:   Value of the feature when it is disabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String - YAML value as per the `type` and `format` attributes.
 
-`--offset OFFSET` (optional)
-:  Used for pagination. The number of records to skip.
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--disabled-value=@path/to/file.json`.
 
-`--collections COLLECTIONS` (optional)
-:  Filter features by a list of comma-separated collections.
+`--enabled` (bool)
+:   The state of the feature flag.
 
-`--segments SEGMENTS` (optional)
-:  Filter features by a list of comma-separated segments.
+`--rollout-percentage` (int64)
+:   Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 
-`--expand EXPAND` (optional)
-:  Expanded view of the item.
+    The default value is `100`. The maximum value is `100`. The minimum value is `0`.
 
-`--tags TAGS` (optional)
-:  Filter features by a list of comma-separated tags.
+`--tags` (string)
+:   Tags associated with the feature.
 
-`--sort SORT` (optional)
-:  Sort the details based on the specified attribute.
+`--segment-rules` ([`FeatureSegmentRule[]`](#cli-feature-segment-rule-example-schema))
+:   Specify the targeting rules that is used to set different property values for different segments.
 
-### Example
-{: #ac-ibmcloud-ac-feature-list-example}
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--segment-rules=@path/to/file.json`.
 
-To list all features, run the following command:
+`--collections` ([`CollectionRef[]`](#cli-collection-ref-example-schema))
+:   List of collection id representing the collections that are associated with the specified property.
 
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--collections=@path/to/file.json`.
+
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
+
+#### Example
+{: #app-configuration-feature-update-examples}
+
 ```sh
-ibmcloud ac feature list --environment_id "production"
+ibmcloud app-configuration feature-update \
+    --environment-id environment_id \
+    --feature-id feature_id \
+    --name 'Cycle Rentals' \
+    --description 'Feature flags to enable Cycle Rentals' \
+    --enabled-value "true" \
+    --disabled-value "false" \
+    --enabled true \
+    --rollout-percentage 100 \
+    --tags 'version: 1.1, yet-to-release' \
+    --segment-rules '[{"rules": [{"segments": ["betausers","premiumusers"]}], "value": "true", "order": 1, "rollout_percentage": 90}]' \
+    --collections '[{"collection_id": "ghzinc"}]'
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-feature-list-output}
+### `ibmcloud app-configuration feature-values-update`
+{: #app-configuration-cli-feature-values-update-command}
 
-The command returns the following output:
+Update the feature values. This method can be executed only by the `writer` role. This method allows the update of feature name, feature enabled_value, feature disabled_value, tags, description and feature segment rules, however this method does not allow toggling the feature flag and assigning feature to a collection.
 
 ```sh
-name            feature_id      segment_exists
-Indian IBMers   ibm-discount    true
-sampleFeature   sampleFeature   true
-Cycle Rentals   cycle-rentals   true
+ibmcloud app-configuration feature-values-update {--environment-id ENVIRONMENT-ID --feature-id FEATURE-ID [--name NAME] [--description DESCRIPTION] [--tags TAGS] [--enabled-value ENABLED-VALUE] [--disabled-value DISABLED-VALUE] [--rollout-percentage ROLLOUT-PERCENTAGE] [--segment-rules SEGMENT-RULES] | --file FILE}
 ```
-{: screen}
 
-## ibmcloud ac feature create
-{: #ac-ibmcloud-ac-feature-create}
 
-You can create a feature, by using the command:
+#### Command options
+{: #app-configuration-feature-values-update-cli-options}
 
-```sh
-ibmcloud ac feature create {--file FILE-PATH | --environment_id ENVIRONMENT_ID --name NAME [--feature_id FEATURE_ID] --description DESCRIPTION --type TYPE --enabled_value ENABLED_VALUE --disabled_value DISABLED_VALUE --tags TAGS --enabled ENABLED --segment_rules SEGMENT_RULES --collections COLLECTIONS}
-```
-{: pre}
+`--environment-id` (string)
+:   Environment Id. Required.
 
-### Command options
-{: #ac-ibmcloud-ac-feature-create-command}
+`--feature-id` (string)
+:   Feature Id. Required.
 
-`--environment_id ENVIRONMENT_ID`
-:  Environment ID
+`--name` (string)
+:   Feature name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
 
-`--name NAME`
-:  Feature name. Required field - input either as a flag or from file.
+    The maximum length is `256` characters.
 
-`--feature_id FEATURE_ID` (optional)
-:  Feature ID. If this value is not provided, name will automatically become the ID. Optional field - input either as a flag or from file.
+`--description` (string)
+:   Feature description.
 
-`--description DESCRIPTION`
-:  Description of the feature. Required field - input either as a flag or from file.
+    The maximum length is `255` characters.
 
-`--type TYPE`
-:  Type of the feature (Boolean, String, Number). Required field - input either as a flag or from file.
+`--tags` (string)
+:   Tags associated with the feature.
 
-`--enabled_value ENABLED_VALUE`
-:  Value of the feature when it is enabled. Required field - input either as a flag or from file.
+`--enabled-value` (interface{})
+:   Value of the feature when it is enabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String - YAML value as per the `type` and `format` attributes.
 
-`--disabled_value DISABLED_VALUE`
-:  Value of the feature when it is disabled. Required field - input either as a flag or from file.
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--enabled-value=@path/to/file.json`.
 
-`--tags TAGS`
-:  Tags associated with the feature. Required field - input either as a flag or from file.
+`--disabled-value` (interface{})
+:   Value of the feature when it is disabled. The value can be Boolean, Numeric, String - TEXT, String - JSON, String - YAML value as per the `type` and `format` attributes.
 
-`--segment_rules SEGMENT_RULES`
-:  Specify the targeting rules that are used to set different values for different segments.
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--disabled-value=@path/to/file.json`.
 
-`--enabled ENABLED`
-:  The state of the feature flag.
+`--rollout-percentage` (int64)
+:   Rollout percentage associated with feature flag. Supported only for Lite and Enterprise plans.
 
-`--collections COLLECTIONS`
-:  Collections array.
+    The default value is `100`. The maximum value is `100`. The minimum value is `0`.
 
-`--file FILE`
-:  Input through file. File format Supported - JSON
+`--segment-rules` ([`FeatureSegmentRule[]`](#cli-feature-segment-rule-example-schema))
+:   Specify the targeting rules that is used to set different property values for different segments.
 
-### Example
-{: #ac-ibmcloud-ac-feature-create-example}
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--segment-rules=@path/to/file.json`.
 
-To create a collection with name `sample` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
 
+#### Example
+{: #app-configuration-feature-values-update-examples}
+
 ```sh
-ibmcloud ac feature create --environment_id "production" --name "IBMers" --feature_id "ibm-discount" --description "Discount given to IBM employees" --type "BOOLEAN" --enabled_value true --disabled_value false --segment_rules '[{"rules":[{"segments":["ibm_employees"]}],"value": true,"order": 1}]' --collections '[{"collection_id":"corporatediscount","enabled": true}]'  --tags "discount,sale" --enabled true
+ibmcloud app-configuration feature-values-update \
+    --environment-id environment_id \
+    --feature-id feature_id \
+    --name 'Cycle Rentals' \
+    --description 'Feature flags to enable Cycle Rentals' \
+    --tags 'version: 1.1, yet-to-release' \
+    --enabled-value "true" \
+    --disabled-value "false" \
+    --rollout-percentage 100 \
+    --segment-rules '[{"rules": [{"segments": ["betausers","premiumusers"]}], "value": "true", "order": 1, "rollout_percentage": 100}]'
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-feature-create-output}
+### `ibmcloud app-configuration feature`
+{: #app-configuration-cli-feature-command}
 
-The command returns the following output:
+Retrieve details of a feature.
 
 ```sh
-type             BOOLEAN
-enabled_value    true
-segment_rules    <Array>
-collections      <Array>
-name             IBMers
-feature_id       ibm-discount
-description      Discount given to IBM employees
-disabled_value   false
-enabled          true
-created_time     2021-02-02T17:52:46Z
-updated_time     2021-02-02T17:52:46Z
+ibmcloud app-configuration feature --environment-id ENVIRONMENT-ID --feature-id FEATURE-ID [--include INCLUDE]
 ```
-{: screen}
+
+
+#### Command options
+{: #app-configuration-feature-cli-options}
+
+`--environment-id` (string)
+:   Environment Id. Required.
+
+`--feature-id` (string)
+:   Feature Id. Required.
 
-## ibmcloud ac feature get
-{: #ac-ibmcloud-ac-feature-get}
+`--include` ([]string)
+:   Include the associated collections or targeting rules or change request details in the response.
 
-You can get a feature, by using the command:
+    Allowable list items are: `collections`, `rules`, `change_request`.
 
+#### Example
+{: #app-configuration-feature-examples}
+
 ```sh
-ibmcloud ac feature get --environment_id ENVIRONMENT_ID --feature_id FEATURE_ID [--include INCLUDE]
+ibmcloud app-configuration feature \
+    --environment-id environment_id \
+    --feature-id feature_id \
+    --include collections,rules,change_request
 ```
 {: pre}
+
+### `ibmcloud app-configuration feature-delete`
+{: #app-configuration-cli-feature-delete-command}
 
-### Command options
-{: #ac-ibmcloud-ac-feature-get-command}
+Delete a feature flag.
+
+```sh
+ibmcloud app-configuration feature-delete --environment-id ENVIRONMENT-ID --feature-id FEATURE-ID
+```
 
-`--environment_id ENVIRONMENT_ID`
-:  Environment ID
 
-`--feature_id FEATURE_ID`
-:  Feature ID for the feature flag.
+#### Command options
+{: #app-configuration-feature-delete-cli-options}
 
-`--include INCLUDE` (optional)
-:  Include the associated collections in the response.
+`--environment-id` (string)
+:   Environment Id. Required.
 
-### Example
-{: #ac-ibmcloud-ac-feature-get-example}
+`--feature-id` (string)
+:   Feature Id. Required.
 
-To get a feature with ID `ibm-discount`, run the following command:
+#### Example
+{: #app-configuration-feature-delete-examples}
 
 ```sh
-ibmcloud ac feature get --environment_id "production" --feature_id ibm-discount
+ibmcloud app-configuration feature-delete \
+    --environment-id environment_id \
+    --feature-id feature_id
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-feature-get-output}
+### `ibmcloud app-configuration feature-toggle`
+{: #app-configuration-cli-feature-toggle-command}
 
-The command returns the following output:
+Toggle a feature.
 
 ```sh
-name    type     disabled_value  updated_time          feature_id    description                      enabled_value  created_time          order  rules    value
-IBMers  BOOLEAN  false           2021-02-02T17:52:46Z  ibm-discount  Discount given to IBM employees  true           2021-02-02T17:52:46Z  1      <Array>  true
+ibmcloud app-configuration feature-toggle --environment-id ENVIRONMENT-ID --feature-id FEATURE-ID --enabled ENABLED
 ```
-{: screen}
 
-## ibmcloud ac feature update
-{: #ac-ibmcloud-ac-feature-update}
 
-You can update a feature, by using the command:
+#### Command options
+{: #app-configuration-feature-toggle-cli-options}
+
+`--environment-id` (string)
+:   Environment Id. Required.
+
+`--feature-id` (string)
+:   Feature Id. Required.
+
+`--enabled` (bool)
+:   The state of the feature flag. Required.
+
+#### Example
+{: #app-configuration-feature-toggle-examples}
+
+```sh
+ibmcloud app-configuration feature-toggle \
+    --environment-id environment_id \
+    --feature-id feature_id \
+    --enabled=true
+```
+{: pre}
 
 ```sh
-ibmcloud ac feature update {--file FILE-PATH | --environment_id ENVIRONMENT_ID --name NAME --feature_id FEATURE_ID --description DESCRIPTION --enabled_value ENABLED_VALUE --disabled_value DISABLED_VALUE --enabled ENABLED --tags TAGS --segment_rules SEGMENT_RULES --collections COLLECTIONS}
+ibmcloud app-configuration feature-toggle \
+    --environment-id environment_id \
+    --feature-id feature_id \
+    --enabled=false
 ```
 {: pre}
+
+## Properties
+{: #app-configuration-properties-cli}
+
+Create and manage different types of properties for your apps and services.
+
+### `ibmcloud app-configuration properties`
+{: #app-configuration-cli-properties-command}
+
+List all the properties in the specified environment.
+Note: If the `--all-pages` option is not set, the command will only retrieve a single page of the collection.
+
+```sh
+ibmcloud app-configuration properties --environment-id ENVIRONMENT-ID [--expand EXPAND] [--sort SORT] [--tags TAGS] [--collections COLLECTIONS] [--segments SEGMENTS] [--include INCLUDE] [--limit LIMIT] [--offset OFFSET] [--search SEARCH]
+```
+
+
+#### Command options
+{: #app-configuration-properties-cli-options}
 
-### Command options
-{: #ac-ibmcloud-ac-feature-update-command}
+`--environment-id` (string)
+:   Environment Id. Required.
 
-`--environment_id ENVIRONMENT_ID`
-:  Environment ID
+`--expand` (bool)
+:   If set to `true`, returns expanded view of the resource details.
 
-`--name NAME`
-:  Feature name. Required field - input either as a flag or from file.
+`--sort` (string)
+:   Sort the property details based on the specified attribute. By default, items are sorted by name.
 
-`--feature_id FEATURE_ID`
-:  Feature ID. Required field - input either as a flag or from file.
+    Allowable values are: `created_time`, `updated_time`, `id`, `name`.
 
-`--description DESCRIPTION`
-:  Description of the feature. Required field - input either as a flag or from file.
+`--tags` (string)
+:   Filter the resources to be returned based on the associated tags. Specify the parameter as a list of comma separated tags. Returns resources associated with any of the specified tags.
 
-`--enabled_value ENABLED_VALUE`
-:  Value of the feature when it is enabled. Required field - input either as a flag or from file.
+`--collections` ([]string)
+:   Filter properties by a list of comma separated collections.
 
-`--disabled_value DISABLED_VALUE`
-:  Value of the feature when it is disabled. Required field - input either as a flag or from file.
+`--segments` ([]string)
+:   Filter properties by a list of comma separated segments.
 
-`--tags TAGS`
-:  Tags associated with the feature. Required field - input either as a flag or from file.
+`--include` ([]string)
+:   Include the associated collections or targeting rules details in the response.
 
-`--enabled ENABLED`
-:  The state of the feature flag.
+    Allowable list items are: `collections`, `rules`.
 
-`--segment_rules SEGMENT_RULES`
-:  Specify the targeting rules that are used to set different values for different segments.
+`--limit` (int64)
+:   The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different set of records, use `limit` with `offset` to page through the available records.
 
-`--collections COLLECTIONS`
-:  Collections array.
+    The default value is `10`. The maximum value is `100`. The minimum value is `1`.
 
-`--file FILE`
-:  Input through the file. File format Supported - JSON.
+`--offset` (int64)
+:   The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset` value. Use `offset` with `limit` to page through the available records.
 
-### Example
-{: #ac-ibmcloud-ac-feature-update-example}
+    The default value is `0`. The minimum value is `0`.
 
-To update description a feature with ID `ibm-discount` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
+`--search` (string)
+:   Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the '[Name OR Tag]' of the entity.
 
+`--all-pages` (bool)
+:   Invoke multiple requests to display all pages of the collection for properties.
+
+#### Example
+{: #app-configuration-properties-examples}
+
 ```sh
-ibmcloud ac feature update --environment_id "production" --name "Indian IBMers" --feature_id "ibm-discount" --description "Discount given to IBM Indian employees" --enabled_value true --disabled_value false --segment_rules '[{"rules":[{"segments":["ibm_employees"]}],"value": true,"order": 1}]' --collections '[{"collection_id":"corporatediscount","enabled": true}]'  --tags "discount,sale" --enabled true
+ibmcloud app-configuration properties \
+    --environment-id environment_id \
+    --expand true \
+    --sort created_time \
+    --tags 'version 1.1,pre-release' \
+    --collections my-collection-id,ghzindiapvtltd \
+    --segments my-segment-id,beta-users \
+    --include collections,rules \
+    --limit 10 \
+    --offset 0 \
+    --search 'test tag'
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-feature-update-output}
+### `ibmcloud app-configuration property-create`
+{: #app-configuration-cli-property-create-command}
 
-The command returns the following output:
+Create a Property.
 
 ```sh
-updated_time     2021-02-02T18:06:03Z
-description      Discount given to IBM Indian employees
-enabled_value    true
-disabled_value   false
-segment_rules    <Array>
-created_time     2021-02-02T17:52:46Z
-name             Indian IBMers
-type             BOOLEAN
-enabled          true
-collections      <Array>
+ibmcloud app-configuration property-create {--environment-id ENVIRONMENT-ID --name NAME --property-id PROPERTY-ID --type TYPE --value VALUE [--description DESCRIPTION] [--format FORMAT] [--tags TAGS] [--segment-rules SEGMENT-RULES] [--collections COLLECTIONS] | --file FILE}
 ```
-{: screen}
 
-## ibmcloud ac feature update-values
-{: #ac-ibmcloud-ac-feature-patch}
 
-You can update values of a feature (This method allows the update of feature name, feature enabled_value, feature disabled_value, tags, description, and feature segment rules, however this method does not allow toggling the feature flag and assigning feature to a collection.), by using the command:
+#### Command options
+{: #app-configuration-property-create-cli-options}
 
-```sh
-ibmcloud ac feature update-values {--file FILE-PATH | --environment_id ENVIRONMENT_ID --name NAME --feature_id FEATURE_ID --description DESCRIPTION --enabled_value ENABLED_VALUE --disabled_value DISABLED_VALUE --tags TAGS --segment_rules SEGMENT_RULES}
-```
-{: pre}
+`--environment-id` (string)
+:   Environment Id. Required.
+
+`--name` (string)
+:   Property name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only. Required.
+
+    The maximum length is `256` characters.
+
+`--property-id` (string)
+:   Property id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only. Required.
+
+    The maximum length is `256` characters.
+
+`--type` (string)
+:   Type of the property (BOOLEAN, STRING, NUMERIC, SECRETREF). If `type` is `STRING`, then `format` attribute is required. Required.
 
-### Command options
-{: #ac-ibmcloud-ac-feature-patch-command}
+    Allowable values are: `BOOLEAN`, `STRING`, `NUMERIC`, `SECRETREF`.
 
-`--environment_id ENVIRONMENT_ID`
-:  Environment ID
+`--value` (interface{})
+:   Value of the Property. The value can be Boolean, Numeric, SecretRef, String - TEXT, String - JSON, String - YAML as per the `type` and `format` attributes. Required.
 
-`--name NAME`
-:  Feature name. Required field - input either as a flag or from file.
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--value=@path/to/file.json`.
 
-`--feature_id FEATURE_ID`
-:  Feature ID. Required field - input either as a flag or from file.
+`--description` (string)
+:   Property description.
 
-`--description DESCRIPTION`
-:  Description of the feature. Required field - input either as a flag or from file.
+    The maximum length is `255` characters.
 
-`--enabled_value ENABLED_VALUE`
-:  Value of the feature when it is enabled. Required field - input either as a flag or from file.
+`--format` (string)
+:   Format of the property (TEXT, JSON, YAML) and it is a required attribute when `type` is `STRING`. It is not required for `BOOLEAN`, `NUMERIC` or `SECRETREF` types. This attribute is populated in the response body of `POST, PUT and GET` calls if the type `STRING` is used and not populated for `BOOLEAN`, `NUMERIC` and `SECRETREF` types.
 
-`--disabled_value DISABLED_VALUE`
-:  Value of the feature when it is unavailable. Required field - input either as a flag or from file.
+    Allowable values are: `TEXT`, `JSON`, `YAML`.
 
-`--tags TAGS`
-:  Tags associated with the feature. Required field - input either as a flag or from file.
+`--tags` (string)
+:   Tags associated with the property.
 
-`--segment_rules SEGMENT_RULES`
-:  Specify the targeting rules that are used to set different values for different segments.
+`--segment-rules` ([`SegmentRule[]`](#cli-segment-rule-example-schema))
+:   Specify the targeting rules that is used to set different property values for different segments.
 
-`--file FILE`
-:  Input through the file. File format Supported - JSON
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--segment-rules=@path/to/file.json`.
 
-### Example
-{: #ac-ibmcloud-ac-feature-patch-example}
+`--collections` ([`CollectionRef[]`](#cli-collection-ref-example-schema))
+:   List of collection id representing the collections that are associated with the specified property.
 
-To update description a feature with ID `ibm-discount` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--collections=@path/to/file.json`.
 
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
+
+#### Example
+{: #app-configuration-property-create-examples}
+
 ```sh
-ibmcloud ac feature update-values --environment_id "production" --name "Indian IBMers" --feature_id "ibm-discount" --description "Discount given to IBM Indian employees" --enabled_value true --disabled_value false --segment_rules '[{"rules":[{"segments":["ibm_employees"]}],"value": true,"order": 1}]'  --tags "discount,sale"
+ibmcloud app-configuration property-create \
+    --environment-id environment_id \
+    --name 'Email property' \
+    --property-id email-property \
+    --type BOOLEAN \
+    --value "true" \
+    --description 'Property for email' \
+    --format TEXT \
+    --tags 'version: 1.1, pre-release' \
+    --segment-rules '[{"rules": [{"segments": ["betausers","premiumusers"]}], "value": "true", "order": 1}]' \
+    --collections '[{"collection_id": "ghzinc"}]'
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-feature-patch-output}
+### `ibmcloud app-configuration property-update`
+{: #app-configuration-cli-property-update-command}
 
-The command returns the following output:
+Update a Property.
 
 ```sh
-updated_time     2021-02-02T18:06:03Z
-description      Discount given to IBM Indian employees
-enabled_value    true
-disabled_value   false
-segment_rules    <Array>
-created_time     2021-02-02T17:52:46Z
-name             Indian IBMers
-type             BOOLEAN
-collections      <Array>
+ibmcloud app-configuration property-update {--environment-id ENVIRONMENT-ID --property-id PROPERTY-ID [--name NAME] [--description DESCRIPTION] [--value VALUE] [--tags TAGS] [--segment-rules SEGMENT-RULES] [--collections COLLECTIONS] | --file FILE}
 ```
-{: screen}
 
-## ibmcloud ac feature delete
-{: #ac-delete}
 
-You can delete a feature, by using the command:
+#### Command options
+{: #app-configuration-property-update-cli-options}
 
-```sh
-ibmcloud ac feature delete --environment_id ENVIRONMENT_ID --feature_id FEATURE_ID
-```
-{: pre}
+`--environment-id` (string)
+:   Environment Id. Required.
+
+`--property-id` (string)
+:   Property Id. Required.
+
+`--name` (string)
+:   Property name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+
+    The maximum length is `256` characters.
+
+`--description` (string)
+:   Property description.
+
+    The maximum length is `255` characters.
+
+`--value` (interface{})
+:   Value of the Property. The value can be Boolean, Numeric, SecretRef, String - TEXT, String - JSON, String - YAML as per the `type` and `format` attributes.
 
-### Command options
-{: #ac-ibmcloud-ac-feature-delete-command}
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--value=@path/to/file.json`.
 
-`--environment_id ENVIRONMENT_ID`
-:  Environment ID
+`--tags` (string)
+:   Tags associated with the property.
 
-`--feature_id FEATURE_ID`
-:  Feature ID
+`--segment-rules` ([`SegmentRule[]`](#cli-segment-rule-example-schema))
+:   Specify the targeting rules that is used to set different property values for different segments.
 
-### Example
-{: #ac-delete-example}
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--segment-rules=@path/to/file.json`.
 
-To delete a feature with ID `ibm-discount`, run the following command:
+`--collections` ([`CollectionRef[]`](#cli-collection-ref-example-schema))
+:   List of collection id representing the collections that are associated with the specified property.
 
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--collections=@path/to/file.json`.
+
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
+
+#### Example
+{: #app-configuration-property-update-examples}
+
 ```sh
-ibmcloud ac feature delete --environment_id "production" --feature_id ibm-discount
+ibmcloud app-configuration property-update \
+    --environment-id environment_id \
+    --property-id property_id \
+    --name 'Email property' \
+    --description 'Property for email' \
+    --value "true" \
+    --tags 'version: 1.1, pre-release' \
+    --segment-rules '[{"rules": [{"segments": ["betausers","premiumusers"]}], "value": "true", "order": 1}]' \
+    --collections '[{"collection_id": "ghzinc"}]'
 ```
 {: pre}
 
-#### Output
-{: #ac-delete-output}
+### `ibmcloud app-configuration property-values-update`
+{: #app-configuration-cli-property-values-update-command}
 
-The command returns the following output:
+Update the property values. This method can be executed by the `writer` role. Property value and targeting rules can be updated, however this method does not allow assigning property to a collection.
 
 ```sh
-OK
+ibmcloud app-configuration property-values-update {--environment-id ENVIRONMENT-ID --property-id PROPERTY-ID [--name NAME] [--description DESCRIPTION] [--tags TAGS] [--value VALUE] [--segment-rules SEGMENT-RULES] | --file FILE}
 ```
-{: screen}
 
-## ibmcloud ac feature toggle
-{: #ac-ibmcloud-ac-feature-toggle}
 
-You can toggle a feature value, by using the command:
+#### Command options
+{: #app-configuration-property-values-update-cli-options}
 
-```sh
-ibmcloud ac feature toggle --environment_id ENVIRONMENT_ID --feature_id FEATURE_ID --enabled ENABLED
-```
-{: pre}
+`--environment-id` (string)
+:   Environment Id. Required.
+
+`--property-id` (string)
+:   Property Id. Required.
+
+`--name` (string)
+:   Property name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+
+    The maximum length is `256` characters.
+
+`--description` (string)
+:   Property description.
+
+    The maximum length is `255` characters.
 
-### Command options
-{: #ac-ibmcloud-ac-feature-toggle-command}
+`--tags` (string)
+:   Tags associated with the property.
 
-`--environment_id ENVIRONMENT_ID`
-:  Environment ID
+`--value` (interface{})
+:   Value of the Property. The value can be Boolean, Numeric, SecretRef, String - TEXT, String - JSON, String - YAML as per the `type` and `format` attributes.
 
-`--feature_id FEATURE_ID`
-:  Feature ID
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--value=@path/to/file.json`.
 
-`--enabled ENABLED`
-:  The state of the feature flag.
+`--segment-rules` ([`SegmentRule[]`](#cli-segment-rule-example-schema))
+:   Specify the targeting rules that is used to set different property values for different segments.
 
-### Example
-{: #ac-ibmcloud-ac-feature-toggle-example}
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--segment-rules=@path/to/file.json`.
 
-To toggle a feature value with ID `ibm-discount`, run the following command:
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
 
+#### Example
+{: #app-configuration-property-values-update-examples}
+
 ```sh
-ibmcloud ac feature toggle --environment_id "production" --feature_id ibm-discount --enabled false
+ibmcloud app-configuration property-values-update \
+    --environment-id environment_id \
+    --property-id property_id \
+    --name 'Email property' \
+    --description 'Property for email' \
+    --tags 'version: 1.1, pre-release' \
+    --value "true" \
+    --segment-rules '[{"rules": [{"segments": ["betausers","premiumusers"]}], "value": "true", "order": 1}]'
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-feature-delete-output}
+### `ibmcloud app-configuration property`
+{: #app-configuration-cli-property-command}
 
-The command returns the following output:
+Retrieve details of a property.
 
 ```sh
-name    type     disabled_value  updated_time          feature_id    description                      enabled_value  created_time          order  rules    value
-IBMers  BOOLEAN  false           2021-02-02T17:52:46Z  ibm-discount  Discount given to IBM employees  true           2021-02-02T17:52:46Z  1      <Array>  true
+ibmcloud app-configuration property --environment-id ENVIRONMENT-ID --property-id PROPERTY-ID [--include INCLUDE]
 ```
-{: screen}
+
+
+#### Command options
+{: #app-configuration-property-cli-options}
+
+`--environment-id` (string)
+:   Environment Id. Required.
+
+`--property-id` (string)
+:   Property Id. Required.
 
-## ibmcloud ac segment list
-{: #ac-ibmcloud-ac-segment-list}
+`--include` ([]string)
+:   Include the associated collections or targeting rules details in the response.
 
-You can list all segments, by using the command:
+    Allowable list items are: `collections`, `rules`.
 
+#### Example
+{: #app-configuration-property-examples}
+
 ```sh
-ibmcloud ac segment list [--limit LIMIT] [--offset OFFSET] [--sort SORT] [--tags TAGS] [--expand EXPAND] [--include INCLUDE]
+ibmcloud app-configuration property \
+    --environment-id environment_id \
+    --property-id property_id \
+    --include collections,rules
 ```
 {: pre}
 
-### Command options
-{: #ac-command}
+### `ibmcloud app-configuration property-delete`
+{: #app-configuration-cli-property-delete-command}
 
-`--limit LIMIT` (optional)
-:  Used for pagination. The number of records to retrieve.
+Delete a Property.
 
-`--include INCLUDE` (optional)
-:  Segment details to include the associated rules in the response.
-
-`--offset OFFSET` (optional)
-:  Used for pagination. The number of records to skip.
+```sh
+ibmcloud app-configuration property-delete --environment-id ENVIRONMENT-ID --property-id PROPERTY-ID
+```
 
-`--expand EXPAND` (optional)
-:  Expanded view the segment details.
 
-`--tags TAGS` (optional)
-:  Filter segments by a list of comma-separated tags.
+#### Command options
+{: #app-configuration-property-delete-cli-options}
 
-`--sort SORT` (optional)
-:  Sort the details based on the specified attribute.
+`--environment-id` (string)
+:   Environment Id. Required.
 
-### Example
-{: #ac-example}
+`--property-id` (string)
+:   Property Id. Required.
 
-To list all segments, run the following command:
+#### Example
+{: #app-configuration-property-delete-examples}
 
 ```sh
-ibmcloud ac segment list
+ibmcloud app-configuration property-delete \
+    --environment-id environment_id \
+    --property-id property_id
 ```
 {: pre}
+
+## Segments
+{: #app-configuration-segments-cli}
+
+Segments define a group of users or resources based on rules. Feature flags or Properties can target segments to deliver variants of a feature or property.
 
-#### Output
-{: #ac-output}
+### `ibmcloud app-configuration segments`
+{: #app-configuration-cli-segments-command}
 
-The command returns the following output:
+List all the segments.
+Note: If the `--all-pages` option is not set, the command will only retrieve a single page of the collection.
 
 ```sh
-name            segment_id
-India IBMers    ibm_employees_01
-IBM Employees   ibm_employees
+ibmcloud app-configuration segments [--expand EXPAND] [--sort SORT] [--tags TAGS] [--include INCLUDE] [--limit LIMIT] [--offset OFFSET] [--search SEARCH]
 ```
-{: screen}
 
-## ibmcloud ac segment create
-{: #ac-create}
 
-You can create a segment, by using the command:
+#### Command options
+{: #app-configuration-segments-cli-options}
 
-```sh
-ibmcloud ac segment create {--file FILE-PATH | --name NAME [--segment_id SEGMENT_ID] --description DESCRIPTION --tags TAGS --rules RULES}
-```
-{: pre}
+`--expand` (bool)
+:   If set to `true`, returns expanded view of the resource details.
+
+`--sort` (string)
+:   Sort the segment details based on the specified attribute. By default, items are sorted by name.
+
+    Allowable values are: `created_time`, `updated_time`, `id`, `name`.
 
-### Command options
-{: #ac-create-command}
+`--tags` (string)
+:   Filter the resources to be returned based on the associated tags. Specify the parameter as a list of comma separated tags. Returns resources associated with any of the specified tags.
 
-`--name NAME`
-:  Segment name. Required field - input either as a flag or from file.
+`--include` (string)
+:   Segment details to include the associated rules in the response.
 
-`--segment_id SEGMENT_ID` (optional)
-:  Segment ID. If this value is not provided, name will automatically become the ID. Optional field - input either as a flag or from file.
+    Allowable values are: `rules`.
 
-`--description DESCRIPTION`
-:  Description of the segment. Required field - input either as a flag or from file.
+`--limit` (int64)
+:   The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different set of records, use `limit` with `offset` to page through the available records.
 
-`--rules RULES`
-:  List of rules that determine whether the entity is part of the segment. Required field - input either as a flag or from file.
+    The default value is `10`. The maximum value is `100`. The minimum value is `1`.
 
-`--tags TAGS`
-:  Tags associated with the segment. Required field - input either as a flag or from file.
+`--offset` (int64)
+:   The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset` value. Use `offset` with `limit` to page through the available records.
 
-`--file FILE`
-:  Input through a file. File format Supported - JSON
+    The default value is `0`. The minimum value is `0`.
 
-### Example
-{: #ac-create-example}
+`--search` (string)
+:   Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the '[Name OR Tag]' of the entity.
 
-To create a collection with name `sample` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
+`--all-pages` (bool)
+:   Invoke multiple requests to display all pages of the collection for segments.
 
+#### Example
+{: #app-configuration-segments-examples}
+
 ```sh
-ibmcloud ac segment create --name "IBM Employees" --segment_id "ibm_employees" --description "IBM Employees Segment" --tags "ibm" --rules '[{"attribute_name": "email", "operator": "endsWith", "values": ["@ibm.com"]}]'
+ibmcloud app-configuration segments \
+    --expand true \
+    --sort created_time \
+    --tags 'version 1.1,pre-release' \
+    --include rules \
+    --limit 10 \
+    --offset 0 \
+    --search 'test tag'
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-segment-create-output}
+### `ibmcloud app-configuration segment-create`
+{: #app-configuration-cli-segment-create-command}
 
-The command returns the following output:
+Create a segment.
 
 ```sh
-name           IBM Employees
-segment_id     ibm_employees
-description    IBM Employees Segment
-created_time   2021-02-02T19:04:22Z
-updated_time   2021-02-02T19:04:22Z
+ibmcloud app-configuration segment-create {--name NAME --segment-id SEGMENT-ID --rules RULES [--description DESCRIPTION] [--tags TAGS] | --file FILE}
 ```
-{: screen}
 
-## ibmcloud ac segment get
-{: #ac-ibmcloud-ac-segment-get}
 
-You can get a segment, by using the command:
+#### Command options
+{: #app-configuration-segment-create-cli-options}
 
-```sh
-ibmcloud ac segment get --segment_id SEGMENT_ID [--include INCLUDE]
-```
-{: pre}
+`--name` (string)
+:   Segment name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only. Required.
+
+    The maximum length is `256` characters.
 
-### Command options
-{: #ac-ibmcloud-ac-segment-get-command}
+`--segment-id` (string)
+:   Segment id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only. Required.
 
-`--segment_id SEGMENT_ID`
-:  Segment ID.
+    The maximum length is `256` characters.
 
-`--include INCLUDE` (optional)
-:  Instructs to include the feature and property details based on the segments association.
+`--rules` ([`Rule[]`](#cli-rule-example-schema))
+:   List of rules that determine if the entity belongs to the segment during feature / property evaluation. An entity is identified by an unique identifier and the attributes that it defines. Any feature flag and property value evaluation is performed in the context of an entity when it is targeted to segments. Required.
 
-### Example
-{: #ac-ibmcloud-ac-segment-get-example}
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--rules=@path/to/file.json`.
 
-To get a segment with ID `ibm_employees`, run the following command:
+`--description` (string)
+:   Segment description.
 
+    The maximum length is `255` characters.
+
+`--tags` (string)
+:   Tags associated with the segments.
+
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
+
+#### Example
+{: #app-configuration-segment-create-examples}
+
 ```sh
-ibmcloud ac segment get --segment_id ibm_employees
+ibmcloud app-configuration segment-create \
+    --name 'Beta Users' \
+    --segment-id beta-users \
+    --rules '[{"attribute_name": "email", "operator": "endsWith", "values": ["@in.mnc.com","@us.mnc.com"]}]' \
+    --description 'Segment containing the beta users' \
+    --tags 'version: 1.1, stage'
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-segment-get-output}
+### `ibmcloud app-configuration segment-update`
+{: #app-configuration-cli-segment-update-command}
 
-The command returns the following output:
+Update the segment properties.
 
 ```sh
-segment_id     description    features  created_time          updated_time          name           attribute_name  operator  values
-ibm_employees  IBM Employees  -         2021-02-02T19:04:22Z  2021-02-02T19:04:22Z  IBM Employees  email           endsWith  <Array>
+ibmcloud app-configuration segment-update {--segment-id SEGMENT-ID [--name NAME] [--description DESCRIPTION] [--tags TAGS] [--rules RULES] | --file FILE}
 ```
-{: screen}
+
+
+#### Command options
+{: #app-configuration-segment-update-cli-options}
+
+`--segment-id` (string)
+:   Segment Id. Required.
+
+`--name` (string)
+:   Segment name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+
+    The maximum length is `256` characters.
+
+`--description` (string)
+:   Segment description.
+
+    The maximum length is `255` characters.
 
-## ibmcloud ac segment update
-{: #ac-ibmcloud-ac-segment-update}
+`--tags` (string)
+:   Tags associated with segments.
 
-You can update a segment, by using the command:
+`--rules` ([`Rule[]`](#cli-rule-example-schema))
+:   List of rules that determine if the entity belongs to the segment during feature / property evaluation. An entity is identified by an unique identifier and the attributes that it defines. Any feature flag and property value evaluation is performed in the context of an entity when it is targeted to segments.
 
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--rules=@path/to/file.json`.
+
+`--file` (string)
+:   Input through the file. This flag is unique and cannot be used with other flags. The file needs to follow the JSON schema for the API.
+
+#### Example
+{: #app-configuration-segment-update-examples}
+
 ```sh
-ibmcloud ac segment update {--file FILE-PATH | --name NAME --segment_id SEGMENT_ID --description DESCRIPTION --tags TAGS --rules RULES}
+ibmcloud app-configuration segment-update \
+    --segment-id segment_id \
+    --name exampleString \
+    --description exampleString \
+    --tags exampleString \
+    --rules '[{"attribute_name": "exampleString", "operator": "is", "values": ["exampleString","anotherTestString"]}]'
 ```
 {: pre}
 
-### Command options
-{: #ac-ibmcloud-ac-segment-update-command}
+### `ibmcloud app-configuration segment`
+{: #app-configuration-cli-segment-command}
 
-`--name NAME`
-:  Segment name. Required field - input either as a flag or from file.
+Retrieve details of a segment.
 
-`--segment_id SEGMENT_ID`
-:  Segment ID. Required field - input either as a flag or from file.
+```sh
+ibmcloud app-configuration segment --segment-id SEGMENT-ID [--include INCLUDE]
+```
 
-`--description DESCRIPTION`
-:  Description of the segment. Required field - input either as a flag or from file.
 
-`--rules RULES`
-:  List of rules that determine whether the entity is part of the segment. Required field - input either as a flag or from file.
+#### Command options
+{: #app-configuration-segment-cli-options}
 
-`--tags TAGS`
-:  Tags associated with the segment. Required field - input either as a flag or from file.
+`--segment-id` (string)
+:   Segment Id. Required.
 
-`--file FILE`
-:  Input through a file. File format Supported - JSON
+`--include` ([]string)
+:   Include feature and property details in the response.
 
-### Example
-{: #ac-ibmcloud-ac-segment-update-example}
+    Allowable list items are: `features`, `properties`.
 
-To update description a segment with ID `ibm_employees` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
+#### Example
+{: #app-configuration-segment-examples}
 
 ```sh
-ibmcloud ac segment update --name "IBM India Employees" --segment_id "ibm_employees" --description "IBM India Employees" --tags "ibm" --rules '[{"attribute_name": "email", "operator": "endsWith", "values": ["@in.ibm.com"]}]'
+ibmcloud app-configuration segment \
+    --segment-id segment_id \
+    --include features,properties
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-segment-update-output}
+### `ibmcloud app-configuration segment-delete`
+{: #app-configuration-cli-segment-delete-command}
 
-The command returns the following output:
+Delete a segment.
 
 ```sh
-description    IBM India Employees
-created_time   2021-02-02T19:04:22Z
-updated_time   2021-02-02T19:10:01Z
-name           IBM India Employees
-segment_id     ibm_employees
+ibmcloud app-configuration segment-delete --segment-id SEGMENT-ID
 ```
-{: screen}
 
-## ibmcloud ac segment delete
-{: #ac-ibmcloud-ac-segment-delete}
 
-You can delete a segment, by using the command:
+#### Command options
+{: #app-configuration-segment-delete-cli-options}
 
+`--segment-id` (string)
+:   Segment Id. Required.
+
+#### Example
+{: #app-configuration-segment-delete-examples}
+
 ```sh
-ibmcloud ac segment delete --segment_id SEGMENT_ID
+ibmcloud app-configuration segment-delete \
+    --segment-id segment_id
 ```
 {: pre}
 
-### Command options
-{: #ac-ibmcloud-ac-segment-delete-command}
+## Snapshots
+{: #app-configuration-snapshots-cli}
 
-`--segment_id SEGMENT_ID`
-:  Segment ID
+Snapshots are a way to capture the current configuration of your app or environment and sync the modified config into a Git repo.
 
-### Example
-{: #ac-ibmcloud-ac-segment-delete-example}
+### `ibmcloud app-configuration gitconfigs`
+{: #app-configuration-cli-gitconfigs-command}
 
-To delete a segment with ID `ibm_employees`, run the following command:
+List all the Git configs.
+Note: If the `--all-pages` option is not set, the command will only retrieve a single page of the collection.
 
 ```sh
-ibmcloud ac segment delete --segment_id ibm_employees
+ibmcloud app-configuration gitconfigs [--sort SORT] [--collection-id COLLECTION-ID] [--environment-id ENVIRONMENT-ID] [--limit LIMIT] [--offset OFFSET] [--search SEARCH]
 ```
-{: pre}
+
+
+#### Command options
+{: #app-configuration-gitconfigs-cli-options}
+
+`--sort` (string)
+:   Sort the git configurations details based on the specified attribute. By default, items are sorted by name.
 
-#### Output
-{: #ac-ibmcloud-ac-segment-delete-output}
+    Allowable values are: `created_time`, `updated_time`, `id`, `name`.
 
-The command returns the following output:
+`--collection-id` (string)
+:   Filters the response based on the specified collection_id.
 
+`--environment-id` (string)
+:   Filters the response based on the specified environment_id.
+
+`--limit` (int64)
+:   The number of records to retrieve. By default, the list operation return the first 10 records. To retrieve different set of records, use `limit` with `offset` to page through the available records.
+
+    The default value is `10`. The maximum value is `100`. The minimum value is `1`.
+
+`--offset` (int64)
+:   The number of records to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset` value. Use `offset` with `limit` to page through the available records.
+
+    The default value is `0`. The minimum value is `0`.
+
+`--search` (string)
+:   Searches for the provided keyword and returns the appropriate row with that value. Here the search happens on the '[Name]' of the entity.
+
+`--all-pages` (bool)
+:   Invoke multiple requests to display all pages of the collection for gitconfigs.
+
+#### Example
+{: #app-configuration-gitconfigs-examples}
+
 ```sh
-OK
+ibmcloud app-configuration gitconfigs \
+    --sort created_time \
+    --collection-id collection_id \
+    --environment-id environment_id \
+    --limit 10 \
+    --offset 0 \
+    --search search_string
 ```
-{: screen}
+{: pre}
 
-## ibmcloud ac property list
-{: #ac-ibmcloud-ac-property-list}
+### `ibmcloud app-configuration gitconfig-create`
+{: #app-configuration-cli-gitconfig-create-command}
 
-You can list all properties, by using the command:
+Create a Git config.
 
 ```sh
-ibmcloud ac property list --environment_id ENVIRONMENT_ID [--expand EXPAND] [--sort SORT] [--tags TAGS] [--include INCLUDE] [--collections COLLECTIONS] [--segments SEGMENTS] [--limit LIMIT] [--offset OFFSET]
+ibmcloud app-configuration gitconfig-create --git-config-name GIT-CONFIG-NAME --git-config-id GIT-CONFIG-ID --collection-id COLLECTION-ID --environment-id ENVIRONMENT-ID --git-url GIT-URL --git-branch GIT-BRANCH --git-file-path GIT-FILE-PATH --git-token GIT-TOKEN
 ```
-{: pre}
+
 
-### Command options
-{: #ac-ibmcloud-ac-property-list-command}
+#### Command options
+{: #app-configuration-gitconfig-create-cli-options}
 
-`--environment_id ENVIRONMENT_ID`
-:  Environment ID
+`--git-config-name` (string)
+:   Git config name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only. Required.
 
-`--limit LIMIT` (optional)
-:  Used for pagination. The number of records to retrieve.
+    The maximum length is `100` characters.
 
-`--include INCLUDE` (optional)
-:  Segment details to include the associated rules in the response.
+`--git-config-id` (string)
+:   Git config id. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only. Required.
 
-`--offset OFFSET` (optional)
-:  Used for pagination. The number of records to skip.
+    The maximum length is `30` characters.
 
-`--collections COLLECTIONS` (optional)
-:  Filter features by a list of comma-separated collections.
+`--collection-id` (string)
+:   Collection Id. Required.
 
-`--segments SEGMENTS` (optional)
-:  Filter features by a list of comma-separated segments.
+`--environment-id` (string)
+:   Environment Id. Required.
 
-`--expand EXPAND` (optional)
-:  Expanded view the segment details.
+`--git-url` (string)
+:   Git url which will be used to connect to the github account. The url must be formed in this format, https://api.github.com/repos/{owner}/{repo_name} for the personal git account. If you are using the organization account then url must be in this format https://github.{organization_name}.com/api/v3/repos/{owner}/{repo_name} . Note do not provide /(slash) in the beginning or at the end of the url. Required.
 
-`--tags TAGS` (optional)
-:  Filter segments by a list of comma-separated tags.
+`--git-branch` (string)
+:   Branch name to which you need to write or update the configuration. Just provide the branch name, do not provide any /(slashes) in the beginning or at the end of the branch name. Note make sure branch exists in your repository. Required.
 
-`--sort SORT` (optional)
-:  Sort the details based on the specified attribute.
+`--git-file-path` (string)
+:   Git file path, this is a path where your configuration file will be written. The path must contain the file name with `json` extension. We only create or update `json` extension file. Note do not provide any /(slashes) in the beginning or at the end of the file path. Required.
 
-### Example
-{: #ac-ibmcloud-ac-property-list-example}
+`--git-token` (string)
+:   Git token, this needs to be provided with enough permission to write and update the file. Required.
 
-To list all properties, run the following command:
+#### Example
+{: #app-configuration-gitconfig-create-examples}
 
 ```sh
-ibmcloud ac property list --environment_id "production"
+ibmcloud app-configuration gitconfig-create \
+    --git-config-name boot-strap-configuration \
+    --git-config-id boot-strap-configuration \
+    --collection-id web-app-collection \
+    --environment-id dev \
+    --git-url https://github.ibm.com/api/v3/repos/jhondoe-owner/my-test-repo \
+    --git-branch main \
+    --git-file-path code/development/README.json \
+    --git-token 61a792eahhGHji223jijb55a6cfdd4d5cde4c8a67esjjhjhHVH
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-property-list-output}
+### `ibmcloud app-configuration gitconfig-update`
+{: #app-configuration-cli-gitconfig-update-command}
 
-The command returns the following output:
+Update the gitconfig properties.
 
 ```sh
-collections   name             property_id      description                 type      value   tags                        segment_rules
--             Email property   email-property   Property for email Update   BOOLEAN   false   version: 1.1, pre-release   -
--             name             name             desc                        NUMERIC   1       tags                        -
+ibmcloud app-configuration gitconfig-update --git-config-id GIT-CONFIG-ID [--git-config-name GIT-CONFIG-NAME] [--collection-id COLLECTION-ID] [--environment-id ENVIRONMENT-ID] [--git-url GIT-URL] [--git-branch GIT-BRANCH] [--git-file-path GIT-FILE-PATH] [--git-token GIT-TOKEN]
 ```
-{: screen}
 
-## ibmcloud ac property create
-{: #ac-ibmcloud-ac-property-create}
 
-You can create a property, by using the command:
+#### Command options
+{: #app-configuration-gitconfig-update-cli-options}
 
+`--git-config-id` (string)
+:   Git Config Id. Required.
+
+`--git-config-name` (string)
+:   Git config name. Allowed special characters are dot ( . ), hyphen( - ), underscore ( _ ) only.
+
+    The maximum length is `100` characters.
+
+`--collection-id` (string)
+:   Collection Id.
+
+`--environment-id` (string)
+:   Environment Id.
+
+`--git-url` (string)
+:   Git url which will be used to connect to the github account. The url must be formed in this format, https://api.github.com/repos/{owner}/{repo_name} for the personal git account. If you are using the organization account then url must be in this format https://github.{organization_name}.com/api/v3/repos/{owner}/{repo_name} . Note do not provide /(slash) in the beginning or at the end of the url.
+
+`--git-branch` (string)
+:   Branch name to which you need to write or update the configuration. Just provide the branch name, do not provide any /(slashes) in the beginning or at the end of the branch name. Note make sure branch exists in your repository.
+
+`--git-file-path` (string)
+:   Git file path, this is a path where your configuration file will be written. The path must contain the file name with `json` extension. We only create or update `json` extension file. Note do not provide any /(slashes) in the beginning or at the end of the file path.
+
+`--git-token` (string)
+:   Git token, this needs to be provided with enough permission to write and update the file.
+
+#### Example
+{: #app-configuration-gitconfig-update-examples}
+
 ```sh
-ibmcloud ac property create (--file FILE-PATH | --environment_id ENVIRONMENT_ID --name NAME [--property_id PROPERTY_ID] --description DESCRIPTION --type TYPE --value VALUE --tags TAGS --segment_rules SEGMENT-RULES --collections COLLECTIONS)
+ibmcloud app-configuration gitconfig-update \
+    --git-config-id git_config_id \
+    --git-config-name exampleString \
+    --collection-id exampleString \
+    --environment-id exampleString \
+    --git-url exampleString \
+    --git-branch exampleString \
+    --git-file-path exampleString \
+    --git-token exampleString
 ```
 {: pre}
 
-### Command options
-{: #ac-ibmcloud-ac-property-create-command}
+### `ibmcloud app-configuration gitconfig`
+{: #app-configuration-cli-gitconfig-command}
 
-`--environment_id ENVIRONMENT_ID`
-:  Environment ID
+Retrieve details of a gitconfig.
 
-`--name NAME`
-:  Property name. Required field - input either as a flag or from file.
+```sh
+ibmcloud app-configuration gitconfig --git-config-id GIT-CONFIG-ID
+```
 
-`--property_id PROPERTY_ID` (optional)
-:  Property ID. If this value is not provided, name will automatically become the Id. Optional field - input either as a flag or from file.
 
-`--description DESCRIPTION`
-:  Description of the property. Required field - input either as a flag or from file.
+#### Command options
+{: #app-configuration-gitconfig-cli-options}
 
-`--segment_rules SEGMENT_RULES`
-:  Specify the targeting rules that are used to set different values for different segments. Required field - input either as a flag or from file.
+`--git-config-id` (string)
+:   Git Config Id. Required.
+
+#### Example
+{: #app-configuration-gitconfig-examples}
+
+```sh
+ibmcloud app-configuration gitconfig \
+    --git-config-id git_config_id
+```
+{: pre}
 
-`--tags TAGS`
-:  Tags associated with the property. Required field - input either as a flag or from file.
+### `ibmcloud app-configuration gitconfig-delete`
+{: #app-configuration-cli-gitconfig-delete-command}
 
-`--value VALUE`
-:  Property value. Required field - input either as a flag or from file.
+Delete a gitconfig.
 
-`--type TYPE`
-:  Property type. Required field - input either as a flag or from file.
+```sh
+ibmcloud app-configuration gitconfig-delete --git-config-id GIT-CONFIG-ID
+```
 
-`--collections COLLECTIONS`
-:  List of collection IDs representing the collections that are associated with the specified property. Required field - input either as a flag or from file.
 
-`--file FILE`
-:  Input through a file. File format Supported - JSON
+#### Command options
+{: #app-configuration-gitconfig-delete-cli-options}
 
-### Example
-{: #ac-ibmcloud-ac-property-create-example}
+`--git-config-id` (string)
+:   Git Config Id. Required.
 
-To create a property with name `email-property` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
+#### Example
+{: #app-configuration-gitconfig-delete-examples}
 
 ```sh
-ibmcloud ac property create --environment_id "production" --name Email_Property --property_id email-property --description Email_Property --type STRING --value VALUE --tags tags --segment_rules '[{"rules":[{"segments":["kmu9n7px"]}],"value":"$default","order":1}]' --collections '[]'
+ibmcloud app-configuration gitconfig-delete \
+    --git-config-id git_config_id
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-property-create-output}
+### `ibmcloud app-configuration gitconfig-promote`
+{: #app-configuration-cli-gitconfig-promote-command}
 
-The command returns the following output:
+Use the command [ibmcloud app-configuration gitconfig-promote-restore --git-config-id GIT-CONFIG-ID --action promote](/docs/app-configuration?topic=app-configuration-app-configuration-cli#app-configuration-cli-gitconfig-promote-restore-command) instead.
+{: deprecated}
 
+Promote configuration, this api will write or update your chosen configuration to the GitHub based on the git url, file path and branch data. In simple words this api will create or updates the bootstrap json file.
+
 ```sh
-name             Email_Property
-description      Email_Property
-type             STRING
-value            VALUE
-segment_rules    <Array>
-property_id      email-property
-segment_exists   true
-tags             tags
-collections      -
+ibmcloud app-configuration gitconfig-promote --git-config-id GIT-CONFIG-ID
 ```
-{: screen}
+
 
-## ibmcloud ac property get
-{: #ac-ibmcloud-ac-property-get}
+#### Command options
+{: #app-configuration-gitconfig-promote-cli-options}
 
-You can get a property, by using the command:
+`--git-config-id` (string)
+:   Git Config Id. Required.
 
+#### Example
+{: #app-configuration-gitconfig-promote-examples}
+
 ```sh
-ibmcloud ac property get --environment_id ENVIRONMENT_ID --property_id PROPERTY_ID [--include INCLUDE]
+ibmcloud app-configuration gitconfig-promote \
+    --git-config-id git_config_id
 ```
 {: pre}
+
+### `ibmcloud app-configuration gitconfig-restore`
+{: #app-configuration-cli-gitconfig-restore-command}
 
-### Command options
-{: #ac-ibmcloud-ac-property-get-command}
+Use the command [ibmcloud app-configuration gitconfig-promote-restore --git-config-id GIT-CONFIG-ID --action restore](/docs/app-configuration?topic=app-configuration-app-configuration-cli#app-configuration-cli-gitconfig-promote-restore-command) instead.
+{: deprecated}
 
-`--environment_id ENVIRONMENT_ID`
-:  Environment ID
+Restore configuration, this api will write or update your chosen configuration from the GitHub to App configuration instance. The api will read the contents in the json file that was created using promote API and recreate or updates the App configuration instance with the file contents like properties, features and segments.
+
+```sh
+ibmcloud app-configuration gitconfig-restore --git-config-id GIT-CONFIG-ID
+```
 
-`--property_id PROPERTY_ID`
-:  Property ID for the property flag.
 
-`--include INCLUDE` (optional)
-:  Property details to include the associated collections or rules details in the response.
+#### Command options
+{: #app-configuration-gitconfig-restore-cli-options}
 
-### Example
-{: #ac-ibmcloud-ac-property-get-example}
+`--git-config-id` (string)
+:   Git Config Id. Required.
 
-To get a property with ID `email-property`, run the following command:
+#### Example
+{: #app-configuration-gitconfig-restore-examples}
 
 ```sh
-ibmcloud ac property get --environment_id "production" --property_id email-property
+ibmcloud app-configuration gitconfig-restore \
+    --git-config-id git_config_id
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-property-get-output}
+## OriginConfig
+{: #app-configuration-origin-config-cli}
 
-The command returns the following output:
+Use settings to add more configurations required by external applications to access App Configuration resources.
 
+### `ibmcloud app-configuration originconfigs`
+{: #app-configuration-cli-originconfigs-command}
+
+List all the Origin Configs.
+
 ```sh
-tags                        collections   name             property_id      description                 type      value   rules     value   order
-version: 1.1, pre-release   -             Email_Property   email-property   Property for email Update   BOOLEAN   false   <Array>   true    1
+ibmcloud app-configuration originconfigs
 ```
-{: screen}
 
-## ibmcloud ac property update
-{: #ac-ibmcloud-ac-property-update}
 
-You can update a property, by using the command:
+#### Example
+{: #app-configuration-originconfigs-examples}
 
 ```sh
-ibmcloud ac property update (--file FILE-PATH | --environment_id ENVIRONMENT_ID --property_id PROPERTY_ID [--name NAME] [--description DESCRIPTION] [--value VALUE] [--tags TAGS] [--segment_rules SEGMENT-RULES] [--collections COLLECTIONS])
+ibmcloud app-configuration originconfigs
 ```
 {: pre}
 
-### Command options
-{: #ac-ibmcloud-ac-property-update-command}
+### `ibmcloud app-configuration originconfigs-update`
+{: #app-configuration-cli-originconfigs-update-command}
 
-`--environment_id ENVIRONMENT_ID`
-:  Environment ID
+Update the Origin Configs.
 
-`--name NAME`
-:  Property name. Required field - input either as a flag or from file.
+```sh
+ibmcloud app-configuration originconfigs-update --allowed-origins ALLOWED-ORIGINS
+```
 
-`--property_id PROPERTY_ID`
-:  Property ID. Required field - input either as a flag or from file.
 
-`--description DESCRIPTION`
-:  Description of the property. Required field - input either as a flag or from file.
+#### Command options
+{: #app-configuration-originconfigs-update-cli-options}
 
-`--segment_rules SEGMENT_RULES`
-:  Specify the targeting rules that are used to set different values for different segments. Required field - input either as a flag or from file.
+`--allowed-origins` ([]string)
+:   List of allowed origins. Specify the parameter as a list of comma separated origins. Required.
 
-`--tags TAGS`
-:  Tags associated with the property. Required field - input either as a flag or from file.
+#### Example
+{: #app-configuration-originconfigs-update-examples}
 
-`--value VALUE`
-:  Property value. Required field - input either as a flag or from file.
+```sh
+ibmcloud app-configuration originconfigs-update \
+    --allowed-origins exampleString,anotherTestString
+```
+{: pre}
 
-`--collections COLLECTIONS`
-:  List of collection IDs representing the collections that are associated with the specified property. Required field - input either as a flag or from file.
+## WorkflowConfigs
+{: #app-configuration-workflow-configs-cli}
 
-`--file FILE`
-:  Input through a file. File format Supported - JSON
+Manage feature flags enablement by adding additional workflow with ServiceNow® integration with App Configuration.
 
-### Example
-{: #ac-ibmcloud-ac-property-update-example}
+### `ibmcloud app-configuration workflowconfig`
+{: #app-configuration-cli-workflowconfig-command}
 
-To update description a property with ID `email-property` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
+Get the environment specific workflow Configs.
 
 ```sh
-ibmcloud ac property update --environment_id "production" --name Email_Property --property_id email-property --description Email_Property_Updated --value VALUE --tags Updated_Tags --segment_rules '[{"rules":[{"segments":["kmu9n7px"]}],"value":"$default","order":1}]' --collections '[]'
+ibmcloud app-configuration workflowconfig --environment-id ENVIRONMENT-ID
 ```
-{: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-property-update-output}
 
-The command returns the following output:
+#### Command options
+{: #app-configuration-workflowconfig-cli-options}
 
+`--environment-id` (string)
+:   Environment Id. Required.
+
+#### Example
+{: #app-configuration-workflowconfig-examples}
+
 ```sh
-name             Email_Property
-value            VALUE
-segment_rules    <Array>
-collections      -
-tags             Updated_Tags
-property_id      email-property
-segment_exists   true
-description      Email_Property_Updated
-type             STRING
+ibmcloud app-configuration workflowconfig \
+    --environment-id environment_id
 ```
-{: screen}
+{: pre}
 
-## ibmcloud ac property update-values
-{: #ac-ibmcloud-ac-property-patch}
+### `ibmcloud app-configuration workflowconfig-create`
+{: #app-configuration-cli-workflowconfig-create-command}
 
-You can update the property values(Property value and targeting rules can be updated, however this method does not allow assigning property to a collection.), by using the command:
+Create a Workflow.
 
 ```sh
-ibmcloud ac property update-values (--file FILE-PATH | --environment_id ENVIRONMENT_ID --property_id PROPERTY_ID [--name NAME] [--description DESCRIPTION][--value VALUE] [--tags TAGS] [--segment_rules SEGMENT-RULES])
+ibmcloud app-configuration workflowconfig-create --environment-id ENVIRONMENT-ID --workflow-url WORKFLOW-URL --approval-group-name APPROVAL-GROUP-NAME --approval-expiration APPROVAL-EXPIRATION [--workflow-credentials WORKFLOW-CREDENTIALS | --workflow-credentials-username WORKFLOW-CREDENTIALS-USERNAME --workflow-credentials-password WORKFLOW-CREDENTIALS-PASSWORD --workflow-credentials-client-id WORKFLOW-CREDENTIALS-CLIENT-ID --workflow-credentials-client-secret WORKFLOW-CREDENTIALS-CLIENT-SECRET] --enabled ENABLED
 ```
-{: pre}
+
+
+#### Command options
+{: #app-configuration-workflowconfig-create-cli-options}
+
+`--environment-id` (string)
+:   Environment Id. Required.
+
+`--workflow-url` (string)
+:   Only service now url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id. Required.
+
+    The maximum length is `200` characters.
 
-### Command options
-{: #ac-ibmcloud-ac-property-patch-command}
+`--approval-group-name` (string)
+:   Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your Service Now then it must be added here. Required.
 
-`--environment_id ENVIRONMENT_ID`
-:  Environment ID
+    The maximum length is `100` characters.
 
-`--name NAME`
-:  Property name. Required field - input either as a flag or from file.
+`--approval-expiration` (int64)
+:   Integer number identifies as hours which helps in adding approval start and end time to the created Change Request. Required.
 
-`--property_id PROPERTY_ID`
-:  Property ID. Required field - input either as a flag or from file.
+    The maximum value is `999`. The minimum value is `1`.
 
-`--description DESCRIPTION`
-:  Description of the property. Required field - input either as a flag or from file.
+`--workflow-credentials` ([`WorkflowCredentials`](#cli-workflow-credentials-example-schema))
+:   The credentials of the Service Now instance. This JSON option can instead be provided by setting individual fields with other options. It is mutually exclusive with those options.
 
-`--segment_rules SEGMENT_RULES`
-:  Specify the targeting rules that are used to set different values for different segments. Required field - input either as a flag or from file.
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--workflow-credentials=@path/to/file.json`.
 
-`--tags TAGS`
-:  Tags associated with the property. Required field - input either as a flag or from file.
+`--enabled` (bool)
+:   This option enables the workflow configuration per environment. User must set it to true if they wish to create Change Request for flag state changes. Required.
 
-`--value VALUE`
-:  Property value. Required field - input either as a flag or from file.
+    The default value is `false`.
 
-`--file FILE`
-:  Input through file. File format Supported - JSON
+`--workflow-credentials-username` (string)
+:   Service Now instance login username. This option provides a value for a sub-field of the JSON option 'workflow-credentials'. It is mutually exclusive with that option.
 
-### Example
-{: #ac-ibmcloud-ac-property-patch-example}
+`--workflow-credentials-password` (string)
+:   Service Now instance login password. This option provides a value for a sub-field of the JSON option 'workflow-credentials'. It is mutually exclusive with that option.
 
-To update description of a property with ID `email-property` using flags ([click here](#ac-fileinput) for using commands with '--file' flag), run the following command:
+`--workflow-credentials-client-id` (string)
+:   The auto-generated unique ID of the application in your Service Now instance. This option provides a value for a sub-field of the JSON option 'workflow-credentials'. It is mutually exclusive with that option.
 
+`--workflow-credentials-client-secret` (string)
+:   The secret string that both the Service Now instance and the client application use to authorize communications with one another. This option provides a value for a sub-field of the JSON option 'workflow-credentials'. It is mutually exclusive with that option.
+
+#### Examples
+{: #app-configuration-workflowconfig-create-examples}
+
 ```sh
-ibmcloud ac property update-values --environment_id "production" --name Email_Property --property_id email-property --description Email_Property_Updated --value VALUE --tags Updated_Tags --segment_rules '[{"rules":[{"segments":["kmu9n7px"]}],"value":"$default","order":1}]'
+ibmcloud app-configuration workflowconfig-create \
+    --environment-id environment_id \
+    --workflow-url https://xxxxx.service-now.com \
+    --approval-group-name WorkflowCRApprovers \
+    --approval-expiration 10 \
+    --workflow-credentials '{"username": "user", "password": "pwd", "client_id": "client id value", "client_secret": "clientsecret"}' \
+    --enabled true
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-property-patch-output}
-
-The command returns the following output:
-
+Alternatively, granular options are available for the sub-fields of JSON string options:
 ```sh
-name             Email_Property
-value            VALUE
-segment_rules    <Array>
-tags             Updated_Tags
-property_id      email-property
-segment_exists   true
-description      Email_Property_Updated
-type             STRING
+ibmcloud app-configuration workflowconfig-create \
+    --environment-id environment_id \
+    --workflow-url https://xxxxx.service-now.com \
+    --approval-group-name WorkflowCRApprovers \
+    --approval-expiration 10 \
+    --enabled true \
+    --workflow-credentials-username admin \
+    --workflow-credentials-password exampleString \
+    --workflow-credentials-client-id f7b6379b55d08210f8ree233afc7256d \
+    --workflow-credentials-client-secret exampleString
 ```
-{: screen}
+{: pre}
 
-## ibmcloud ac property delete
-{: #ac-ibmcloud-ac-property-delete}
+### `ibmcloud app-configuration workflowconfig-update`
+{: #app-configuration-cli-workflowconfig-update-command}
 
-You can delete a property, by using the command:
+Update a Workflow.
 
 ```sh
-ibmcloud ac property delete --environment_id ENVIRONMENT_ID --property_id PROPERTY_ID
+ibmcloud app-configuration workflowconfig-update --environment-id ENVIRONMENT-ID [--workflow-url WORKFLOW-URL] [--approval-group-name APPROVAL-GROUP-NAME] [--approval-expiration APPROVAL-EXPIRATION] [--workflow-credentials WORKFLOW-CREDENTIALS | --workflow-credentials-username WORKFLOW-CREDENTIALS-USERNAME --workflow-credentials-password WORKFLOW-CREDENTIALS-PASSWORD --workflow-credentials-client-id WORKFLOW-CREDENTIALS-CLIENT-ID --workflow-credentials-client-secret WORKFLOW-CREDENTIALS-CLIENT-SECRET] [--enabled ENABLED]
 ```
-{: pre}
+
+
+#### Command options
+{: #app-configuration-workflowconfig-update-cli-options}
+
+`--environment-id` (string)
+:   Environment Id. Required.
+
+`--workflow-url` (string)
+:   Service Now instance URL. Only url https://xxxxx.service-now.com allowed, xxxxx is the service now instance id.
+
+    The maximum length is `200` characters.
 
-### Command options
-{: #ac-ibmcloud-ac-property-delete-command}
+`--approval-group-name` (string)
+:   Group name of personals who can approve the Change Request on your Service Now. It must be first registered in your Service Now then it must be added here.
 
-`--environment_id ENVIRONMENT_ID`
-:  Environment ID
+    The maximum length is `100` characters.
 
-`--property_id PROPERTY_ID`
-:  Property ID
+`--approval-expiration` (int64)
+:   Integer number identifies as hours which helps in adding approval start and end time to the created Change Request.
 
-### Example
-{: #ac-ibmcloud-ac-property-delete-example}
+    The maximum value is `999`. The minimum value is `1`.
 
-To delete a property with ID `ibm_employees`, run the following command:
+`--workflow-credentials` ([`WorkflowCredentials`](#cli-workflow-credentials-example-schema))
+:   The credentials of the Service Now instance. This JSON option can instead be provided by setting individual fields with other options. It is mutually exclusive with those options.
 
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--workflow-credentials=@path/to/file.json`.
+
+`--enabled` (bool)
+:   This option enables the workflow configuration per environment. User must set it to true if they wish to create Change Request for flag state changes.
+
+    The default value is `false`.
+
+`--workflow-credentials-username` (string)
+:   Service Now instance login username. This option provides a value for a sub-field of the JSON option 'workflow-credentials'. It is mutually exclusive with that option.
+
+`--workflow-credentials-password` (string)
+:   Service Now instance login password. This option provides a value for a sub-field of the JSON option 'workflow-credentials'. It is mutually exclusive with that option.
+
+`--workflow-credentials-client-id` (string)
+:   The auto-generated unique ID of the application in your Service Now instance. This option provides a value for a sub-field of the JSON option 'workflow-credentials'. It is mutually exclusive with that option.
+
+`--workflow-credentials-client-secret` (string)
+:   The secret string that both the Service Now instance and the client application use to authorize communications with one another. This option provides a value for a sub-field of the JSON option 'workflow-credentials'. It is mutually exclusive with that option.
+
+#### Examples
+{: #app-configuration-workflowconfig-update-examples}
+
 ```sh
-ibmcloud ac property delete --environment_id "production" --property_id ibm_employees
+ibmcloud app-configuration workflowconfig-update \
+    --environment-id environment_id \
+    --workflow-url exampleString \
+    --approval-group-name exampleString \
+    --approval-expiration 1 \
+    --workflow-credentials '{"username": "admin", "password": "exampleString", "client_id": "f7b6379b55d08210f8ree233afc7256d", "client_secret": "exampleString"}' \
+    --enabled false
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-property-delete-output}
-
-The command returns the following output:
-
+Alternatively, granular options are available for the sub-fields of JSON string options:
 ```sh
-OK
+ibmcloud app-configuration workflowconfig-update \
+    --environment-id environment_id \
+    --workflow-url exampleString \
+    --approval-group-name exampleString \
+    --approval-expiration 1 \
+    --enabled false \
+    --workflow-credentials-username admin \
+    --workflow-credentials-password exampleString \
+    --workflow-credentials-client-id f7b6379b55d08210f8ree233afc7256d \
+    --workflow-credentials-client-secret exampleString
 ```
-{: screen}
+{: pre}
 
-## ibmcloud ac export
-{: #ac-ibmcloud-ac-export}
+### `ibmcloud app-configuration workflowconfig-delete`
+{: #app-configuration-cli-workflowconfig-delete-command}
 
-You can export configuration data of the selected instance, by using the command:
+Delete a  Workflow config.
 
 ```sh
-ibmcloud ac export [--file FILE] [--output OUTPUT]
+ibmcloud app-configuration workflowconfig-delete --environment-id ENVIRONMENT-ID
 ```
-{: pre}
-
-### Command options
-{: #ac-ibmcloud-ac-export-command}
 
-`--file FILE` (optional)
-:  Path of file to where configuration will be exported.
 
-`--output OUTPUT` (optional)
-:  Choose an output format - can be 'json' or 'yaml'. (default "json")
+#### Command options
+{: #app-configuration-workflowconfig-delete-cli-options}
 
-### Example
-{: #ac-ibmcloud-ac-export-example}
+`--environment-id` (string)
+:   Environment Id. Required.
 
-To export configuration data of the selected instance, run the following command:
+#### Example
+{: #app-configuration-workflowconfig-delete-examples}
 
 ```sh
-ibmcloud ac export --file exportedConfig.json
+ibmcloud app-configuration workflowconfig-delete \
+    --environment-id environment_id
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-export-output}
+## Config
+{: #app-configuration-config-cli}
 
-The command returns the following output:
+Export and Import configurations from and to App Configuration instance.
 
+### `ibmcloud app-configuration instance-import`
+{: #app-configuration-cli-instance-import-command}
+
+Import configuration to the instance.
+
 ```sh
-OK
-Configuration exported to file exportedConfig.json
+ibmcloud app-configuration instance-import [--environments ENVIRONMENTS] [--collections COLLECTIONS] [--segments SEGMENTS] [--clean CLEAN]
 ```
-{: screen}
+
+
+#### Command options
+{: #app-configuration-instance-import-cli-options}
+
+`--environments` ([`ImportEnvironmentSchema[]`](#cli-import-environment-schema-example-schema))
+:   Array will contain features and properties per environment.
+
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--environments=@path/to/file.json`.
+
+`--collections` ([`ImportCollectionSchema[]`](#cli-import-collection-schema-example-schema))
+:   Array will contain collections details.
+
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--collections=@path/to/file.json`.
+
+`--segments` ([`ImportSegmentSchema[]`](#cli-import-segment-schema-example-schema))
+:   Array will contain segments details.
 
-## ibmcloud ac import
-{: #ac-ibmcloud-ac-import}
+    Provide a JSON string option or specify a JSON file to read from by providing a filepath option that begins with a `@`, e.g. `--segments=@path/to/file.json`.
 
-You can import configuration data from a file to the selected instance, by using the command:
+`--clean` (string)
+:   Full instance import requires query parameter `clean=true` to perform wiping of the existing data.
 
+#### Example
+{: #app-configuration-instance-import-examples}
+
 ```sh
-ibmcloud ac import --file FILE [--clean CLEAN]
+ibmcloud app-configuration instance-import \
+    --environments '[{"name": "Dev", "environment_id": "dev", "description": "Environment created on instance creation", "tags": "exampleString", "color_code": "#FDD13A", "features": [{"name": "Cycle Rentals", "feature_id": "cycle-rentals", "description": "exampleString", "type": "NUMERIC", "format": "TEXT", "enabled_value": "1", "disabled_value": "2", "enabled": true, "rollout_percentage": 100, "tags": "exampleString", "segment_rules": [{"rules": [{"segments": ["exampleString","anotherTestString"]}], "value": "exampleString", "order": 38, "rollout_percentage": 100}], "collections": [{"collection_id": "web-app"}], "isOverridden": true}], "properties": [{"name": "Daily Discount", "property_id": "daily_discount", "description": "exampleString", "type": "NUMERIC", "format": "TEXT", "value": "100", "tags": "pre-release, v1.2", "segment_rules": [{"rules": [{"segments": ["exampleString","anotherTestString"]}], "value": "200", "order": 1}], "collections": [{"collection_id": "web-app"}], "isOverridden": true}]}]' \
+    --collections '[{"collection_id": "web-app", "name": "web-app", "description": "web app collection", "tags": "v1"}]' \
+    --segments '[{"name": "Testers", "segment_id": "khpwj68h", "description": "Testers", "tags": "test", "rules": [{"attribute_name": "email", "operator": "is", "values": ["john@bluecharge.com","alice@bluecharge.com"]}]}]' \
+    --clean true
 ```
 {: pre}
 
-### Command options
-{: #ac-ibmcloud-ac-import-command}
+### `ibmcloud app-configuration instance-export`
+{: #app-configuration-cli-instance-export-command}
 
-`--file FILE`
-:  Path of file from where configuration will be imported.
+Get the instance configuration.
 
-`--clean CLEAN` (optional)
-:  If set to 'true', clears the existing data in the service instance before performing import of the configuration data.
+```sh
+ibmcloud app-configuration instance-export
+```
 
-### Example
-{: #ac-ibmcloud-ac-import-example}
 
-To import configuration data from a file to the selected instance, run the following command:
+#### Example
+{: #app-configuration-instance-export-examples}
 
 ```sh
-ibmcloud ac import --file exportedConfig.json
+ibmcloud app-configuration instance-export
 ```
 {: pre}
 
-#### Output
-{: #ac-ibmcloud-ac-import-output}
+### `ibmcloud app-configuration gitconfig-promote-restore`
+{: #app-configuration-cli-gitconfig-promote-restore-command}
 
-The command returns the following output:
+This api will either promote or restore your chosen configuration from or to the GitHub based on the git url, file path and branch data.
 
 ```sh
-OK
-Configuration imported from file exportedConfig.json
+ibmcloud app-configuration gitconfig-promote-restore --git-config-id GIT-CONFIG-ID --action ACTION
 ```
-{: screen}
+
+
+#### Command options
+{: #app-configuration-gitconfig-promote-restore-cli-options}
 
-## Creating or Updating item from file
-{: #ac-fileinput}
+`--git-config-id` (string)
+:   Git Config Id. Required.
 
-The plug-in provides you the functions of creating or updating items in JSON format that is stored in a file.
+`--action` (string)
+:   Promote configuration to Git or Restore configuration from Git. Required.
 
-Following is how you can create collection from a file.
+    Allowable values are: `promote`, `restore`.
 
+#### Example
+{: #app-configuration-gitconfig-promote-restore-examples}
+
 ```sh
-ibmcloud ac collection create {--file FILE-PATH | --name NAME [--collection_id COLLECTION_ID] [--description DESCRIPTION] [--tags TAGS]}
+ibmcloud app-configuration gitconfig-promote-restore \
+    --git-config-id git_config_id \
+    --action promote
 ```
 {: pre}
 
-Notice the '|' symbol. This indicates that there are two ways to use the command.
+## Schema examples
+{: #app-configuration-schema-examples}
 
-```sh
-ibmcloud ac collection create --file FILE-PATH
-OR
-ibmcloud ac collection create --name NAME [--collection_id COLLECTION_ID] [--description DESCRIPTION] [--tags TAGS]
+The following schema examples represent the data that you need to specify for a command option. These examples model the data structure and include placeholder values for the expected value type. When you run a command, replace these values with the values that apply to your environment as appropriate.
+
+### CollectionRef[]
+{: #cli-collection-ref-example-schema}
+
+The following example shows the format of the CollectionRef[] object.
+
+```json
+
+[ {
+  "collection_id" : "ghzinc"
+} ]
 ```
 {: codeblock}
 
-To view the supported JSON format visit the [API Docs](https://cloud.ibm.com/apidocs/app-configuration).
+### FeatureSegmentRule[]
+{: #cli-feature-segment-rule-example-schema}
 
-Use the file flag (cannot be combined with any other flag) to give the path of the file.
+The following example shows the format of the FeatureSegmentRule[] object.
 
-### Example
-{: #ac-fileinput-example}
+```json
 
-To create a collection with ID `corporateDiscount` stored in a file *create_collection_body.json*, run the following command:
-
-```sh
-ibmcloud ac collection create --file create_collection_body.json
+[ {
+  "rules" : [ {
+    "segments" : [ "betausers", "premiumusers" ]
+  } ],
+  "value" : "true",
+  "order" : 1,
+  "rollout_percentage" : 50
+} ]
 ```
-{: pre}
+{: codeblock}
 
-Here is the content of `create_collection_body.json`:
+### ImportCollectionSchema[]
+{: #cli-import-collection-schema-example-schema}
 
-```sh
+The following example shows the format of the ImportCollectionSchema[] object.
+
+```json
+
+[ {
+  "collection_id" : "web-app",
+  "name" : "web-app",
+  "description" : "web app collection",
+  "tags" : "v1"
+} ]
+```
+{: codeblock}
+
+### ImportEnvironmentSchema[]
+{: #cli-import-environment-schema-example-schema}
+
+The following example shows the format of the ImportEnvironmentSchema[] object.
+
+```json
+
+[ {
+  "name" : "Dev",
+  "environment_id" : "dev",
+  "description" : "Environment created on instance creation",
+  "tags" : "exampleString",
+  "color_code" : "#FDD13A",
+  "features" : [ {
+    "name" : "Cycle Rentals",
+    "feature_id" : "cycle-rentals",
+    "description" : "exampleString",
+    "type" : "NUMERIC",
+    "format" : "TEXT",
+    "enabled_value" : "1",
+    "disabled_value" : "2",
+    "enabled" : true,
+    "rollout_percentage" : 100,
+    "tags" : "exampleString",
+    "segment_rules" : [ {
+      "rules" : [ {
+        "segments" : [ "exampleString", "anotherExampleString" ]
+      } ],
+      "value" : "exampleString",
+      "order" : 38,
+      "rollout_percentage" : 100
+    } ],
+    "collections" : [ {
+      "collection_id" : "web-app"
+    } ],
+    "isOverridden" : true
+  } ],
+  "properties" : [ {
+    "name" : "Daily Discount",
+    "property_id" : "daily_discount",
+    "description" : "exampleString",
+    "type" : "NUMERIC",
+    "format" : "TEXT",
+    "value" : "100",
+    "tags" : "pre-release, v1.2",
+    "segment_rules" : [ {
+      "rules" : [ {
+        "segments" : [ "exampleString", "anotherExampleString" ]
+      } ],
+      "value" : "200",
+      "order" : 1
+    } ],
+    "collections" : [ {
+      "collection_id" : "web-app"
+    } ],
+    "isOverridden" : true
+  } ]
+} ]
+```
+{: codeblock}
+
+### ImportSegmentSchema[]
+{: #cli-import-segment-schema-example-schema}
+
+The following example shows the format of the ImportSegmentSchema[] object.
+
+```json
+
+[ {
+  "name" : "Testers",
+  "segment_id" : "khpwj68h",
+  "description" : "Testers",
+  "tags" : "test",
+  "rules" : [ {
+    "attribute_name" : "email",
+    "operator" : "is",
+    "values" : [ "john@bluecharge.com", "alice@bluecharge.com" ]
+  } ]
+} ]
+```
+{: codeblock}
+
+### Rule[]
+{: #cli-rule-example-schema}
+
+The following example shows the format of the Rule[] object.
+
+```json
+
+[ {
+  "attribute_name" : "email",
+  "operator" : "endsWith",
+  "values" : [ "@in.mnc.com", "@us.mnc.com" ]
+} ]
+```
+{: codeblock}
+
+### SegmentRule[]
+{: #cli-segment-rule-example-schema}
+
+The following example shows the format of the SegmentRule[] object.
+
+```json
+
+[ {
+  "rules" : [ {
+    "segments" : [ "betausers", "premiumusers" ]
+  } ],
+  "value" : "true",
+  "order" : 1
+} ]
+```
+{: codeblock}
+
+### WorkflowCredentials
+{: #cli-workflow-credentials-example-schema}
+
+The following example shows the format of the WorkflowCredentials object.
+
+```json
+
 {
-    "name": "Corporate Discount",
-    "collection_id": "corporateDiscount",
-    "description": "Discount for partner Organizations",
-    "tags": "discount,sale"
+  "username" : "user",
+  "password" : "pwd",
+  "client_id" : "client id value",
+  "client_secret" : "clientsecret"
 }
 ```
 {: codeblock}
 
-#### Output
-{: #ac-fileinput-output}
 
-The command returns the following output:
-
-```sh
-name            Corporate Discount
-collection_id   corporateDiscount
-description     Discount for partner Organizations
-created_time    2021-02-02T19:17:07Z
-updated_time    2021-02-02T19:17:07Z
-```
-{: screen}
-
-The behavior for create and update of collection or feature or segment is similar as above. For accepted JSON format structure, visit the [API Docs](https://cloud.ibm.com/apidocs/app-configuration)
-
-## ibmcloud plug-in uninstall
+## Uninstall
 {: #ac-ibmcloud-plugin-uninstall}
 
 Use this command to uninstall the App Configuration CLI plug-in.
