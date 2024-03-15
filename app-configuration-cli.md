@@ -349,6 +349,11 @@ ibmcloud app-configuration environment-create \
 ```
 {: pre}
 
+```sh
+ibmcloud app-configuration environment-create --file=path/to/file.json
+```
+{: pre}
+
 ### `ibmcloud app-configuration environment-update`
 {: #app-configuration-cli-environment-update-command}
 
@@ -397,6 +402,11 @@ ibmcloud app-configuration environment-update \
 ```
 {: pre}
 
+```sh
+ibmcloud app-configuration environment-update --file=path/to/file.json
+```
+{: pre}
+
 ### `ibmcloud app-configuration environment`
 {: #app-configuration-cli-environment-command}
 
@@ -438,7 +448,7 @@ ibmcloud app-configuration environment \
 Delete an Environment.
 
 ```sh
-ibmcloud app-configuration environment-delete --environment-id ENVIRONMENT-ID
+ibmcloud app-configuration environment-delete --environment-id ENVIRONMENT-ID [--force FORCE]
 ```
 
 
@@ -447,6 +457,9 @@ ibmcloud app-configuration environment-delete --environment-id ENVIRONMENT-ID
 
 `--environment-id` (string)
 :   Environment Id. Required.
+
+`-f`, `--force`
+:   Force deletion without confirmation.
 
 #### Example
 {: #app-configuration-environment-delete-examples}
@@ -577,6 +590,11 @@ ibmcloud app-configuration collection-create \
 ```
 {: pre}
 
+```sh
+ibmcloud app-configuration collection-create --file=path/to/file.json
+```
+{: pre}
+
 ### `ibmcloud app-configuration collection-update`
 {: #app-configuration-cli-collection-update-command}
 
@@ -621,6 +639,11 @@ ibmcloud app-configuration collection-update \
 ```
 {: pre}
 
+```sh
+ibmcloud app-configuration collection-update --file=path/to/file.json
+```
+{: pre}
+
 ### `ibmcloud app-configuration collection`
 {: #app-configuration-cli-collection-command}
 
@@ -662,7 +685,7 @@ ibmcloud app-configuration collection \
 Delete the collection.
 
 ```sh
-ibmcloud app-configuration collection-delete --collection-id COLLECTION-ID
+ibmcloud app-configuration collection-delete --collection-id COLLECTION-ID [--force FORCE]
 ```
 
 
@@ -671,6 +694,9 @@ ibmcloud app-configuration collection-delete --collection-id COLLECTION-ID
 
 `--collection-id` (string)
 :   Collection Id of the collection. Required.
+
+`-f`, `--force`
+:   Force deletion without confirmation.
 
 #### Example
 {: #app-configuration-collection-delete-examples}
@@ -855,6 +881,11 @@ ibmcloud app-configuration feature-create \
 ```
 {: pre}
 
+```sh
+ibmcloud app-configuration feature-create --file=path/to/file.json
+```
+{: pre}
+
 ### `ibmcloud app-configuration feature-update`
 {: #app-configuration-cli-feature-update-command}
 
@@ -937,6 +968,11 @@ ibmcloud app-configuration feature-update \
 ```
 {: pre}
 
+```sh
+ibmcloud app-configuration feature-update --file=path/to/file.json
+```
+{: pre}
+
 ### `ibmcloud app-configuration feature-values-update`
 {: #app-configuration-cli-feature-values-update-command}
 
@@ -1009,6 +1045,11 @@ ibmcloud app-configuration feature-values-update \
 ```
 {: pre}
 
+```sh
+ibmcloud app-configuration feature-values-update --file=path/to/file.json
+```
+{: pre}
+
 ### `ibmcloud app-configuration feature`
 {: #app-configuration-cli-feature-command}
 
@@ -1050,7 +1091,7 @@ ibmcloud app-configuration feature \
 Delete a feature flag.
 
 ```sh
-ibmcloud app-configuration feature-delete --environment-id ENVIRONMENT-ID --feature-id FEATURE-ID
+ibmcloud app-configuration feature-delete --environment-id ENVIRONMENT-ID --feature-id FEATURE-ID [--force FORCE]
 ```
 
 
@@ -1062,6 +1103,9 @@ ibmcloud app-configuration feature-delete --environment-id ENVIRONMENT-ID --feat
 
 `--feature-id` (string)
 :   Feature Id. Required.
+
+`-f`, `--force`
+:   Force deletion without confirmation.
 
 #### Example
 {: #app-configuration-feature-delete-examples}
@@ -1272,6 +1316,11 @@ ibmcloud app-configuration property-create \
 ```
 {: pre}
 
+```sh
+ibmcloud app-configuration property-create --file=path/to/file.json
+```
+{: pre}
+
 ### `ibmcloud app-configuration property-update`
 {: #app-configuration-cli-property-update-command}
 
@@ -1338,6 +1387,11 @@ ibmcloud app-configuration property-update \
 ```
 {: pre}
 
+```sh
+ibmcloud app-configuration property-update --file=path/to/file.json
+```
+{: pre}
+
 ### `ibmcloud app-configuration property-values-update`
 {: #app-configuration-cli-property-values-update-command}
 
@@ -1398,6 +1452,11 @@ ibmcloud app-configuration property-values-update \
 ```
 {: pre}
 
+```sh
+ibmcloud app-configuration property-values-update --file=path/to/file.json
+```
+{: pre}
+
 ### `ibmcloud app-configuration property`
 {: #app-configuration-cli-property-command}
 
@@ -1439,7 +1498,7 @@ ibmcloud app-configuration property \
 Delete a Property.
 
 ```sh
-ibmcloud app-configuration property-delete --environment-id ENVIRONMENT-ID --property-id PROPERTY-ID
+ibmcloud app-configuration property-delete --environment-id ENVIRONMENT-ID --property-id PROPERTY-ID [--force FORCE]
 ```
 
 
@@ -1451,6 +1510,9 @@ ibmcloud app-configuration property-delete --environment-id ENVIRONMENT-ID --pro
 
 `--property-id` (string)
 :   Property Id. Required.
+
+`-f`, `--force`
+:   Force deletion without confirmation.
 
 #### Example
 {: #app-configuration-property-delete-examples}
@@ -1580,6 +1642,11 @@ ibmcloud app-configuration segment-create \
 ```
 {: pre}
 
+```sh
+ibmcloud app-configuration segment-create --file=path/to/file.json
+```
+{: pre}
+
 ### `ibmcloud app-configuration segment-update`
 {: #app-configuration-cli-segment-update-command}
 
@@ -1630,6 +1697,11 @@ ibmcloud app-configuration segment-update \
 ```
 {: pre}
 
+```sh
+ibmcloud app-configuration segment-update --file=path/to/file.json
+```
+{: pre}
+
 ### `ibmcloud app-configuration segment`
 {: #app-configuration-cli-segment-command}
 
@@ -1667,7 +1739,7 @@ ibmcloud app-configuration segment \
 Delete a segment.
 
 ```sh
-ibmcloud app-configuration segment-delete --segment-id SEGMENT-ID
+ibmcloud app-configuration segment-delete --segment-id SEGMENT-ID [--force FORCE]
 ```
 
 
@@ -1676,6 +1748,9 @@ ibmcloud app-configuration segment-delete --segment-id SEGMENT-ID
 
 `--segment-id` (string)
 :   Segment Id. Required.
+
+`-f`, `--force`
+:   Force deletion without confirmation.
 
 #### Example
 {: #app-configuration-segment-delete-examples}
@@ -1889,7 +1964,7 @@ ibmcloud app-configuration gitconfig \
 Delete a gitconfig.
 
 ```sh
-ibmcloud app-configuration gitconfig-delete --git-config-id GIT-CONFIG-ID
+ibmcloud app-configuration gitconfig-delete --git-config-id GIT-CONFIG-ID [--force FORCE]
 ```
 
 
@@ -1898,6 +1973,9 @@ ibmcloud app-configuration gitconfig-delete --git-config-id GIT-CONFIG-ID
 
 `--git-config-id` (string)
 :   Git Config Id. Required.
+
+`-f`, `--force`
+:   Force deletion without confirmation.
 
 #### Example
 {: #app-configuration-gitconfig-delete-examples}
@@ -2212,7 +2290,7 @@ ibmcloud app-configuration workflowconfig-update \
 Delete a  Workflow config.
 
 ```sh
-ibmcloud app-configuration workflowconfig-delete --environment-id ENVIRONMENT-ID
+ibmcloud app-configuration workflowconfig-delete --environment-id ENVIRONMENT-ID [--force FORCE]
 ```
 
 
@@ -2221,6 +2299,9 @@ ibmcloud app-configuration workflowconfig-delete --environment-id ENVIRONMENT-ID
 
 `--environment-id` (string)
 :   Environment Id. Required.
+
+`-f`, `--force`
+:   Force deletion without confirmation.
 
 #### Example
 {: #app-configuration-workflowconfig-delete-examples}
